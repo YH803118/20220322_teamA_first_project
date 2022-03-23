@@ -76,9 +76,9 @@ public class MemberControllerImpl implements MemberController{
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav =new ModelAndView();
 		int result = memberService.addMember(member);
-		if(result>=1) {
 		mav.setViewName("redirect:/test/loginTest.do");
-		}
+	
+		
 		return mav;
 	}
 
