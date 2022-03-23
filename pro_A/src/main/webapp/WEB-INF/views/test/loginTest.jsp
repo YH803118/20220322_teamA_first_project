@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/pro_A/member/login.do">
+<form action="/pro_A/test/login.do">
 	아이디 : <input type="text" name="id"><br>
 	비밀번호 : <input type="text" name="pwd"><br>
 	<input type="submit" value="로그인">
