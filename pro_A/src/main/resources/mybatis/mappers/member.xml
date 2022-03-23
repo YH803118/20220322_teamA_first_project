@@ -13,9 +13,9 @@
 		</resultMap>
 		
 		
-	<select id="loginCheck" parameterType="String" resultType="memberDTO">
+	<select id="loginCheck" parameterType="memberDTO" resultType="memberDTO">
 		<![CDATA[
-			select count(*) from t_member where id=#{id} and pwd=#{pwd}
+			select * from t_member where id=#{id} and pwd=#{pwd}
 		]]>
 	</select>
 	
