@@ -1,29 +1,2 @@
 @charset "UTF-8";
 
-#calendar {
-	top: 30px;
-	left: 30px;
-	width: 450px;
-	height: 500px;
-	background-color: red;
-}
-
-#login {
-	top: 30px;
-	right: 30px;
-	width: 260px;
-	height: 200px;
-	background-color:blue;
-}
-
-#notice {
-	background-color: lightgreen;
-	margin: 30px;
-	left:0;
-}
-
-#community{
-	background-color: green;
-	margin: 30px;
-	left:0;
-}
