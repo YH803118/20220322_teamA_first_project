@@ -14,11 +14,12 @@
 }
 
 #login {
+	position: relative;
 	float:right;
 	margin: 30px;
 	width: 260px;
 	height: 200px;
-	background-color:blue;
+	background-color:#aaaaaa;
 }
 
 #notice {
@@ -36,13 +37,21 @@
 	margin: 30px;
 	left:0;
 }
+.loginInput{
+	width:50%;
+}
+#loginForm{
+	width: 100%;
+	text-align:center;
+	float:left;
+}
 </style>
 </head>
 <body>
 <div id="login">
-<form action="/pro_A/test/login.do">
-	아이디 : <input type="text" name="id"><br>
-	비밀번호 : <input type="text" name="pwd"><br>
+<form action="/pro_A/test/login.do" id="loginForm">
+	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput"><br>
+	비밀번호 : <input type="text" name="pwd" class="loginInput"><br>
 	<input type="submit" value="로그인">
 </form>
 </div>
