@@ -10,9 +10,9 @@
 		<put-attribute name="footer" value="" />
 	</definition>
 		
-	<definition name="/test/loginTest" extends="baseLayout">
+	<definition name="/test/loginForm" extends="baseLayout">
 		<put-attribute name="title" value="로그인" />
-		<put-attribute name="body" value="/WEB-INF/views/test/loginTest.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/test/loginForm.jsp" />
 	</definition>
 	
 	<definition name="/test/memberForm" extends="baseLayout">
