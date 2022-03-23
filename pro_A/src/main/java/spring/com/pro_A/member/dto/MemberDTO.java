@@ -9,6 +9,7 @@ public class MemberDTO {
 	private String email;
 	private Date joinDate;
 	private int memberType;
+	// student = 0, professor = 1, manager = 2 
 	
 	public String getId() {
 		return id;
