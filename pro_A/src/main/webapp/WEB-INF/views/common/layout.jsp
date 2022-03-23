@@ -12,11 +12,11 @@
 		height: 1100px;
 		margin: 50px auto;
 		text-align: center;
-		background-color: #EEEEEE
+		background-color: #EEEEEE;
 	}	
 	#header {
 		width: 100%;
-		height: 60px;
+		height: 160px;
 		background-color: lightgreen;
 	}	
 	#content{
