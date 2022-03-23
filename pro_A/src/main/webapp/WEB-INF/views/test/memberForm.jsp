@@ -27,6 +27,12 @@
 				<td><input type="email" name="email"></td>
 			</tr>
 			<tr>
+				<td>
+				<input type="radio" name="memberType" value="0">학생 
+				<input type="radio" name="memberType" value="1">교수
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" style="text-align:center;">
 					<input type="submit" value="회원가입">
 				</td>
