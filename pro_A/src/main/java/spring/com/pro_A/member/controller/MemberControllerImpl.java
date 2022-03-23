@@ -31,54 +31,37 @@ public class MemberControllerImpl implements MemberController{
 		
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
-			
+			System.out.println("로그인성공");
 		} else {
-			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/test/login.jsp");
+			System.out.println("로그인실패");
 		}
 		
 		return mav;
 	}
-	
-	private String getViewName(HttpServletRequest request) throws Exception{
-		// /pro03/test/login.do?id=???
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-			
-		if(uri == null || uri.trim().equals("")) {
-			uri = request.getRequestURI();
-		}
-		
-		System.out.println("uri : " + uri);
-		
-		int begin = uri.lastIndexOf("/");
-		
-		int end;
-		if(uri.indexOf("?") != -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-		
-		String fileName = uri.substring(begin, end);
-		System.out.println(fileName);
-		
-		if(fileName.indexOf(".") != -1) {
-			fileName = fileName.substring(0, fileName.lastIndexOf("."));
-		}
-		System.out.println(fileName);
 
-		return fileName;
-	}
+	
+	
 
 	@Override
 	@RequestMapping(value="/test/memberForm.do")
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName(getViewName(request));
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
 	
 	
 	
 	
+
+
+	@Override
+	@RequestMapping(value="/test/loginTest.do")
+	public ModelAndView loginTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+
 }
