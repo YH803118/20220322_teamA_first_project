@@ -15,9 +15,13 @@ public interface MemberController {
 	public ModelAndView login(@ModelAttribute("member")MemberDTO dto,
 			RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public ModelAndView addMember(@ModelAttribute("member")MemberDTO dto,
+			RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView form(HttpServletRequest request,HttpServletResponse response) throws Exception;
 
 	public ModelAndView loginTest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView addMember(MemberDTO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

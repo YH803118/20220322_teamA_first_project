@@ -21,4 +21,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.login(dto);
 	}
 
+	@Override
+	public int addMember(MemberDTO member) {
+		// TODO Auto-generated method stub
+		return memberDAO.join(member);
+	}
+
 }

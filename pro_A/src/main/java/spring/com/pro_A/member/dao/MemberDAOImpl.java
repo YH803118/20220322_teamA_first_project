@@ -18,4 +18,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne("mapper.member.loginCheck", dto);
 	}
 
+	@Override
+	public int join(MemberDTO member) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mapper.member.joinMember",member);
+	}
+
 }

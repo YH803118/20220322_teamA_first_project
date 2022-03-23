@@ -11,7 +11,7 @@
 		<h1 style="text-align:center;">회원가입</h1>
 		<table style="margin:auto;">
 			<tr>
-				<td width="200">아이디</td>
+				<td width="	200">아이디</td>
 				<td width="400"><input type="text" name="id"></td>
 			</tr>
 			<tr>
