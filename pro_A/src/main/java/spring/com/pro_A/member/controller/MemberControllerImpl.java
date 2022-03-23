@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.pro12.member.vo.MemberVO;
+
 
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
@@ -68,19 +68,30 @@ public class MemberControllerImpl implements MemberController{
 	}
 
 
+
 	
+
+
+
+
+
+
+
 	@Override
 	@RequestMapping(value="/test/addMember.do" ,method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberDTO member,
-			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav =new ModelAndView();
-		int result = memberService.addMember(member);
-		mav.setViewName("redirect:/test/loginTest.do");
-	
-		
-		return mav;
-	}
+	   public ModelAndView addMember(@ModelAttribute("member") MemberDTO member,
+	                           HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      request.setCharacterEncoding("utf-8");
+	      ModelAndView mav =new ModelAndView();
+	      int result = memberService.addMember(member);
+	      if(result>=1) {
+	      mav.setViewName("redirect:/test/loginTest.do");
+	      }
+	      
+	      return mav;
+	   }
+
+
 
 
 

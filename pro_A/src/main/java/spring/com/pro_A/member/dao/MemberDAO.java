@@ -6,6 +6,8 @@ public interface MemberDAO {
 
 	MemberDTO login(MemberDTO dto);
 
-	int join(MemberDTO member);
+
+	int addMember(MemberDTO member);
+
 
 }

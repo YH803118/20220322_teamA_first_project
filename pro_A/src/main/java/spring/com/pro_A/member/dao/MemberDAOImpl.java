@@ -19,9 +19,12 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public int join(MemberDTO member) {
+
+
+	public int addMember(MemberDTO member) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("mapper.member.joinMember",member);
+		return sqlSession.insert("mapper.member.joinMember", member);
+
 	}
 
 }
