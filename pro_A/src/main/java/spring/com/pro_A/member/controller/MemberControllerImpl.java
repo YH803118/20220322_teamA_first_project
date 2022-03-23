@@ -46,7 +46,7 @@ public class MemberControllerImpl implements MemberController{
 	
 
 	@Override
-	@RequestMapping(value="/test/memberForm.do")
+	@RequestMapping(value="/test/*Form.do")
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -58,14 +58,7 @@ public class MemberControllerImpl implements MemberController{
 	
 
 
-	@Override
-	@RequestMapping(value="/test/loginTest.do")
-	public ModelAndView loginTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
-	}
+	
 
 
 
