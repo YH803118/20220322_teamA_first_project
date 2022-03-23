@@ -14,4 +14,5 @@ import spring.com.pro_A.member.dto.MemberDTO;
 public interface MemberController {
 	public ModelAndView login(@ModelAttribute("member")MemberDTO dto,
 			RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView loginTest(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -31,12 +31,20 @@ public class MemberControllerImpl implements MemberController{
 		
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
-			
+			System.out.println("로그인성공");
 		} else {
-			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/test/login.jsp");
+			System.out.println("로그인실패");
 		}
 		
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value="/test/loginTest.do")
+	public ModelAndView loginTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
 }
