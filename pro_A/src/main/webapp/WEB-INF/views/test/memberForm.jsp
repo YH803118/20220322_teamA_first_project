@@ -5,8 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#memberForm{
+	border:1px solid black;
+	margin: 30px auto;
+	width: 80%;
+	height: 300px;
+	background-color: #dedede;
+}
+</style>
 </head>
 <body>
+<div id="memberForm">
 	<form action="/pro_A/test/addMember.do" method="post">
 		<h1 style="text-align:center;">회원가입</h1>
 		<table style="margin:auto;">
@@ -27,7 +37,7 @@
 				<td><input type="email" name="email"></td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 				<input type="radio" name="memberType" value="0">학생 
 				<input type="radio" name="memberType" value="1">교수
 				</td>
@@ -39,5 +49,6 @@
 			</tr>
 		</table>
 	</form>
+</div>
 </body>
 </html>
