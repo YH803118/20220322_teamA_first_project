@@ -18,5 +18,11 @@ public class BoardDAOImpl implements BoardDAO {
 		List<NoticeDTO> noticeList = sqlsession.selectList("mapper.board.selectNoticeListAll");
 		return noticeList;
 	}
+
+	@Override
+	public NoticeDTO selectNoticeDetail(int noticeNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.board.selectNoticeDetail", noticeNo);
+	}
 	
 }

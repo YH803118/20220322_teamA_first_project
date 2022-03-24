@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.com.pro_A.board.dto.NoticeDTO;
@@ -34,4 +35,13 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/board/noticeDetail.do", method = RequestMethod.GET)
+	public ModelAndView noticeDetailView(
+			@RequestParam(value="noticeNo", required = false) int noticeNo,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		NoticeDTO notice = boardService.noticeDetailView(noticeNo);
+		return null;
+		
+	}
 }

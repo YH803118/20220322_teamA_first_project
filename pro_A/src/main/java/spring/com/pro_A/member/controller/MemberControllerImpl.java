@@ -42,8 +42,6 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	
-	
 
 	@Override
 	@RequestMapping(value="/test/*Form.do")
@@ -55,7 +53,7 @@ public class MemberControllerImpl implements MemberController{
 	
 	
 	
-	
+		
 
 
 	

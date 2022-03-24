@@ -7,5 +7,7 @@ import spring.com.pro_A.board.dto.NoticeDTO;
 public interface BoardDAO {
 	
 	public List<NoticeDTO> selectNoticeListAll();
+
+	public NoticeDTO selectNoticeDetail(int noticeNo);
 	
 }

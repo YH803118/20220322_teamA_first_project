@@ -19,6 +19,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.selectNoticeListAll();
 	}
+
+	@Override
+	public NoticeDTO noticeDetailView(int noticeNo) {
+		// TODO Auto-generated method stub
+		return boardDAO.selectNoticeDetail(noticeNo);
+	}
 	
 	
 

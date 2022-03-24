@@ -7,26 +7,27 @@
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title" /></title>
 <style>
+ 	* {
+ 		box-sizing: border-box;
+ 		margin:0px auto;
+ 	}
+ 	
 	#container{
 		width: 100%;
-		height: 1100px;
-		margin: 50px auto;
+		margin: 0px auto;
 		text-align: center;
 		background-color: #EEEEEE;
 	}	
 	#header {
-		width: 100%;
 		height: 160px;
 		background-color: lightgreen;
 	}	
 	#content{
+		min-height : 700px;
 		padding-bottom: 150px;
 	}
 	#footer {
-		position:absolute;
-		top: 1000px;
-		width: 800px;
-		height: 150px;
+		clear:both;
 		background-color: #bcbcbc
 	}
 </style>

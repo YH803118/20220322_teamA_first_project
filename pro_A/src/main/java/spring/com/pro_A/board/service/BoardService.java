@@ -7,5 +7,7 @@ import spring.com.pro_A.board.dto.NoticeDTO;
 public interface BoardService {
 	
 	public List<NoticeDTO> noticeList();
+
+	public NoticeDTO noticeDetailView(int noticeNo);
 	
 }

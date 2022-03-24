@@ -7,19 +7,23 @@
 <title>Insert title here</title>
 <style>
 #menu {
-	width: 710px;
-	height: 30px;
-	position: relative;
-	left: 30px;
-	top: 130px;
+		width:100%;
+		display:flex;
+		position : absolute;
+		margin-top:130px;
+		background-color: #2d2d2d;
 }
-#menu ul li{
+
+#menu ul {
+	justify-content : center;
 	position: relative;
+}
+
+#menu ul li{
 	left: 30px;
 	float:left;
 	vertical-align: middle;
 	line-height: 30px;
-	background-color: #2d2d2d;
 	text-align:center;
 	list-style: none;
 }
@@ -35,13 +39,15 @@
 }
 </style>
 </head>
-<body><div id="menu">
-<ul>
-	<li><a href="#">공지사항</a></li>
-	<li><a href="#">질의응답</a></li>
-	<li><a href="#">자료실</a></li>
-	<li><a href="#">커뮤니티</a></li>
-</ul>
-</div>
+<body>
+	<div id="menu">
+	<ul>
+		<li><a href="/pro_A/board/noticeList.do">공지사항</a></li>
+		<li><a href="#">질의응답</a></li>
+		<li><a href="#">자료실</a></li>
+		<li><a href="#">커뮤니티</a></li>
+	</ul>
+	</div>
+	${contextPath }
 </body>
 </html>

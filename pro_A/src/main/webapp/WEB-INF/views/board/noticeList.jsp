@@ -6,9 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+	table {
+	
+		border : 1px solid;
+		width : 75%;
+		min-width: 500px;
+		overflow: hidden;
+	}
+</style>
 </head>
 <body>
 	<h1> 공지게시판 구현.jsp</h1>
+	<c:if test="${not empty isLogOn && isLogOn eq true}">
+		<c:if test="${not empty isLonOnId && isLogOn eq admin}">
+			<a href="#"> 글쓰기 </a>
+		</c:if>
+	</c:if>
 	<table>
 		<tr>
 			<th>번호</th>
@@ -22,7 +37,10 @@
 				<c:forEach var="notice" items="${noticeList }" step="1">
 					<tr>
 						<td>${notice.noticeNo }</td>
-						<td>${notice.noticeTitle }</td>
+						<td>
+							<a href="/pro_A/board/noticeDetail?noticeNo=${notice.noticeNo }">
+						${notice.noticeTitle }</a>
+						</td>
 						<td>${notice.noticeWriter }</td>
 						<td>${notice.noticeRegDate }</td>
 						<td>${notice.noticeHit }</td>
@@ -36,5 +54,15 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	<div class="searchBar">
+		<form action="#">
+			<select>
+				<option value="noticeTitle">제목</option>
+				<option value="noticeContent">내용</option>
+				<input type="text" name="searchContent">
+				<input type="submit" value="검색">
+			</select>	
+		</form>
+	</div>
 </body>
 </html>
