@@ -2,6 +2,7 @@ package spring.com.pro_A.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,11 @@ public class MemberControllerImpl implements MemberController{
 		
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("isLogon", "login");
+			session.setAttribute("dto", memberDTO);
 			System.out.println("로그인성공");
+			mav.setViewName("redirect:/test/loginForm.do");
 		} else {
 			System.out.println("로그인실패");
 		}
@@ -56,7 +61,7 @@ public class MemberControllerImpl implements MemberController{
 	      ModelAndView mav =new ModelAndView();
 	      int result = memberService.addMember(member);
 	      if(result>=1) {
-	      mav.setViewName("redirect:/test/loginTest.do");
+	      mav.setViewName("redirect:/test/loginForm.do");
 	      }
 	      
 	      return mav;
