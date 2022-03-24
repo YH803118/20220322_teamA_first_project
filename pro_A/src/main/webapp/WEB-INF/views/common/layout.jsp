@@ -13,14 +13,8 @@
  	}
  	
 	#container{
-<<<<<<< HEAD
 		width: 100%;
 		margin: 0px auto;
-=======
-		width: 800px;
-		height: 1100px;
-		margin: 50px auto;
->>>>>>> branch 'main' of https://github.com/YH803118/20220322_teamA_first_project.git
 		text-align: center;
 		background-color: #EEEEEE;
 	}	
