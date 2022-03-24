@@ -8,7 +8,7 @@
 <title><tiles:insertAttribute name="title" /></title>
 <style>
 	#container{
-		width: 100%;
+		width: 800px;
 		height: 1100px;
 		margin: 50px auto;
 		text-align: center;
