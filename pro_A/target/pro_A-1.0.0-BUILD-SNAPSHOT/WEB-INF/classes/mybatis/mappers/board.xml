@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.board">
+		<resultMap id="noticeAllResult" type="noticeDTO">
+			<result property="noticeNo" column = "noticeNo"/>
+			<result property="noticeWriter" column = "noticeWriter"/>
+			<result property="noticeTitle" column = "noticeTitle"/>
+			<result property="noticeContent" column = "noticeContent"/>
+			<result property="noticeFileName" column = "noticeFileName"/>
+			<result property="noticeRegDate" column = "noticeRegDate"/>
+			<result property="noticeLevel" column = "noticeLevel"/>
+			<result property="noticeHit" column = "noticeHit"/>
+		</resultMap>
+		
+		<select id="selectNoticeListAll" resultMap="noticeAllResult">
+			<![CDATA[
+				select noticeNo, noticeTitle, noticeWriter, noticeRegDate
+				  from (select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
+				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate
+				from t_noticeBoard where rownum <=20) where rn > 10
+			]]>
+		</select>
+		
+		<select id="test" resultType="noticeDTO">
+			<![CDATA[
+				select * from t_noticeBoard where noticeNo = 1				
+			]]>
+		</select>
+	</mapper>
