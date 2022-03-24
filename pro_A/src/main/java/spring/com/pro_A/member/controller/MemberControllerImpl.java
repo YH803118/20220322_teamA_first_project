@@ -41,10 +41,6 @@ public class MemberControllerImpl implements MemberController{
 		
 		return mav;
 	}
-
-	
-	
-
 	@Override
 	@RequestMapping(value="/test/*Form.do")
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -52,24 +48,6 @@ public class MemberControllerImpl implements MemberController{
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
-	
-	
-	
-	
-
-
-	
-
-
-
-	
-
-
-
-
-
-
-
 	@Override
 	@RequestMapping(value="/test/addMember.do" ,method = RequestMethod.POST)
 	   public ModelAndView addMember(@ModelAttribute("member") MemberDTO member,
