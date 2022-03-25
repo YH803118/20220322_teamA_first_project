@@ -8,4 +8,8 @@ public interface MemberService {
 
 	int addMember(MemberDTO member);
 
+	MemberDTO selectId(String id);
+
+	void modMember(MemberDTO member);
+
 }

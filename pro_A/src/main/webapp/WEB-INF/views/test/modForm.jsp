@@ -12,6 +12,7 @@
 비밀번호:<input type="password" name="pwd"><br>
 이름:<input type="text" name="name"><br>
 이메일:<input type="email" name="email"><br>
+<input type="hidden" name="command" value="mod"><br>
 <input type="submit" value="수정">
 </form>
 </body>

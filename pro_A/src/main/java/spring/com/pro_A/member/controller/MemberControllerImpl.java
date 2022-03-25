@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
 
@@ -36,7 +35,7 @@ public class MemberControllerImpl implements MemberController{
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("isLogon", "login");
+			session.setAttribute("isLogon", true);
 			session.setAttribute("dto", memberDTO);
 			System.out.println("로그인성공");
 			mav.setViewName("redirect:/test/loginForm.do");
@@ -66,5 +65,25 @@ public class MemberControllerImpl implements MemberController{
 	      
 	      return mav;
 	   }
+	
+	@Override
+	@RequestMapping(value="/test/modForm.do")
+	public ModelAndView modform(@ModelAttribute("member") MemberDTO member,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String command=request.getParameter("command");
+		if(command==null) {
+		String id=request.getParameter("id");
+		MemberDTO dto=memberService.selectId(id);
+		mav.addObject("dto",dto);
+		String viewName = (String) request.getAttribute("viewName");
+		mav = new ModelAndView(viewName);
+		}
+		else if(command.equals("mod")) {
+			memberService.modMember(member);
+			 mav.setViewName("redirect:/test/loginForm.do");
+		}
+		return mav;
+	}
 
 }
