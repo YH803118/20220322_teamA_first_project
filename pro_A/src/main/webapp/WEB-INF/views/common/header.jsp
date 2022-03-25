@@ -56,25 +56,14 @@ a{top:30px;}
 		<li><a href="#">자료실</a></li>
 		<li><a href="#">커뮤니티</a></li>
 	</ul>
-		<c:choose>
-<<<<<<< HEAD
-			<c:when test="${isLogon=='true' }">
-				<li><a href="/pro_A/test/modMember.do?id=${dto.id }">${dto.id }</a></li>
-				<li><a href="/pro_A/test/logout.do">로그아웃</a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="#">로그인</a></li>
-			</c:otherwise>
-		</c:choose>
-	</ul>
-=======
+<c:choose>
 	<c:when test="${isLogon=='true' }">
 		<a href="/pro_A/test/modForm.do?id=${dto.id }">${dto.id }</a>
 		<a href="/pro_A/test/logout.do">로그아웃</a>
 	</c:when>
 </c:choose>
 	
->>>>>>> branch 'main' of https://github.com/YH803118/20220322_teamA_first_project.git
+
 	</div>
 	
 </body>
