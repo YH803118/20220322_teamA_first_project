@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.file">
+		<resultMap id="fileList" type="fileDTO">
+			<result property="noticeNo" column = "noticeNo"/>
+			<result property="noticeFileName" column = "noticeFileName"/>
+			<result property="regDate" column = "regDate"/>
+		</resultMap>
+		
+	
+		<insert id="addNoticeFile" parameterType="fileDTO">
+			<![CDATA[
+				insert into t_noticeFile(noticeNo, noticeFileName) values (#{noticeNo}, #{noticeFileName})
+			]]>
+		</insert>
+	</mapper>

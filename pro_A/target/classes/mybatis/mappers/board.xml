@@ -8,7 +8,6 @@
 			<result property="noticeWriter" column = "noticeWriter"/>
 			<result property="noticeTitle" column = "noticeTitle"/>
 			<result property="noticeContent" column = "noticeContent"/>
-			<result property="noticeFileName" column = "noticeFileName"/>
 			<result property="noticeRegDate" column = "noticeRegDate"/>
 			<result property="noticeLevel" column = "noticeLevel"/>
 			<result property="noticeHit" column = "noticeHit"/>
@@ -16,16 +15,37 @@
 		
 		<select id="selectNoticeListAll" resultMap="noticeAllResult">
 			<![CDATA[
-				select noticeNo, noticeTitle, noticeWriter, noticeRegDate
+				select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
 				  from (select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
-				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate
-				from t_noticeBoard where rownum <=20) where rn > 10
+				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
+				from t_noticeBoard where rownum <=20) where rn > 0
 			]]>
 		</select>
 		
-		<select id="test" resultType="noticeDTO">
+		<select id="selectNoticeDetail" parameterType="int"  resultType="noticeDTO">
 			<![CDATA[
-				select * from t_noticeBoard where noticeNo = 1				
+				select * from t_noticeBoard where noticeNo = #{noticeNo}				
 			]]>
 		</select>
+		
+		<select id="getLastNoticeNo" resultType="int">
+			<![CDATA[
+				select max(noticeNo) from t_noticeBoard
+			]]>
+		</select>
+		
+		<update id="noticeAddHit" parameterType="int" >
+			<![CDATA[
+				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{boardNo}
+			]]>
+		</update>
+		
+		<insert id="addNotice" parameterType="java.util.Map">
+			<![CDATA[
+				insert into t_noticeBoard(noticeNo, noticeWriter, noticeTitle, noticeContent, noticeLevel)
+				 values(seq_notice.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent}, #{noticeLevel})
+			]]>
+			
+		</insert>
+		
 	</mapper>
