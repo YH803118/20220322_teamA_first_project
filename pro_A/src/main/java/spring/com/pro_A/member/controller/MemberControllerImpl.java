@@ -67,8 +67,8 @@ public class MemberControllerImpl implements MemberController{
 	   }
 	
 	@Override
-	@RequestMapping(value="/test/modMember.do")
-	public ModelAndView modMember(@ModelAttribute("member") MemberDTO member,
+	@RequestMapping(value="/test/modForm.do")
+	public ModelAndView modForm(@ModelAttribute("member") MemberDTO member,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String command=request.getParameter("command");
