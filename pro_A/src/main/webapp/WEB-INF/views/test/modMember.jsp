@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/pro12/test/modForm.do">
+<form action="/pro12/test/modMember.do">
 이름:<input type="text" name="id" readonly="readonly"><br>
 비밀번호:<input type="password" name="pwd"><br>
 이름:<input type="text" name="name"><br>

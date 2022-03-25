@@ -55,7 +55,7 @@ a{top:30px;}
 	</ul>
 		<c:choose>
 	<c:when test="${isLogon=='true' }">
-		<a href="/pro_A/test/modForm.do?id=${dto.id }">${dto.id }</a>
+		<a href="/pro_A/test/modMember.do?id=${dto.id }">${dto.id }</a>
 		<a href="/pro_A/test/logout.do">로그아웃</a>
 	</c:when>
 </c:choose>
