@@ -30,4 +30,16 @@ public class MemberServiceImpl implements MemberService{
 
 	}
 
+	@Override
+	public MemberDTO selectId(String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectId(id);
+	}
+
+	@Override
+	public void modMember(MemberDTO member) {
+		// TODO Auto-generated method stub
+		memberDAO.modMember(member);
+	}
+
 }

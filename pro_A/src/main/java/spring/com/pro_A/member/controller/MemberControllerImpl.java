@@ -2,6 +2,7 @@ package spring.com.pro_A.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
 
@@ -34,9 +34,14 @@ public class MemberControllerImpl implements MemberController{
 		
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("isLogon", true);
+			session.setAttribute("dto", memberDTO);
 			System.out.println("로그인성공");
+			mav.setViewName("redirect:/test/loginForm.do");
 		} else {
 			System.out.println("로그인실패");
+			mav.setViewName("redirect:/test/loginForm.do");
 		}
 		
 		return mav;
@@ -56,10 +61,39 @@ public class MemberControllerImpl implements MemberController{
 	      ModelAndView mav =new ModelAndView();
 	      int result = memberService.addMember(member);
 	      if(result>=1) {
-	      mav.setViewName("redirect:/test/loginTest.do");
+	      mav.setViewName("redirect:/test/loginForm.do");
 	      }
 	      
 	      return mav;
 	   }
+	
+	@Override
+	@RequestMapping(value="/test/modForm.do")
+	public ModelAndView modForm(@ModelAttribute("member") MemberDTO member,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String command=request.getParameter("command");
+		if(command==null) {
+		String id=request.getParameter("id");
+		MemberDTO dto=memberService.selectId(id);
+		String viewName = (String) request.getAttribute("viewName");
+		mav.addObject("dto",dto);
+		mav.setViewName(viewName);
+		}
+		else if(command.equals("mod")) {
+			memberService.modMember(member);
+			 mav.setViewName("redirect:/test/loginForm.do");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/test/logout.do")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session=request.getSession();
+		session.invalidate();
+		ModelAndView mav= new ModelAndView("redirect:/test/loginForm.do");
+		return mav;
+	}
 
 }

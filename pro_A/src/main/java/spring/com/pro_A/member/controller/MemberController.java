@@ -20,6 +20,9 @@ public interface MemberController {
 	
 	public ModelAndView form(HttpServletRequest request,HttpServletResponse response) throws Exception;
 
+	public ModelAndView modForm(MemberDTO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) throws Exception;
 
 
 }

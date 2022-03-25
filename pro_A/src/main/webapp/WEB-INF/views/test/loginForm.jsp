@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,11 +49,20 @@
 </style>
 </head>
 <body>
+
+
 <div id="login">
 <form action="/pro_A/test/login.do" id="loginForm">
+<c:choose>
+<c:when test="${isLogon=='true' }">
+${dto.id }님 환영합니다.
+</c:when>
+<c:otherwise>
 	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput"><br>
 	비밀번호 : <input type="text" name="pwd" class="loginInput"><br>
 	<input type="submit" value="로그인">
+</c:otherwise>
+</c:choose>
 </form>
 </div>
 <div id="calendar"></div>
