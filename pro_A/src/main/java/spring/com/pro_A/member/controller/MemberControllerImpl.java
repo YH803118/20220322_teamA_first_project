@@ -67,17 +67,17 @@ public class MemberControllerImpl implements MemberController{
 	   }
 	
 	@Override
-	@RequestMapping(value="/test/modForm.do")
-	public ModelAndView modform(@ModelAttribute("member") MemberDTO member,
+	@RequestMapping(value="/test/modMember.do")
+	public ModelAndView modMember(@ModelAttribute("member") MemberDTO member,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String command=request.getParameter("command");
 		if(command==null) {
 		String id=request.getParameter("id");
 		MemberDTO dto=memberService.selectId(id);
-		mav.addObject("dto",dto);
 		String viewName = (String) request.getAttribute("viewName");
-		mav = new ModelAndView(viewName);
+		mav.addObject("dto",dto);
+		mav.setViewName(viewName);
 		}
 		else if(command.equals("mod")) {
 			memberService.modMember(member);
