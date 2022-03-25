@@ -17,6 +17,9 @@
 	  month = Integer.parseInt(strMonth);
 	}else{}
 
+	if(month > 11){	month = 0; year++;	}
+	else if(month < 0){ month = 11; year--;	}
+	
 	cal.set(year, month, 1);
 	int startDay = cal.getMinimum(java.util.Calendar.DATE);
 	int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH); 
@@ -27,7 +30,7 @@
 
 	Calendar todayCal = Calendar.getInstance();
 
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 %>
@@ -36,13 +39,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#calendarFrm table{
+	margin: 30px;
+	width: 450px;
+	height: 330px;
+	background-color: gray;
+}
+#calendarFrm a {
+	display:block;
+	color: black;
+	text-decoration: none;
+	text-align:center;
+}
+#calendarFrm td:hover > a{
+	color: #fff
+}
+</style>
 </head>
 <body>
 <form name="calendarFrm" id="calendarFrm" action="" method="post">
 <div id="content" >
-	<table border="1">
+	<table>
 		<tr>
-			<td colspan="7"><input type="button" value="저번 달" onclick="location.href='/pro_A/test/calendar.do?year=<%=year%>&month=<%=month-1%>'">
+			<td colspan="7">
+			<input type="button" value="저번 달" onclick="location.href='/pro_A/test/calendar.do?year=<%=year%>&month=<%=month-1%>'">
 			<%=year %>년 <%=month+1 %>월
 			<input type="button" value="다음 달" onclick="location.href='/pro_A/test/calendar.do?year=<%=year%>&month=<%=month+1%>'">
 			</td>
@@ -59,11 +80,20 @@
 		<tr>
 		<c:set var="start" value="<%=start %>" />
 		<c:forEach var="i" begin="1" end="<%=endDay+start-1 %>" step="1">
-			<c:if test="${i >= start }"><td>${i-start+1 }</td></c:if>
+			<c:if test="${i >= start }">	
+				<td>
+					<a href="#">${i-start+1 }</a>
+				</td>
+			</c:if>
 			<c:if test="${i%7 == 0 }"></tr><tr></c:if>
 			<c:if test="${i < start }"><td></td></c:if>
 		</c:forEach>
 		</tr>
+		<tr><td colspan="7">
+			<c:forEach var="sche" items="${schedule }">
+				 ${sche.scheduleDate }<br>
+			</c:forEach>
+		</td></tr>
 	</table>
 </div>
 </form>
