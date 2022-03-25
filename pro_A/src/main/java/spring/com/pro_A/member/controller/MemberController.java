@@ -22,6 +22,7 @@ public interface MemberController {
 
 	public ModelAndView modForm(MemberDTO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) throws Exception;
 
 
 }

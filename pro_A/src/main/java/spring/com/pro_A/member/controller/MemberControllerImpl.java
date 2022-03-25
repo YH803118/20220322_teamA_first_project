@@ -41,6 +41,7 @@ public class MemberControllerImpl implements MemberController{
 			mav.setViewName("redirect:/test/loginForm.do");
 		} else {
 			System.out.println("로그인실패");
+			mav.setViewName("redirect:/test/loginForm.do");
 		}
 		
 		return mav;
@@ -83,6 +84,15 @@ public class MemberControllerImpl implements MemberController{
 			memberService.modMember(member);
 			 mav.setViewName("redirect:/test/loginForm.do");
 		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/test/logout.do")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session=request.getSession();
+		session.invalidate();
+		ModelAndView mav= new ModelAndView("redirect:/test/loginForm.do");
 		return mav;
 	}
 
