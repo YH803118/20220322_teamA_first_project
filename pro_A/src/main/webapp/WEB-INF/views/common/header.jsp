@@ -42,19 +42,21 @@
 </style>
 </head>
 <body>
+
 	<div id="menu">
 	<ul>
 		<li><a href="/pro_A/board/noticeList.do">공지사항</a></li>
 		<li><a href="#">질의응답</a></li>
 		<li><a href="#">자료실</a></li>
 		<li><a href="#">커뮤니티</a></li>
-	</ul>
-	</div>
-	<c:choose>
+		<c:choose>
 	<c:when test="${isLogOn=='true' }">
-		<a href="/pro_A/member/modMember.do?id=${member.id }"><h3>${member.id }</h3></a>
-		<a href="/pro_A/member/logout.do"><h3>로그아웃</h3></a>
+		<li><a href="/pro_A/test/modMember.do?id=${dto.id }">${dto.id }</a></li>
+		<li><a href="/pro_A/test/logout.do">로그아웃</a></li>
 	</c:when>
 </c:choose>
+	</ul>
+	</div>
+	
 </body>
 </html>

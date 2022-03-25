@@ -24,7 +24,18 @@
 			insert into t_member values(#{id},#{pwd},#{name},#{email},SYSDATE,#{memberType})
 		]]>		
 	</insert>
-		
+	
+	<select id="selectId" resultType="memberDTO" parameterType="String">
+	<![CDATA[
+		select * from t_member where id=#{id}
+	]]>
+	</select>
+	
+	<update id="modMember" parameterType="memberDTO">
+	<![CDATA[
+		update t_member set pwd=#{pwd},name=#{name},email=#{email} where id=#{id}
+	]]>
+	</update>	
 	</mapper>
 	
 	

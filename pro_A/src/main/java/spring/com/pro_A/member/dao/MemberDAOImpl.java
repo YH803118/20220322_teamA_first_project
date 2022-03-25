@@ -27,4 +27,16 @@ public class MemberDAOImpl implements MemberDAO{
 
 	}
 
+	@Override
+	public MemberDTO selectId(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mapper.member.selectId",id);
+	}
+
+	@Override
+	public void modMember(MemberDTO member) {
+		// TODO Auto-generated method stub
+		sqlSession.update("mapper.member.modMember",member);
+	}
+
 }

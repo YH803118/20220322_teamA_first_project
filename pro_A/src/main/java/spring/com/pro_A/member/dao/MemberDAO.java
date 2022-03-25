@@ -10,4 +10,10 @@ public interface MemberDAO {
 	int addMember(MemberDTO member);
 
 
+	public MemberDTO selectId(String id);
+
+
+	public void modMember(MemberDTO member);
+
+
 }
