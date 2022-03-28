@@ -52,7 +52,20 @@ public class BoardDAOImpl implements BoardDAO {
 	public void addNoticeFile(FileDTO fileDTO) {
 		// TODO Auto-generated method stub
 		int result = sqlsession.insert("mapper.file.addNoticeFile", fileDTO);
-		System.out.println("파일 업로드 성공 여부?  : " + result);
+	}
+
+	@Override
+	public List<FileDTO> selectFiles(int noticeNo) {
+		// TODO Auto-generated method stub
+		List<FileDTO> files = sqlsession.selectList("mapper.file.selectFiles", noticeNo);
+		return files;
+	}
+
+	@Override
+	public FileDTO getFileInfo(String noticeFileName) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.file.getFileInfo", noticeFileName);
+		
 	}
 	
 	

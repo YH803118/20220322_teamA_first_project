@@ -9,7 +9,18 @@
 			<result property="regDate" column = "regDate"/>
 		</resultMap>
 		
+		<select id="selectFiles" parameterType="int" resultMap="fileList">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo }
+			]]>
+		</select>
 	
+		<select id="getFileInfo" parameterType="String" resultType="fileDTO">
+			<![CDATA[
+				select * from t_noticeFile where noticeFileName = #{noticeFileName}
+			]]>
+		</select>
+		
 		<insert id="addNoticeFile" parameterType="fileDTO">
 			<![CDATA[
 				insert into t_noticeFile(noticeNo, noticeFileName) values (#{noticeNo}, #{noticeFileName})

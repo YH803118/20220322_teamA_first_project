@@ -19,5 +19,9 @@ public interface BoardService {
 	public int addNotice(Map<String, String> noticeMap);
 
 	public void addNoticeFile(FileDTO fileDTO);
+
+	public List<FileDTO> noticeFiles(int noticeNo);
+
+	public FileDTO getFileInfo(String noticeFileName);
 	
 }

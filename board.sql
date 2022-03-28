@@ -46,7 +46,8 @@ create table t_noticeFile(
     constraint fk_noticeFile foreign key(noticeNo) references t_noticeBoard(noticeNo)
 );
 commit;
-    
+
+alter table t_noticeFile modify noticeFileName varchar2(500);
     
 select max(noticeNo) from t_noticeBoard;
 
@@ -65,3 +66,7 @@ insert into t_noticeBoard(noticeNo, noticeWriter, noticeTitle, noticeContent,not
  values(seq_notice.nextval, '김테스터', 'add함수테스트', 'add함수sql 테스트중22', 0);
  
 delete from t_noticeBoard where noticeNo > 11;
+
+select * from t_noticeFile;
+
+alter table t_noticeFile modify noticeNo not null;

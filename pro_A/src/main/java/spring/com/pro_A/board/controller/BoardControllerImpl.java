@@ -1,7 +1,9 @@
 package spring.com.pro_A.board.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
@@ -30,89 +32,130 @@ import spring.com.pro_A.board.service.BoardService;
 
 @Controller
 public class BoardControllerImpl implements BoardController {
-	
+
 	private static final String CURR_IMAGE_REPO_PATH = "d:\\workspace\\spring\\upLoadFile";
-	
+
 	@Autowired
 	private BoardService boardService;
-	
-	@RequestMapping(value="/board/noticeList.do", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/board/noticeList.do", method = RequestMethod.GET)
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		List<NoticeDTO> noticeList =  boardService.noticeList();
-		ModelAndView mav = new ModelAndView((String)request.getAttribute("viewName"));
+
+		List<NoticeDTO> noticeList = boardService.noticeList();
+		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
 		mav.addObject("noticeList", noticeList);
 		return mav;
 	}
-	
-	@RequestMapping(value="/board/noticeDetail.do", method = RequestMethod.GET)
-	public ModelAndView noticeDetailView(
-			@RequestParam(value="noticeNo", required = false) int noticeNo,
+
+	@RequestMapping(value = "/board/noticeDetail.do", method = RequestMethod.GET)
+	public ModelAndView noticeDetailView(@RequestParam(value = "noticeNo", required = false) int noticeNo,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boardService.noticeAddHit(noticeNo);
+
 		NoticeDTO notice = boardService.noticeDetailView(noticeNo);
+		List<FileDTO> noticeFiles = boardService.noticeFiles(noticeNo);
 		ModelAndView mav = new ModelAndView("/board/noticeDetailView");
 		mav.addObject("detailDTO", notice);
-		
+		mav.addObject("noticeFiles", noticeFiles);
 		return mav;
-		
+
 	}
-	
-	@RequestMapping(value="/board/*Form.do", method=RequestMethod.GET)
-	public ModelAndView noticeWriteForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		return new ModelAndView((String)request.getAttribute("viewName"));
+
+	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
+	public ModelAndView noticeWriteForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return new ModelAndView((String) request.getAttribute("viewName"));
 	}
-	
-	@RequestMapping(value="/board/noticeNew.do", method=RequestMethod.POST)
-	public ModelAndView noticeNew(MultipartHttpServletRequest multipartReq, HttpServletResponse response) throws Exception {
+
+	@RequestMapping(value = "/board/noticeNew.do", method = RequestMethod.POST)
+	public void noticeNew(MultipartHttpServletRequest multipartReq, HttpServletResponse response)
+			throws Exception {
 		
+		ModelAndView mav = new ModelAndView();
 		multipartReq.setCharacterEncoding("utf-8");
 		Map<String, String> noticeMap = new HashMap<String, String>();
 		Enumeration enu = multipartReq.getParameterNames();
-		
-		while(enu.hasMoreElements()) {
+
+		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
-			System.out.println("name : " + name);
 			String value = (String) multipartReq.getParameter(name);
-			System.out.println("value : " + value);
 			noticeMap.put(name, value);
 		}
-		
-		 int result = boardService.addNotice(noticeMap);
-		 int addNoticeNo = boardService.getLastNoticeNo();
-		 noticeFileUploader(multipartReq, addNoticeNo);
-		
-		return null;
+
+		int result = boardService.addNotice(noticeMap);
+//		if(result > 0) {
+//			int addNoticeNo = boardService.getLastNoticeNo();
+//			int success = noticeFileUploader(multipartReq, addNoticeNo);
+//			if(success != 0 ) {
+//				boardService.deleteNotice(addNoticeNo);
+//			}
+//		} else {
+//			
+//		}
+		response.sendRedirect("/pro_A/board/noticeList.do");
 	}
 	
-	
-	public void noticeFileUploader(MultipartRequest multipartReq, int noticeNo) throws Exception {
-			
+	@RequestMapping(value = "/board/noticeDownload.do")
+	public void noticeFileDown(@RequestParam("fileName") String noticeFileName, HttpServletResponse response)
+			throws Exception {
+		OutputStream out = response.getOutputStream();
+		FileDTO file = boardService.getFileInfo(noticeFileName);
+		File downFile = new File(CURR_IMAGE_REPO_PATH + "\\" + file.getRegDate() + "\\" + noticeFileName);
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachment;fileName=" + noticeFileName);
+
+		FileInputStream in = new FileInputStream(downFile);
+		byte[] buffer = new byte[1024 * 8];
+		while (true) {
+			int count = in.read(buffer);
+			if (count == -1) {
+				break;
+			}
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
+	}
+
+	// File Upload Process Method
+	public int noticeFileUploader(MultipartRequest multipartReq, int noticeNo) {
+
 		Date todays = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String DailyDir = sdf.format(todays);
 		Iterator it = multipartReq.getFileNames();
-		
-		while(it.hasNext()){
+		int result = 0;
+		while (it.hasNext()) {
 			FileDTO fileDTO = new FileDTO();
-			String fileName = (String)it.next();
-			MultipartFile mFile= multipartReq.getFile(fileName);
-			File upLoadPath = new File(CURR_IMAGE_REPO_PATH,DailyDir);
-			if(!upLoadPath.exists()) {
+			String fileName = (String) it.next();
+			MultipartFile mFile = multipartReq.getFile(fileName);
+			File upLoadPath = new File(CURR_IMAGE_REPO_PATH, DailyDir);
+			if (!upLoadPath.exists()) {
 				upLoadPath.mkdirs();
 			}
-			String noticeFileName = mFile.getOriginalFilename();
-			noticeFileName = noticeFileName.substring(noticeFileName.lastIndexOf("\\")+1);
-			UUID uuid = UUID.randomUUID();
-			noticeFileName = uuid.toString() + "_" + noticeFileName;
-			fileDTO.setNoticeNo(noticeNo);
-			fileDTO.setNoticeFileName(noticeFileName);
-			boardService.addNoticeFile(fileDTO);
-			File saveFile = new File(upLoadPath, noticeFileName);
-			mFile.transferTo(saveFile);
+			if (mFile.getSize() != 0) {
+				String noticeFileName = mFile.getOriginalFilename();
+				noticeFileName = noticeFileName.substring(noticeFileName.lastIndexOf("\\") + 1);
+				UUID uuid = UUID.randomUUID();
+				noticeFileName = uuid.toString() + "_" + noticeFileName;
+				fileDTO.setNoticeNo(noticeNo);
+				fileDTO.setNoticeFileName(noticeFileName);
+				boardService.addNoticeFile(fileDTO);
+				File saveFile = new File(upLoadPath, noticeFileName);
+				try {
+					mFile.transferTo(saveFile);
+					result = 0;
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					result = -1;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					result = -1;
+					e.printStackTrace();
+				}
+			}
 		}
-		
+		return result;
 	}
-	
 }

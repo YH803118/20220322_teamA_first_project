@@ -19,5 +19,9 @@ public interface BoardDAO {
 	public int addNotice(Map<String, String> noticeMap);
 
 	public void addNoticeFile(FileDTO fileDTO);
+
+	public List<FileDTO> selectFiles(int noticeNo);
+
+	public FileDTO getFileInfo(String noticeFileName);
 	
 }

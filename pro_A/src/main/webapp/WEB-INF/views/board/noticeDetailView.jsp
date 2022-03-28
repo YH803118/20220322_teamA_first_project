@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,13 @@
 		</tr>
 		<tr>
 			<td>첨부파일</td>
-			<td></td>
+			<td colspan="3">
+			<c:if test="${not empty noticeFiles  }">
+				<c:forEach var="files" items="${ noticeFiles}">
+					<a href="/pro_A/board/noticeDownload.do?fileName=${files.noticeFileName }">${files.noticeFileName }</a><br>
+				</c:forEach>
+			</c:if>
+			</td>
 		</tr>
 	</table>
 
