@@ -19,11 +19,7 @@
 </head>
 <body>
 	<h1> 공지게시판 구현.jsp</h1>
-	<c:if test="${not empty isLogOn && isLogOn eq true}">
-		<c:if test="${not empty isLonOnId && isLogOn eq admin}">
-			<a href="#"> 글쓰기 </a>
-		</c:if>
-	</c:if>
+			<a href="/pro_A/board/noticeWriteForm.do"> 글쓰기 </a>
 	<table>
 		<tr>
 			<th>번호</th>
@@ -38,7 +34,7 @@
 					<tr>
 						<td>${notice.noticeNo }</td>
 						<td>
-							<a href="/pro_A/board/noticeDetail?noticeNo=${notice.noticeNo }">
+							<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }">
 						${notice.noticeTitle }</a>
 						</td>
 						<td>${notice.noticeWriter }</td>

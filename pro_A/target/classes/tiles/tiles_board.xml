@@ -4,7 +4,17 @@
 	
 <tiles-definitions>
 	<definition name="/board/noticeList" extends="baseLayout">
-		<put-attribute name="title" value="로그인" />
+		<put-attribute name="title" value="notice" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeList.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeDetailView" extends="baseLayout">
+		<put-attribute name="title" value="detailView" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeDetailView.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeWriteForm" extends="baseLayout">
+		<put-attribute name="title" value="writeForm" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeWriteForm.jsp" />
 	</definition>
 </tiles-definitions>
