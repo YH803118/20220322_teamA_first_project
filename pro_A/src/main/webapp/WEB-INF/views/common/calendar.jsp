@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Calendar" %>
+
 <%
 	Calendar cal = Calendar.getInstance();
 	String strYear = request.getParameter("year");
@@ -11,6 +12,7 @@
 	int year = cal.get(Calendar.YEAR);
 	int month = cal.get(Calendar.MONTH);
 	int date = cal.get(Calendar.DATE);
+
 	
 	if(strYear != null){
 	  year = Integer.parseInt(strYear);
@@ -31,8 +33,15 @@
 	Calendar todayCal = Calendar.getInstance();
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String stringToday = sdf.format(todayCal.getTime());
 
-	int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
+	SimpleDateFormat sdfYM = new SimpleDateFormat("yyyy-MM-");
+	String yearMonth = sdfYM.format(cal.getTime());
+	//int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
+%>
+
+<%
+	String schedule = request.getParameter("schedule");
 %>
 <!DOCTYPE html>
 <html>
@@ -53,11 +62,17 @@
 	text-align:center;
 }
 #calendarFrm td:hover > a{
-	color: #fff
+	color: #fff;
+	background-color: #2E2E2E;
+}
+
+#scheduleOn{
+	background-color: #aaaaaa;
 }
 </style>
 </head>
 <body>
+<c:set var="yearMonth" value="<%=yearMonth %>"/>
 <form name="calendarFrm" id="calendarFrm" action="" method="post">
 <div id="content" >
 	<table>
@@ -82,7 +97,24 @@
 		<c:forEach var="i" begin="1" end="<%=endDay+start-1 %>" step="1">
 			<c:if test="${i >= start }">	
 				<td>
-					<a href="#">${i-start+1 }</a>
+					<c:set var="date" value="${i-start+1 }" />
+					<c:if test="${(i-start+1)<10 }">
+						<c:set var="date" value="${'0' += (i-start+1) }" />
+					</c:if>
+					<c:set var="day" value="${yearMonth }${date }" />
+					<c:set var="doneLoop" value="false"/>
+					<c:forEach var="sche" items="${calendarList }">
+						<c:choose>
+							<c:when test="${sche.scheduleDate eq day }">
+								<a href="/pro_A/test/calendar.do?schedule=${sche.schedule }" id="scheduleOn">${i-start+1 }*</a>
+							</c:when>
+							<c:when test="${not doneLoop }">
+								<c:set var="doneLoop" value="true"/>
+							</c:when>
+							<c:otherwise>
+								<a href="#">${i-start+1 }</a></c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</td>
 			</c:if>
 			<c:if test="${i%7 == 0 }"></tr><tr></c:if>
@@ -90,9 +122,13 @@
 		</c:forEach>
 		</tr>
 		<tr><td colspan="7">
-			<c:forEach var="sche" items="${schedule }">
-				 ${sche.scheduleDate }<br>
-			</c:forEach>
+			<c:set var="schedule" value="<%=schedule %>" />
+			${schedule }
+			<%-- <c:forEach var="sche" items="${calendarList }">
+				<c:when test="${schedule eq sche.schedule }">
+					${sche.scheduleDetail }
+				</c:when>
+			</c:forEach> --%>
 		</td></tr>
 	</table>
 </div>
