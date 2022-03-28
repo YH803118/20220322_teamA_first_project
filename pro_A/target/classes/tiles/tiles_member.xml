@@ -27,4 +27,9 @@
 		<put-attribute name="title" value="회원수정" />
 		<put-attribute name="body" value="/WEB-INF/views/test/modForm.jsp" />
 	</definition>
+	
+	<definition name="/test/openForm" extends="baseLayout">
+		<put-attribute name="title" value="강좌개설" />
+		<put-attribute name="body" value="/WEB-INF/views/test/openForm.jsp" />
+	</definition>
 </tiles-definitions>

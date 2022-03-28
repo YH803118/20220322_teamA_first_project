@@ -55,12 +55,18 @@
 <form action="/pro_A/test/login.do" id="loginForm">
 <c:choose>
 <c:when test="${isLogon=='true' }">
-${dto.id }님 환영합니다.
+${dto.id }님 환영합니다.<br>
+<c:choose>
+<c:when test="${dto.memberType==1 }">
+<a href="/pro_A/test/openForm.do"><input type="button" value="강좌개설"></a>
+</c:when>
+</c:choose>
 </c:when>
 <c:otherwise>
 	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput"><br>
-	비밀번호 : <input type="text" name="pwd" class="loginInput"><br>
+	비밀번호 : <input type="password" name="pwd" class="loginInput"><br>
 	<input type="submit" value="로그인">
+	<a href="/pro_A/test/memberForm.do"><input type="button" value="회원가입"></a>
 </c:otherwise>
 </c:choose>
 </form>
