@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import spring.com.pro_A.board.dao.BoardDAO;
+import spring.com.pro_A.board.dto.Criteria;
 import spring.com.pro_A.board.dto.FileDTO;
 import spring.com.pro_A.board.dto.NoticeDTO;
 
@@ -17,9 +18,9 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<NoticeDTO> noticeList() {
+	public List<NoticeDTO> noticeList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return boardDAO.selectNoticeListAll();
+		return boardDAO.selectNoticeListAll(cri);
 	}
 
 	@Override
@@ -66,5 +67,39 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardDAO.getFileInfo(noticeFileName);
 	}
+
+
+	
+	@Override
+	public List<FileDTO> getNoticeFileList(int noticeNo) {
+		// TODO Auto-generated method stub
+		return boardDAO.getNoticeFileList(noticeNo);
+	}
+
+	@Override
+	public int noticeFileDel(int noticeNo) {
+		// 
+		return boardDAO.noticeFileDel(noticeNo);
+	}
+
+	@Override
+	public int noticeDel(int noticeNo) {
+		// TODO Auto-generated method stub
+		return boardDAO.noticeDel(noticeNo);
+	}
+
+	@Override
+	public int getNoticeCountAll() {
+		// TODO Auto-generated method stub
+		return boardDAO.getNoticeCountAll();
+	}
+
+	@Override
+	public List<NoticeDTO> noticeListTop() {
+		// TODO Auto-generated method stub
+		return boardDAO.selectNoticeListTop();
+	}
+	
+	
 
 }

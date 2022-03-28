@@ -21,9 +21,22 @@
 			]]>
 		</select>
 		
+		<select id="getFileList" parameterType="int" resultMap="fileList">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo}
+			]]>
+		</select>
+		
+		
 		<insert id="addNoticeFile" parameterType="fileDTO">
 			<![CDATA[
-				insert into t_noticeFile(noticeNo, noticeFileName) values (#{noticeNo}, #{noticeFileName})
+				insert into t_noticeFile(noticeFileName, noticeNo, uuid, originalFileName) values (#{noticeFileName},#{noticeNo}, #{uuid},#{originalFileName})
 			]]>
 		</insert>
+		
+		<delete id="noticeFileDel" parameterType="int">
+			<![CDATA[
+				delete from t_noticeFile where noticeNo=#{noticeNo}
+			]]>
+		</delete>
 	</mapper>

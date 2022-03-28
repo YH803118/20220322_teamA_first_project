@@ -26,24 +26,42 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.com.pro_A.board.dto.Criteria;
 import spring.com.pro_A.board.dto.FileDTO;
 import spring.com.pro_A.board.dto.NoticeDTO;
+import spring.com.pro_A.board.dto.PageDTO;
 import spring.com.pro_A.board.service.BoardService;
 
 @Controller
 public class BoardControllerImpl implements BoardController {
 
-	private static final String CURR_IMAGE_REPO_PATH = "d:\\workspace\\spring\\upLoadFile";
+	private static final String CURR_FILE_REPO_PATH = "d:\\workspace\\spring\\upLoadFile";
 
+	
 	@Autowired
 	private BoardService boardService;
 
 	@RequestMapping(value = "/board/noticeList.do", method = RequestMethod.GET)
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		List<NoticeDTO> noticeList = boardService.noticeList();
+	public ModelAndView noticeList(@RequestParam(value="pageNum", required =false) String pageNum,  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Criteria cri = new Criteria();
+		List<NoticeDTO> noticeListTop = boardService.noticeListTop();
+		cri.setAmount(20-noticeListTop.size());
+		int total = boardService.getNoticeCountAll();
+		if(pageNum == null) {
+			cri.setPageNum(1);
+		} else {
+			cri.setPageNum(Integer.parseInt(pageNum));
+		}
+		PageDTO pageDTO = new PageDTO(cri, total);
+		pageDTO.setCurPage(cri.getPageNum());
+		
+		List<NoticeDTO> noticeList = boardService.noticeList(cri);
 		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
 		mav.addObject("noticeList", noticeList);
+		mav.addObject("noticeListTop", noticeListTop);
+		mav.addObject("pageDTO", pageDTO);
+		System.out.println("현재 페이지 : " + pageDTO.getCurPage());
+		System.out.println("다음 페이지 : " + pageDTO.getCurPage()+1);
 		return mav;
 	}
 
@@ -83,6 +101,8 @@ public class BoardControllerImpl implements BoardController {
 		}
 
 		int result = boardService.addNotice(noticeMap);
+		int addNoticeNo = boardService.getLastNoticeNo();
+ 		int success = noticeFileUploader(multipartReq, addNoticeNo);
 //		if(result > 0) {
 //			int addNoticeNo = boardService.getLastNoticeNo();
 //			int success = noticeFileUploader(multipartReq, addNoticeNo);
@@ -95,12 +115,37 @@ public class BoardControllerImpl implements BoardController {
 		response.sendRedirect("/pro_A/board/noticeList.do");
 	}
 	
+	@RequestMapping(value="/board/noticeDelete.do", method=RequestMethod.GET)
+	public void noticeDel(@RequestParam("noticeNo") int noticeNo, HttpServletResponse response) throws Exception{
+						
+		List<FileDTO> fileList = boardService.getNoticeFileList(noticeNo);
+		if(!fileList.isEmpty()) {
+			fileDel(fileList);
+		}
+		boardService.noticeFileDel(noticeNo);
+		boardService.noticeDel(noticeNo);
+		response.sendRedirect("/pro_A/board/noticeList.do");
+		
+	}
+	
+	
+	@RequestMapping(value="/board/noticeFileDel.do", method=RequestMethod.GET)
+	public void noticeFileDel(@RequestParam("noticeNo") int noticeNo, 
+			@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response) throws Exception {
+		
+		FileDTO delFile = boardService.getFileInfo(noticeFileName);
+		System.out.println("delFile : " + delFile.getNoticeNo());
+		response.sendRedirect("/pro_A/board/noticeDetail.do?noticeNo="+noticeNo);
+	}
+
+	
+
 	@RequestMapping(value = "/board/noticeDownload.do")
-	public void noticeFileDown(@RequestParam("fileName") String noticeFileName, HttpServletResponse response)
+	public void noticeFileDown(@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response)
 			throws Exception {
 		OutputStream out = response.getOutputStream();
 		FileDTO file = boardService.getFileInfo(noticeFileName);
-		File downFile = new File(CURR_IMAGE_REPO_PATH + "\\" + file.getRegDate() + "\\" + noticeFileName);
+		File downFile = new File(CURR_FILE_REPO_PATH + "\\" + file.getRegDate() + "\\" + noticeFileName);
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment;fileName=" + noticeFileName);
 
@@ -117,9 +162,25 @@ public class BoardControllerImpl implements BoardController {
 		out.close();
 	}
 
-	// File Upload Process Method
-	public int noticeFileUploader(MultipartRequest multipartReq, int noticeNo) {
+	public void fileDel(FileDTO fileDTO) {
+		File file = null;
 
+	}
+
+	public void fileDel(List<FileDTO> fileList) {
+		File file = null;
+		for (FileDTO fileDTO : fileList) {
+			FileDTO delFileInfo = boardService.getFileInfo(fileDTO.getNoticeFileName());
+			file = new File(
+					CURR_FILE_REPO_PATH + "//" + delFileInfo.getRegDate() + "//" + delFileInfo.getNoticeFileName());
+			if (file.exists()) {
+				boolean result = file.delete();
+				System.out.println("파일 삭제 테스트 결과 :" + result);
+			}
+		}
+	}
+	
+	public int noticeFileUploader(MultipartRequest multipartReq, int noticeNo) {
 		Date todays = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String DailyDir = sdf.format(todays);
@@ -129,7 +190,7 @@ public class BoardControllerImpl implements BoardController {
 			FileDTO fileDTO = new FileDTO();
 			String fileName = (String) it.next();
 			MultipartFile mFile = multipartReq.getFile(fileName);
-			File upLoadPath = new File(CURR_IMAGE_REPO_PATH, DailyDir);
+			File upLoadPath = new File(CURR_FILE_REPO_PATH, DailyDir);
 			if (!upLoadPath.exists()) {
 				upLoadPath.mkdirs();
 			}
@@ -137,13 +198,19 @@ public class BoardControllerImpl implements BoardController {
 				String noticeFileName = mFile.getOriginalFilename();
 				noticeFileName = noticeFileName.substring(noticeFileName.lastIndexOf("\\") + 1);
 				UUID uuid = UUID.randomUUID();
-				noticeFileName = uuid.toString() + "_" + noticeFileName;
+				fileDTO.setUuid(uuid.toString());
+				System.out.println("fileDTO , uuid = : " + fileDTO.getUuid());
 				fileDTO.setNoticeNo(noticeNo);
+				System.out.println("fileDTO , noticeNo = : " + fileDTO.getNoticeNo());
+				fileDTO.setOriginalFileName(noticeFileName);
+				System.out.println("original fileName : " + fileDTO.getOriginalFileName());
+				noticeFileName = uuid.toString() + "_" + noticeFileName;
 				fileDTO.setNoticeFileName(noticeFileName);
-				boardService.addNoticeFile(fileDTO);
+				System.out.println("변경된 파일이름 : " + fileDTO.getNoticeFileName());
 				File saveFile = new File(upLoadPath, noticeFileName);
 				try {
 					mFile.transferTo(saveFile);
+					boardService.addNoticeFile(fileDTO);
 					result = 0;
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
@@ -158,4 +225,6 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return result;
 	}
+
+	
 }

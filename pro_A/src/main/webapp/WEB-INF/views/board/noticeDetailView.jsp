@@ -25,12 +25,14 @@
 			<td colspan="3">
 			<c:if test="${not empty noticeFiles  }">
 				<c:forEach var="files" items="${ noticeFiles}">
-					<a href="/pro_A/board/noticeDownload.do?fileName=${files.noticeFileName }">${files.noticeFileName }</a><br>
+					<a href="/pro_A/board/noticeDownload.do?noticeFileName=${files.noticeFileName }">${files.originalFileName }</a>
+					<a href="/pro_A/board/noticeFileDel.do?noticeNo=${detailDTO.noticeNo }&noticeFileName=${files.noticeFileName }"><button>삭제</button></a><br>
 				</c:forEach>
 			</c:if>
 			</td>
 		</tr>
 	</table>
-
+	<a href="/pro_A/board/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button>삭제</button></a>
+	<a href="/pro_A/board/noticeModify.do?noticeNo=${detailDTO.noticeNo }"><button>수정</button></a>
 </body>
 </html>
