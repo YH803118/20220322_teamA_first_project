@@ -9,5 +9,6 @@
 		<typeAlias type="spring.com.pro_A.board.dto.FileDTO" alias="fileDTO" />
 		<typeAlias type="spring.com.pro_A.calendar.dto.CalendarDTO" alias="calendarDTO" />
 		<typeAlias type="spring.com.pro_A.lecture.dto.LectureDTO" alias="lectureDTO" />
+		<typeAlias type="spring.com.pro_A.member.dto.CalendarDTO" alias="calendarDTO" />
 	</typeAliases>
 </configuration>

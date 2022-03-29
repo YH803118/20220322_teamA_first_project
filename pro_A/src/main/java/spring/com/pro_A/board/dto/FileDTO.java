@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileDTO {
 
-	private int noticeNo;
 	private String noticeFileName;
+	private int noticeNo;
+	private String uuid;
+	private String originalFileName;
 	private Date regDate;
 
 	public int getNoticeNo() {
@@ -33,6 +35,22 @@ public class FileDTO {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
 	}
 
 }

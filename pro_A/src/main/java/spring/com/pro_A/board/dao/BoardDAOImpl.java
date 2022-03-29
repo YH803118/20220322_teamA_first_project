@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import spring.com.pro_A.board.dto.Criteria;
 import spring.com.pro_A.board.dto.FileDTO;
 import spring.com.pro_A.board.dto.NoticeDTO;
 
@@ -19,8 +20,8 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private  SqlSession sqlsession;
 	
-	public List<NoticeDTO> selectNoticeListAll(){
-		List<NoticeDTO> noticeList = sqlsession.selectList("mapper.board.selectNoticeListAll");
+	public List<NoticeDTO> selectNoticeListAll(Criteria cri){
+		List<NoticeDTO> noticeList = sqlsession.selectList("mapper.board.selectNoticeListAll", cri);
 		return noticeList;
 	}
 
@@ -67,6 +68,42 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlsession.selectOne("mapper.file.getFileInfo", noticeFileName);
 		
 	}
+	
+	
+	@Override
+	public List<FileDTO> getNoticeFileList(int noticeNo) {
+		// TODO Auto-generated method stub
+		 List<FileDTO> fileList = sqlsession.selectList("mapper.file.getFileList", noticeNo);
+		 
+		 return fileList;
+	}
+
+	@Override
+	public int noticeFileDel(int noticeNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("mapper.file.noticeFileDel", noticeNo);
+	}
+
+	@Override
+	public int noticeDel(int noticeNo) {
+		int result = sqlsession.delete("mapper.board.noticeDel", noticeNo);
+		System.out.println("게시글 삭제 결과 : " + result);
+		return result;
+	}
+
+	@Override
+	public int getNoticeCountAll() {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.board.getNoticeCountAll");
+		
+	}
+
+	@Override
+	public List<NoticeDTO> selectNoticeListTop() {
+		
+		return sqlsession.selectList("mapper.board.selectNoticeListTop");
+	}
+	
 	
 	
 	

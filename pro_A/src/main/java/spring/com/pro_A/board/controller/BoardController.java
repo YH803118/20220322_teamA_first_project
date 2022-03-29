@@ -9,13 +9,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardController {
 
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public void noticeNew(MultipartHttpServletRequest multipartReq, HttpServletResponse response)
-			throws Exception;
-	public ModelAndView noticeDetailView(
-			@RequestParam(value="noticeNo", required = false) int noticeNo,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public void noticeFileDown(@RequestParam("fileName") String noticeFileName,
-			HttpServletResponse response) throws Exception;
-}
+	public ModelAndView noticeList(@RequestParam("pageNum") String pageNum, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public void noticeNew(MultipartHttpServletRequest multipartReq, HttpServletResponse response) throws Exception;
+
+	public void noticeDel(@RequestParam("noticeNo") int noticeNo, HttpServletResponse response) throws Exception;
+
+	public ModelAndView noticeDetailView(@RequestParam(value = "noticeNo", required = false) int noticeNo,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public void noticeFileDown(@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response)
+			throws Exception;
+	
+	public void noticeFileDel(@RequestParam("noticeNo") int noticeNo,
+			@RequestParam("noticeFileName") String noticeFileName,HttpServletResponse response) throws Exception;
+	
+}

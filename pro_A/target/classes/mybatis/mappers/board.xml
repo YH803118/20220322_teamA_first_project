@@ -13,14 +13,34 @@
 			<result property="noticeHit" column = "noticeHit"/>
 		</resultMap>
 		
-		<select id="selectNoticeListAll" resultMap="noticeAllResult">
+		<select id="selectNoticeListAll" parameterType="spring.com.pro_A.board.dto.Criteria"  resultMap="noticeAllResult">
 			<![CDATA[
 				select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
-				  from (select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
+				  from (
+				  select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
 				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
-				from t_noticeBoard where rownum <=20) where rn > 0
+				from t_noticeBoard where rownum <=#{pageNum} * #{amount}
+				) where rn > (#{pageNum}-1) * #{amount}
 			]]>
 		</select>
+		
+		<select id="selectNoticeListTop" resultMap="noticeAllResult">
+		 <![CDATA[
+		 	select noticeNo, noticeTitle, noticeWriter, noticeRegDate
+		 	 from 
+		 		(
+		 		 select rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate 
+		 		 from t_noticeBoard where noticeLevel=1 and rownum <=5
+		 		) order by noticeRegDate desc
+		 ]]>
+		</select>
+		
+		<select id="getNoticeCountAll" resultType="int">
+			<![CDATA[
+				select count(*) from t_noticeBoard
+			]]>
+		</select>
+		
 		
 		<select id="selectNoticeDetail" parameterType="int"  resultType="noticeDTO">
 			<![CDATA[
@@ -28,11 +48,14 @@
 			]]>
 		</select>
 		
+		
 		<select id="getLastNoticeNo" resultType="int">
 			<![CDATA[
 				select max(noticeNo) from t_noticeBoard
 			]]>
 		</select>
+		
+		
 		
 		<update id="noticeAddHit" parameterType="int" >
 			<![CDATA[
@@ -45,7 +68,12 @@
 				insert into t_noticeBoard(noticeNo, noticeWriter, noticeTitle, noticeContent, noticeLevel)
 				 values(seq_notice.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent}, #{noticeLevel})
 			]]>
-			
 		</insert>
+		
+		<delete id="noticeDel" parameterType="int">
+			<![CDATA[
+				delete from t_noticeBoard where noticeNo=#{noticeNo}
+			]]>
+		</delete>
 		
 	</mapper>
