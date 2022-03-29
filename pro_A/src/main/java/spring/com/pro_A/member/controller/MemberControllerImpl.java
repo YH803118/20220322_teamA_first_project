@@ -37,12 +37,17 @@ public class MemberControllerImpl implements MemberController{
 		
 		memberDTO = memberService.login(dto);
 		if(memberDTO != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("isLogon", true);
-			session.setAttribute("dto", memberDTO);
-			System.out.println("로그인성공");
-			mav.setViewName("redirect:/test/loginForm.do");
-		} else {
+			if(memberDTO.getMemberType() == 2) {
+				System.out.println("관리자로그인");
+				mav.setViewName("redirect:/test/managerForm.do");
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("isLogon", true);
+				session.setAttribute("dto", memberDTO);
+				System.out.println("로그인성공");
+				mav.setViewName("redirect:/test/loginForm.do");
+			}
+		} else{
 			System.out.println("로그인실패");
 			mav.setViewName("redirect:/test/loginForm.do");
 		}
@@ -94,7 +99,6 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value="/test/logout.do")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		HttpSession session=request.getSession();
 		session.invalidate();
 		ModelAndView mav= new ModelAndView("redirect:/test/loginForm.do");

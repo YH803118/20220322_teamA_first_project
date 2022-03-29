@@ -14,8 +14,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
 	</definition>
 			
-	<definition name="/test/loginForm" extends="baseLayout">
-		<put-attribute name="body" value="/WEB-INF/views/test/loginForm.jsp" />
+	<definition name="/test/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/test/{1}.jsp" />
 	</definition>
 	
 	<definition name="/test/memberForm" extends="baseLayout">
