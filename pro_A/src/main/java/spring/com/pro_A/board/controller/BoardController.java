@@ -16,12 +16,14 @@ public interface BoardController {
 	public void noticeDel(@RequestParam("noticeNo") int noticeNo, HttpServletResponse response) throws Exception;
 
 	public ModelAndView noticeDetailView(@RequestParam(value = "noticeNo", required = false) int noticeNo,
+			@RequestParam(value="mod", required = false) String mod,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public void noticeFileDown(@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response)
 			throws Exception;
 	
-	public void noticeFileDel(@RequestParam("noticeNo") int noticeNo,
-			@RequestParam("noticeFileName") String noticeFileName,HttpServletResponse response) throws Exception;
+	public void noticeMod(MultipartHttpServletRequest multipartReq, HttpServletResponse response) throws Exception;
 	
+	public void noticeSearch(@RequestParam("serchType") String searchType, @RequestParam("searchContent") String searchContent,
+								HttpServletResponse response) throws Exception;
 }

@@ -30,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void noticeAddHit(int boardNo) {
-		boardDAO.noticeAddHit(boardNo);
+	public void noticeAddHit(int noticeNo) {
+		boardDAO.noticeAddHit(noticeNo);
 
 	}
 

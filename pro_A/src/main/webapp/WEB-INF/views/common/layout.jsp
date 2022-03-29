@@ -17,6 +17,7 @@
 		margin: 0px auto;
 		text-align: center;
 		background-color: #EEEEEE;
+		overflow : hidden;
 	}	
 	#header {
 		height: 160px;
@@ -24,7 +25,6 @@
 	}	
 	#content{
 		min-height : 700px;
-		padding-bottom: 150px;
 	}
 	#footer {
 		clear:both;

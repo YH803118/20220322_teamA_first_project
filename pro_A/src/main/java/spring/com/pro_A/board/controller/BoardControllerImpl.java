@@ -60,23 +60,26 @@ public class BoardControllerImpl implements BoardController {
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("noticeListTop", noticeListTop);
 		mav.addObject("pageDTO", pageDTO);
-		System.out.println("현재 페이지 : " + pageDTO.getCurPage());
-		System.out.println("다음 페이지 : " + pageDTO.getCurPage()+1);
 		return mav;
 	}
 
 	@RequestMapping(value = "/board/noticeDetail.do", method = RequestMethod.GET)
 	public ModelAndView noticeDetailView(@RequestParam(value = "noticeNo", required = false) int noticeNo,
+			@RequestParam(value="mod", required = false) String mod,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		boardService.noticeAddHit(noticeNo);
-
+		ModelAndView mav = new ModelAndView();
+		if(mod == null) {
+			boardService.noticeAddHit(noticeNo);
+			 mav.setViewName("/board/noticeDetailView");
+		} else {
+			 mav.setViewName("/board/noticeModifyForm");
+		}
 		NoticeDTO notice = boardService.noticeDetailView(noticeNo);
 		List<FileDTO> noticeFiles = boardService.noticeFiles(noticeNo);
-		ModelAndView mav = new ModelAndView("/board/noticeDetailView");
 		mav.addObject("detailDTO", notice);
 		mav.addObject("noticeFiles", noticeFiles);
+		
 		return mav;
-
 	}
 
 	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
@@ -128,17 +131,6 @@ public class BoardControllerImpl implements BoardController {
 		
 	}
 	
-	
-	@RequestMapping(value="/board/noticeFileDel.do", method=RequestMethod.GET)
-	public void noticeFileDel(@RequestParam("noticeNo") int noticeNo, 
-			@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response) throws Exception {
-		
-		FileDTO delFile = boardService.getFileInfo(noticeFileName);
-		System.out.println("delFile : " + delFile.getNoticeNo());
-		response.sendRedirect("/pro_A/board/noticeDetail.do?noticeNo="+noticeNo);
-	}
-
-	
 
 	@RequestMapping(value = "/board/noticeDownload.do")
 	public void noticeFileDown(@RequestParam("noticeFileName") String noticeFileName, HttpServletResponse response)
@@ -162,10 +154,7 @@ public class BoardControllerImpl implements BoardController {
 		out.close();
 	}
 
-	public void fileDel(FileDTO fileDTO) {
-		File file = null;
-
-	}
+	
 
 	public void fileDel(List<FileDTO> fileList) {
 		File file = null;
@@ -175,7 +164,6 @@ public class BoardControllerImpl implements BoardController {
 					CURR_FILE_REPO_PATH + "//" + delFileInfo.getRegDate() + "//" + delFileInfo.getNoticeFileName());
 			if (file.exists()) {
 				boolean result = file.delete();
-				System.out.println("파일 삭제 테스트 결과 :" + result);
 			}
 		}
 	}
@@ -225,6 +213,20 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return result;
 	}
-
 	
+	@RequestMapping(value="/board/noticeModify.do", method=RequestMethod.POST)
+	public void noticeMod(MultipartHttpServletRequest multipartReq, HttpServletResponse response) throws Exception {
+		System.out.println("ddd");
+		
+	}
+
+	@Override
+	@RequestMapping(value = "/board/noticeSearch.do", method=RequestMethod.GET)
+	public void noticeSearch(String searchType, String searchContent, HttpServletResponse response) throws Exception {
+
+		if(searchType.equals("noticeContent")) {
+		}
+		
+	}
+
 }

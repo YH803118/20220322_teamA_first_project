@@ -59,7 +59,7 @@
 		
 		<update id="noticeAddHit" parameterType="int" >
 			<![CDATA[
-				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{boardNo}
+				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{noticeNo}
 			]]>
 		</update>
 		
