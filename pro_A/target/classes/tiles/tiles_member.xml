@@ -9,14 +9,13 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
-	
 	<definition name="main" extends="baseLayout">
 		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
 	</definition>
 			
-	<definition name="/test/loginForm" extends="baseLayout">
-		<put-attribute name="body" value="/WEB-INF/views/test/loginForm.jsp" />
+	<definition name="/test/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/test/{1}.jsp" />
 	</definition>
 	
 	<definition name="/test/memberForm" extends="baseLayout">
@@ -26,5 +25,10 @@
 	<definition name="/test/modForm" extends="baseLayout">
 		<put-attribute name="title" value="회원수정" />
 		<put-attribute name="body" value="/WEB-INF/views/test/modForm.jsp" />
+	</definition>
+	
+	<definition name="/test/openForm" extends="baseLayout">
+		<put-attribute name="title" value="강좌개설" />
+		<put-attribute name="body" value="/WEB-INF/views/test/openForm.jsp" />
 	</definition>
 </tiles-definitions>

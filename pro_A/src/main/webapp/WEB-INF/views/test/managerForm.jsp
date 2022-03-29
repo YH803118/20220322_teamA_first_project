@@ -9,6 +9,7 @@
 Calendar cal = Calendar.getInstance();
 String strYear = request.getParameter("year");
 String strMonth = request.getParameter("month");
+String strDate = request.getParameter("date");
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH);
@@ -17,6 +18,7 @@ int date = cal.get(Calendar.DATE);
 if (strYear != null) {
 	year = Integer.parseInt(strYear);
 	month = Integer.parseInt(strMonth);
+	date = Integer.parseInt(strDate);
 } else {
 }
 
@@ -55,16 +57,6 @@ String schedule = request.getParameter("schedule");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#login {
-	position: relative;
-	top: 0;
-	float: right;
-	margin: 30px;
-	width: 260px;
-	height: 200px;
-	background-color: #aaaaaa;
-}
-
 #notice {
 	top: 500px;
 	background-color: lightgreen;
@@ -95,7 +87,7 @@ String schedule = request.getParameter("schedule");
 #calendarFrm table {
 	margin: 30px;
 	top: 160px;
-	width: 450px;
+	width: 740px;
 	height: 330px;
 	background-color: gray;
 }
@@ -123,9 +115,9 @@ String schedule = request.getParameter("schedule");
 		<table>
 			<tr>
 				<td colspan="7"><input type="button" value="저번 달"
-					onclick="location.href='${contextPath }/test/loginForm.do?year=<%=year%>&month=<%=month-1%>'">
+					onclick="location.href='${contextPath }/test/managerForm.do?year=<%=year%>&month=<%=month-1%>'">
 					<%=year%>년 <%=month + 1%>월 <input type="button" value="다음 달"
-					onclick="location.href='${contextPath }/test/loginForm.do?year=<%=year%>&month=<%=month+1%>'">
+					onclick="location.href='${contextPath }/test/managerForm.do?year=<%=year%>&month=<%=month+1%>'">
 				</td>
 			</tr>
 			<tr>
@@ -149,15 +141,15 @@ String schedule = request.getParameter("schedule");
 								items="${calendarList }">
 								<c:choose>
 									<c:when test="${sche.scheduleDate eq day }">
-										<a
-											href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
+										<a	href="${contextPath }/test/managerForm.do?schedule=${sche.schedule }"
 											id="scheduleOn">${i-start+1 }*</a>
 									</c:when>
 									<c:when test="${not doneLoop }">
 										<c:set var="doneLoop" value="true" />
 									</c:when>
 									<c:otherwise>
-										<a href="#">${i-start+1 }</a>
+										<a href="${contextPath }/test/managerForm.do?year=<%=year%>&month=<%=month%>&date=${i-start+1}">
+										${i-start+1 }</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
@@ -180,32 +172,14 @@ String schedule = request.getParameter("schedule");
 			</c:if>
 					</c:forEach></td>
 			</tr>
+			<tr>
+				<td colspan="7">
+				<%=year %>.<%=month+1 %>.<%=date %>
+				</td>
+			</tr>
 		</table>
 	</div>
-	<div id="login">
-		<form action="/pro_A/test/login.do" id="loginForm">
-			<c:choose>
-				<c:when test="${isLogon=='true' }">
-${dto.id }님 환영합니다.<br>
-					<c:choose>
-						<c:when test="${dto.memberType==1 }">
-							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input
-								type="button" value="강좌개설"></a>
-						</c:when>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput">
-					<br>
-	비밀번호 : <input type="password" name="pwd" class="loginInput">
-					<br>
-					<input type="submit" value="로그인">
-					<a href="/pro_A/test/memberForm.do"><input type="button"
-						value="회원가입"></a>
-				</c:otherwise>
-			</c:choose>
-		</form>
-	</div>
+
 	<div id="notice"></div>
 	<div id="community"></div>
 </body>

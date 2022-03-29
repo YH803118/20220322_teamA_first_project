@@ -1,10 +1,13 @@
 package spring.com.pro_A.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -40,6 +43,12 @@ public class MemberServiceImpl implements MemberService{
 	public void modMember(MemberDTO member) {
 		// TODO Auto-generated method stub
 		memberDAO.modMember(member);
+	}
+
+	@Override
+	public List<CalendarDTO> showSchedule() {
+		// TODO Auto-generated method stub
+		return memberDAO.showSchedule();
 	}
 
 }

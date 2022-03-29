@@ -1,9 +1,12 @@
 package spring.com.pro_A.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
 @Repository
@@ -37,6 +40,13 @@ public class MemberDAOImpl implements MemberDAO{
 	public void modMember(MemberDTO member) {
 		// TODO Auto-generated method stub
 		sqlSession.update("mapper.member.modMember",member);
+	}
+
+	@Override
+	public List<CalendarDTO> showSchedule() {
+		// TODO Auto-generated method stub
+		List<CalendarDTO> schedule = sqlSession.selectList("mapper.calendar.showSchedule"); 
+		return schedule;
 	}
 
 }
