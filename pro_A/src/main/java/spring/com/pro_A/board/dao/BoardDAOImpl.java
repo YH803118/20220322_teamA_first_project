@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import spring.com.pro_A.board.dto.Criteria;
 import spring.com.pro_A.board.dto.FileDTO;
 import spring.com.pro_A.board.dto.NoticeDTO;
 
@@ -19,8 +20,8 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private  SqlSession sqlsession;
 	
-	public List<NoticeDTO> selectNoticeListAll(){
-		List<NoticeDTO> noticeList = sqlsession.selectList("mapper.board.selectNoticeListAll");
+	public List<NoticeDTO> selectNoticeListAll(Criteria cri){
+		List<NoticeDTO> noticeList = sqlsession.selectList("mapper.board.selectNoticeListAll", cri);
 		return noticeList;
 	}
 
@@ -52,8 +53,57 @@ public class BoardDAOImpl implements BoardDAO {
 	public void addNoticeFile(FileDTO fileDTO) {
 		// TODO Auto-generated method stub
 		int result = sqlsession.insert("mapper.file.addNoticeFile", fileDTO);
-		System.out.println("파일 업로드 성공 여부?  : " + result);
 	}
+
+	@Override
+	public List<FileDTO> selectFiles(int noticeNo) {
+		// TODO Auto-generated method stub
+		List<FileDTO> files = sqlsession.selectList("mapper.file.selectFiles", noticeNo);
+		return files;
+	}
+
+	@Override
+	public FileDTO getFileInfo(String noticeFileName) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.file.getFileInfo", noticeFileName);
+		
+	}
+	
+	
+	@Override
+	public List<FileDTO> getNoticeFileList(int noticeNo) {
+		// TODO Auto-generated method stub
+		 List<FileDTO> fileList = sqlsession.selectList("mapper.file.getFileList", noticeNo);
+		 
+		 return fileList;
+	}
+
+	@Override
+	public int noticeFileDel(int noticeNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("mapper.file.noticeFileDel", noticeNo);
+	}
+
+	@Override
+	public int noticeDel(int noticeNo) {
+		int result = sqlsession.delete("mapper.board.noticeDel", noticeNo);
+		System.out.println("게시글 삭제 결과 : " + result);
+		return result;
+	}
+
+	@Override
+	public int getNoticeCountAll() {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.board.getNoticeCountAll");
+		
+	}
+
+	@Override
+	public List<NoticeDTO> selectNoticeListTop() {
+		
+		return sqlsession.selectList("mapper.board.selectNoticeListTop");
+	}
+	
 	
 	
 	

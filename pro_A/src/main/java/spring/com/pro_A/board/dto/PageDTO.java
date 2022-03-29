@@ -4,6 +4,7 @@ public class PageDTO {
 	
 	private int startPage;
 	private int endPage;
+	private int curPage;
 	private boolean prev, next;
 	
 	private int total;
@@ -18,7 +19,6 @@ public class PageDTO {
 		this.startPage = this.endPage - 9;
 		
 		int realEnd = (int) (Math.ceil((total*1.0)/ cri.getAmount()));
-		
 		if(realEnd < this.endPage) {
 			this.endPage = realEnd;
 		}
@@ -27,4 +27,61 @@ public class PageDTO {
 		
 	}
 
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public boolean isPrev() {
+		return prev;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public Criteria getCri() {
+		return cri;
+	}
+
+	public void setCri(Criteria cri) {
+		this.cri = cri;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	
 }

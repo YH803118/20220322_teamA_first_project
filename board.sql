@@ -3,7 +3,6 @@ create table t_noticeBoard(
     noticeWriter varchar2(20) not null,
     noticeTitle varchar2(100) not null,
     noticeContent varchar2(4000) not null,
-    noticeFileName varchar2(50),
     noticeRegDate date default sysdate,
     noticeLevel number default 0,
     noticeHit number default 0,
@@ -12,7 +11,7 @@ create table t_noticeBoard(
 
 commit;
 
-insert into t_noticeBoard values(1, '홍길동', '홍길동 테스트1', '홍길동 테스트내용', null, sysdate, 0);
+insert into t_noticeBoard values(seq_notice.nextval, '홍길동', '홍길동 테스트1', '홍길동 테스트내용', sysdate, 1, 0);
 
 
 
@@ -20,7 +19,7 @@ alter table t_noticeBoard modify noticeFileName null;
 alter table t_noticeBoard add(noticeHit number default 0);
 select * from t_noticeBoard;    
 
-insert into t_noticeBoard (noticeNo, noticeWriter, noticeTitle, noticecontent, noticefilename, noticeLevel) (select seq_notice.nextval,noticeWriter, noticeTitle, noticecontent, noticefilename, noticeLevel from t_noticeBoard);
+insert into t_noticeBoard (noticeNo, noticeWriter, noticeTitle, noticecontent, noticeLevel) (select seq_notice.nextval,noticeWriter, noticeTitle, noticecontent, noticeLevel from t_noticeBoard);
 
 
 
@@ -39,20 +38,23 @@ update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo = 1;
 
 
 create table t_noticeFile(
-    noticeFileName varchar2(20),
+    noticeFileName varchar2(500),
     noticeNo number,
+    uuid varchar2(100),
+    originalFileName varchar2(500),
     RegDate date default sysdate,
     constraint pk_noticeFile primary key(noticeFileName),
     constraint fk_noticeFile foreign key(noticeNo) references t_noticeBoard(noticeNo)
 );
 commit;
-    
+
+alter table t_noticeFile modify noticeFileName varchar2(500);
     
 select max(noticeNo) from t_noticeBoard;
 
 select noticeNo from t_noticeBoard order by noticeNo desc;
 
-
+select * from t_noticeFile;
 DROP SEQUENCE SEQ_NOTICE;
 create SEQUENCE seq_notice;
 
@@ -65,3 +67,13 @@ insert into t_noticeBoard(noticeNo, noticeWriter, noticeTitle, noticeContent,not
  values(seq_notice.nextval, '김테스터', 'add함수테스트', 'add함수sql 테스트중22', 0);
  
 delete from t_noticeBoard where noticeNo > 11;
+
+select * from t_noticeFile;
+
+select count(*) from t_noticeBoard;
+
+alter table t_noticeFile modify noticeNo not null;
+
+select * from t_noticeBoard;
+
+select noticeNo, noticeTitle, noticeWriter, noticeRegDate from (select  /*+INDEX_DESC(t_noticeBoard noticeRegDate) */ rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate from t_noticeBoard where noticeLevel =  0 and rownum <=5);

@@ -15,6 +15,14 @@
 		min-width: 500px;
 		overflow: hidden;
 	}
+	ul {
+		list-style: none;
+	}
+	
+	ul > li {
+		float: left;
+	}
+	
 </style>
 </head>
 <body>
@@ -28,6 +36,22 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
+		<c:choose>
+			<c:when test="${not empty noticeListTop }">
+				<c:forEach var="noticeTop" items="${noticeListTop }" step="1">
+					<tr>
+						<td>${noticeTop.noticeNo }</td>
+						<td>
+							<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }">
+							${noticeTop.noticeTitle }</a>
+						</td>
+						<td>${noticeTop.noticeWriter }</td>
+						<td>${noticeTop.noticeRegDate }</td>
+						<td>${noticeTop.noticeHit }</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+		</c:choose>
 		<c:choose>
 			<c:when test="${not empty noticeList  }">
 				<c:forEach var="notice" items="${noticeList }" step="1">
@@ -60,5 +84,21 @@
 			</select>	
 		</form>
 	</div>
+	<div>
+		<ul>
+			<c:if test="${pageDTO.prev }">
+				<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.startPage-1 }">Prev</a></li>
+			</c:if>
+			
+			<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+				<li><a href="/pro_A/board/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
+			</c:forEach>
+			
+			<c:if test="${pageDTO.next }">
+				<li><a href=""/pro_A/board/noticeList.do?pageNum=${pageDTO.endPage+1 }">Next</a></li>
+			</c:if>
+		</ul>
+	</div>	
+	
 </body>
 </html>
