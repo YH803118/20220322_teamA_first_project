@@ -13,11 +13,11 @@
  	}
  	
 	#container{
-		width: 100%;
+		width: 800px;
 		margin: 0px auto;
 		text-align: center;
 		background-color: #EEEEEE;
-	}	
+	}
 	#header {
 		height: 160px;
 		background-color: lightgreen;

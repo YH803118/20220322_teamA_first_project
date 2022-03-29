@@ -1,4 +1,4 @@
-package spring.com.pro_A.calendar.dto;
+package spring.com.pro_A.member.dto;
 
 import java.sql.Date;
 
