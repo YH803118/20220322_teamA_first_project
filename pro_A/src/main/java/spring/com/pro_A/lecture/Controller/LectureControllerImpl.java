@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.com.pro_A.lecture.Service.LectureService;
 import spring.com.pro_A.lecture.dto.LectureDTO;
 
+@Controller
 public class LectureControllerImpl implements LectureController{
 	
 	@Autowired
@@ -26,7 +28,7 @@ public class LectureControllerImpl implements LectureController{
 		
 		ModelAndView mav=new ModelAndView();
 		int result=lectureService.open(dto);
-		
+		mav.setViewName("redirect:/test/loginForm.do");
 		return mav;
 	}
 

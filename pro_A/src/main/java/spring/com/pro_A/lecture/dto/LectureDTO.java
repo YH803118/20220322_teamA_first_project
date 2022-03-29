@@ -1,5 +1,8 @@
 package spring.com.pro_A.lecture.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LectureDTO {
 
 	private String lectName;
