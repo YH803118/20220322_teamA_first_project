@@ -25,8 +25,8 @@ public class CalendarControllerImpl implements CalendarController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		List<CalendarDTO> schedule = calendarService.showSchedule();
-		mav.addObject("schedule",schedule);
+		List<CalendarDTO> calendarList = calendarService.showSchedule();
+		mav.addObject("calendarList",calendarList);
 		return mav;
 	}
 }

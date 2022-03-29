@@ -58,7 +58,7 @@
 ${dto.id }님 환영합니다.<br>
 <c:choose>
 <c:when test="${dto.memberType==1 }">
-<a href="/pro_A/test/openForm.do"><input type="button" value="강좌개설"></a>
+<a href="/pro_A/test/openForm.do?name=${dto.name }"><input type="button" value="강좌개설"></a>
 </c:when>
 </c:choose>
 </c:when>

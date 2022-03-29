@@ -9,7 +9,6 @@ public class NoticeDTO {
 	private String noticeWriter;
 	private String noticeTitle;
 	private String noticeContent;
-	private String noticeFileName;
 	private String noticeRegDate;
 	private int noticeLevel; // 0 일반, 1 상단고정
 	private int noticeHit;
@@ -44,14 +43,6 @@ public class NoticeDTO {
 
 	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
-	}
-
-	public String getNoticeFileName() {
-		return noticeFileName;
-	}
-
-	public void setNoticeFileName(String noticeFileName) {
-		this.noticeFileName = noticeFileName;
 	}
 
 	public String getNoticeRegDate() {
