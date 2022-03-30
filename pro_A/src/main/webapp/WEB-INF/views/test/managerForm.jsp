@@ -7,6 +7,12 @@
 
 <%
 Calendar cal = Calendar.getInstance();
+Calendar selDay = Calendar.getInstance();
+String strSelDay = "";
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+SimpleDateFormat sdfYM = new SimpleDateFormat("yyyy-MM-");
+
 String strYear = request.getParameter("year");
 String strMonth = request.getParameter("month");
 String strDate = request.getParameter("date");
@@ -15,11 +21,16 @@ int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH);
 int date = cal.get(Calendar.DATE);
 
-if (strYear != null) {
+if (strYear != null && strDate == null) {
+	year = Integer.parseInt(strYear);
+	month = Integer.parseInt(strMonth);
+} else if(strDate != null){
 	year = Integer.parseInt(strYear);
 	month = Integer.parseInt(strMonth);
 	date = Integer.parseInt(strDate);
-} else {
+	
+	selDay.set(year,month,date);
+	strSelDay = sdf.format(selDay.getTime());
 }
 
 if (month > 11) {
@@ -40,10 +51,8 @@ int newLine = 0;
 
 Calendar todayCal = Calendar.getInstance();
 
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 String stringToday = sdf.format(todayCal.getTime());
 
-SimpleDateFormat sdfYM = new SimpleDateFormat("yyyy-MM-");
 String yearMonth = sdfYM.format(cal.getTime());
 //int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 %>
@@ -58,17 +67,17 @@ String schedule = request.getParameter("schedule");
 <title>Insert title here</title>
 <style>
 #notice {
-	top: 500px;
+	top: 600px;
 	background-color: lightgreen;
 	margin: 30px;
-	width: 450px;
+	width: 740px;
 	height: 120px;
 	left: 0;
 }
 
 #community {
 	background-color: green;
-	width: 450px;
+	width: 740px;
 	height: 120px;
 	margin: 30px;
 	left: 0;
@@ -88,7 +97,7 @@ String schedule = request.getParameter("schedule");
 	margin: 30px;
 	top: 160px;
 	width: 740px;
-	height: 330px;
+	height: 500px;
 	background-color: gray;
 }
 
@@ -110,6 +119,7 @@ String schedule = request.getParameter("schedule");
 </style>
 </head>
 <body>
+<form action="/pro_A/test/addSchedule.do" method="post">
 	<c:set var="yearMonth" value="<%=yearMonth%>" />
 	<div id="calendarFrm">
 		<table>
@@ -133,54 +143,67 @@ String schedule = request.getParameter("schedule");
 				<c:set var="start" value="<%=start%>" />
 				<c:forEach var="i" begin="1" end="<%=endDay + start - 1%>" step="1">
 					<c:if test="${i >= start }">
-						<td><c:set var="date" value="${i-start+1 }" /> <c:if
-								test="${(i-start+1)<10 }">
-								<c:set var="date" value="${'0' += (i-start+1) }" />
-							</c:if> <c:set var="day" value="${yearMonth }${date }" /> <c:set
-								var="doneLoop" value="false" /> <c:forEach var="sche"
-								items="${calendarList }">
-								<c:choose>
-									<c:when test="${sche.scheduleDate eq day }">
+						<td><c:set var="date" value="${i-start+1 }" /> 
+						<c:if test="${(i-start+1)<10 }">
+							<c:set var="date" value="${'0' += (i-start+1) }" />
+						</c:if> 
+							<c:set var="day" value="${yearMonth }${date }" /> 
+							<c:set var="doneLoop" value="true" />
+							<c:set var="noSchedule" value="true" />
+							
+							<c:forEach var="sche" items="${calendarList }">
+								<c:if test="${doneLoop}">
+									<c:if test="${sche.scheduleDate eq day }">
 										<a	href="${contextPath }/test/managerForm.do?schedule=${sche.schedule }"
 											id="scheduleOn">${i-start+1 }*</a>
-									</c:when>
-									<c:when test="${not doneLoop }">
-										<c:set var="doneLoop" value="true" />
-									</c:when>
-									<c:otherwise>
-										<a href="${contextPath }/test/managerForm.do?year=<%=year%>&month=<%=month%>&date=${i-start+1}">
-										${i-start+1 }</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach></td>
+											<c:set var="noSchedule" value="false"/>
+											<c:set var="doneLoop" value="false" />
+									</c:if>
+								</c:if>
+							</c:forEach>
+								<c:if test="${noSchedule eq true }">
+									<a href="${contextPath }/test/managerForm.do?year=<%=year%>&month=<%=month%>&date=${i-start+1}">
+									${i-start+1 }</a>
+								</c:if>
+							</td>
 					</c:if>
-					<c:if test="${i%7 == 0 }">
-			</tr>
-			<tr>
-				</c:if>
-				<c:if test="${i < start }">
-					<td></td>
-				</c:if>
+					<c:if test="${i%7 == 0 }">	
+						</tr><tr>
+					</c:if>
+					<c:if test="${i < start }">
+						<td></td>
+					</c:if>
 				</c:forEach>
 			</tr>
-			<tr>
-				<td colspan="7"><c:set var="schedule" value="<%=schedule%>" />
-					${schedule }<br> <c:forEach var="sche"
-						items="${calendarList }">
-						<c:if test="${schedule eq sche.schedule }">
-				${sche.scheduleDetail }
-			</c:if>
-					</c:forEach></td>
-			</tr>
+			<c:set var="schedule" value="<%=schedule%>" />
+			<c:choose>
+			<c:when test="${schedule eq null }">
 			<tr>
 				<td colspan="7">
-				<%=year %>.<%=month+1 %>.<%=date %>
+				<%=strSelDay %>&nbsp;
+				<input type="text" name="schedule">
+				<input type="hidden" name="scheduleDate" value="<%=strSelDay %>">
+				<input type="submit" value="추가">
 				</td>
 			</tr>
+			</c:when>
+			<c:otherwise>
+			<tr>
+				<td colspan="7">
+					${schedule }<br> 
+					<c:forEach var="sche" items="${calendarList }">
+						<c:if test="${schedule eq sche.schedule }">
+							${sche.scheduleDetail }
+						</c:if>
+					</c:forEach></td>
+			</tr>
+			</c:otherwise>
+			</c:choose>
 		</table>
 	</div>
 
 	<div id="notice"></div>
 	<div id="community"></div>
+</form>
 </body>
 </html>

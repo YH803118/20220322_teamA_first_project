@@ -105,5 +105,16 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	
+	@RequestMapping(value="/test/addSchedule.do" ,method = RequestMethod.POST)
+	   public ModelAndView addMember(@ModelAttribute("calendar") CalendarDTO calendar,
+	                           HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      request.setCharacterEncoding("utf-8");
+	      ModelAndView mav =new ModelAndView();
+	      int result = memberService.addSchedule(calendar);
+	      if(result>=1) {
+	      mav.setViewName("redirect:/test/managerForm.do");
+	      }
+	      
+	      return mav;
+	   }
 }

@@ -49,4 +49,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return schedule;
 	}
 
+	@Override
+	public int addSchedule(CalendarDTO calendar) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mapper.calendar.addSchedule", calendar);
+	}
+
 }

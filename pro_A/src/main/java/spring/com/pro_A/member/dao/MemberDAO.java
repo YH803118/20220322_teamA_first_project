@@ -22,4 +22,7 @@ public interface MemberDAO {
 	List<CalendarDTO> showSchedule();
 
 
+	int addSchedule(CalendarDTO calendar);
+
+
 }

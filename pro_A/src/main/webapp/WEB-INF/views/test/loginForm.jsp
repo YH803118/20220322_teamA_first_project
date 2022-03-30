@@ -144,23 +144,23 @@ String schedule = request.getParameter("schedule");
 						<td><c:set var="date" value="${i-start+1 }" /> <c:if
 								test="${(i-start+1)<10 }">
 								<c:set var="date" value="${'0' += (i-start+1) }" />
-							</c:if> <c:set var="day" value="${yearMonth }${date }" /> <c:set
-								var="doneLoop" value="false" /> <c:forEach var="sche"
-								items="${calendarList }">
-								<c:choose>
-									<c:when test="${sche.scheduleDate eq day }">
-										<a
-											href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
+							</c:if> <c:set var="day" value="${yearMonth }${date }" />
+							<c:set var="doneLoop" value="true" />
+							<c:set var="noSchedule" value="true" />
+							
+							<c:forEach var="sche" items="${calendarList }">
+								<c:if test="${doneLoop}">
+									<c:if test="${sche.scheduleDate eq day }">
+										<a	href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
 											id="scheduleOn">${i-start+1 }*</a>
-									</c:when>
-									<c:when test="${not doneLoop }">
-										<c:set var="doneLoop" value="true" />
-									</c:when>
-									<c:otherwise>
-										<a href="#">${i-start+1 }</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach></td>
+											<c:set var="noSchedule" value="false"/>
+											<c:set var="doneLoop" value="false" />
+									</c:if>
+								</c:if>
+							</c:forEach>
+								<c:if test="${noSchedule eq true }">
+									<a href="#">	${i-start+1 }</a>
+								</c:if></td>
 					</c:if>
 					<c:if test="${i%7 == 0 }">
 			</tr>
@@ -186,7 +186,7 @@ String schedule = request.getParameter("schedule");
 		<form action="/pro_A/test/login.do" id="loginForm">
 			<c:choose>
 				<c:when test="${isLogon=='true' }">
-${dto.id }님 환영합니다.<br>
+				${dto.id }님 환영합니다.<br>
 					<c:choose>
 						<c:when test="${dto.memberType==1 }">
 							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input

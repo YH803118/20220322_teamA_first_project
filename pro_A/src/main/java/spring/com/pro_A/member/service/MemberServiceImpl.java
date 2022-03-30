@@ -51,4 +51,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.showSchedule();
 	}
 
+	@Override
+	public int addSchedule(CalendarDTO calendar) {
+		// TODO Auto-generated method stub
+		return memberDAO.addSchedule(calendar);
+	}
+
 }

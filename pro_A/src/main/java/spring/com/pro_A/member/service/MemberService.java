@@ -17,4 +17,6 @@ public interface MemberService {
 
 	List<CalendarDTO> showSchedule();
 
+	int addSchedule(CalendarDTO calendar);
+
 }
