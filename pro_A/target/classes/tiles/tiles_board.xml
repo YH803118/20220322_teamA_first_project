@@ -17,4 +17,9 @@
 		<put-attribute name="title" value="writeForm" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeWriteForm.jsp" />
 	</definition>
+	
+	<definition name="/board/noticeModifyForm" extends="baseLayout">
+		<put-attribute name="title" value="게시물 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeModifyForm.jsp" />
+	</definition>
 </tiles-definitions>

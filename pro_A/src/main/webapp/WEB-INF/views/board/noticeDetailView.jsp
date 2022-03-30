@@ -6,19 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+	.tblView, .tblView > tr, td {
+		border : 1px solid;
+		border-collapse: collapse;
+		padding: 0px;
+	}
+	
+	textarea {
+		border-style : none;
+		border:0px;
+		padding:0px;
+		resize: none;
+	}
+</style>
 </head>
 <body>
 	<h1> 상세페이지 내용 </h1>
-	<table border="1px solid">
+	<table class="tblView">
 		<tr>
-			<td>제목</td>
+			<th>제목</th>
 			<td>${detailDTO.noticeTitle }</td>
-			<td>글쓴이</td>
+			<th>글쓴이</th>
 			<td>${detailDTO.noticeWriter }</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td colspan="3">${detailDTO.noticeContent }</td>
+			<td colspan="3">
+				<textarea rows="30" cols="80" name="noticeContent" readonly="readonly">${detailDTO.noticeContent }</textarea>
+			</td>
 		</tr>
 		<tr>
 			<td>첨부파일</td>
@@ -26,13 +43,14 @@
 			<c:if test="${not empty noticeFiles  }">
 				<c:forEach var="files" items="${ noticeFiles}">
 					<a href="/pro_A/board/noticeDownload.do?noticeFileName=${files.noticeFileName }">${files.originalFileName }</a>
-					<a href="/pro_A/board/noticeFileDel.do?noticeNo=${detailDTO.noticeNo }&noticeFileName=${files.noticeFileName }"><button>삭제</button></a><br>
 				</c:forEach>
 			</c:if>
 			</td>
 		</tr>
 	</table>
-	<a href="/pro_A/board/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button>삭제</button></a>
-	<a href="/pro_A/board/noticeModify.do?noticeNo=${detailDTO.noticeNo }"><button>수정</button></a>
+	<div style="margin-top: 10px;">
+		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&mod=true"><button>수정</button></a>
+		<a href="/pro_A/board/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button>삭제</button></a>
+	</div>
 </body>
 </html>

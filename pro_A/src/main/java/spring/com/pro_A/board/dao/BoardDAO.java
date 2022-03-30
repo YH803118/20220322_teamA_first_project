@@ -13,7 +13,7 @@ public interface BoardDAO {
 
 	public NoticeDTO selectNoticeDetail(int noticeNo);
 
-	public void noticeAddHit(int boardNo);
+	public void noticeAddHit(int noticeNo);
 
 	public int getLastNoticeNo();
 

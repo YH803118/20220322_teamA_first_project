@@ -32,8 +32,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void noticeAddHit(int boardNo) {
-		int result = sqlsession.update("mapper.board.noticeAddHit", boardNo);
+	public void noticeAddHit(int noticeNo) {
+		int result = sqlsession.update("mapper.board.noticeAddHit", noticeNo);
 	}
 
 	@Override
