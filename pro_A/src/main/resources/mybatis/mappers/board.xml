@@ -14,7 +14,6 @@
 		</resultMap>
 		
 		<select id="selectNoticeListAll" parameterType="spring.com.pro_A.common.dto.Criteria"  resultMap="noticeAllResult">
-<<<<<<< HEAD
 			<![CDATA[
 				select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
 				  from (
@@ -24,17 +23,6 @@
 				) where rn > (#{pageNum}-1) * #{amount}
 			]]>
 		</select>
-=======
-         <![CDATA[
-            select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
-              from (
-              select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
-                rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
-            from t_noticeBoard where rownum <=#{pageNum} * #{amount}
-            ) where rn > (#{pageNum}-1) * #{amount}
-         ]]>
-      </select>
->>>>>>> branch 'main' of https://github.com/YH803118/20220322_teamA_first_project.git
 		
 		<select id="selectNoticeListTop" resultMap="noticeAllResult">
 		 <![CDATA[
