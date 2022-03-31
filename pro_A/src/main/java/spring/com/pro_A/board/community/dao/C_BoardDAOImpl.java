@@ -53,6 +53,25 @@ public class C_BoardDAOImpl implements C_BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.update("mapper.boardc.updateCommu",commDTO);
 	}
+
+	@Override
+	public int getCommuSearchCnt(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.boardc.getCommuSearchCnt",cri);
+	}
+
+	@Override
+	public List<CommDTO> searchCommuList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mapper.boardc.getSearchCommu",cri);
+	}
+
+	@Override
+	public int delCommu(int commuNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("mapper.boardc.delCommu", commuNo);
+	}
+	
 	
 	
 

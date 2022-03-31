@@ -108,6 +108,12 @@ public class N_BoardDAOImpl implements N_BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mapper.boardn.selectSearchList",cri);
 	}
+
+	@Override
+	public int getSearchCountAll(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.boardn.selectSearchCount", cri);
+	}
 	
 	
 	

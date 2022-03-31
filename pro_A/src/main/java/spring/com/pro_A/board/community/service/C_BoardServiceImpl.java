@@ -48,5 +48,25 @@ public class C_BoardServiceImpl implements C_BoardService {
 		return cBoardDAO.updateCommu(commDTO);
 	}
 
+	@Override
+	public int getCommuSearchCnt(Criteria cri) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.getCommuSearchCnt(cri);
+	}
+
+	@Override
+	public List<CommDTO> searchCommuList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.searchCommuList(cri);
+	}
+
+	@Override
+	public int delCommu(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.delCommu(commuNo);
+	}
+
+
+	
 	
 }

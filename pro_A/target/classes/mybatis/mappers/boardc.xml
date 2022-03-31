@@ -37,6 +37,40 @@
 			]]>
 		</select>
 		
+		<select id="getCommuSearchCnt" parameterType="spring.com.pro_A.common.dto.Criteria" resultType="int">
+			<![CDATA[
+				select count(*) from t_commuBoard where
+			]]>
+				<choose>
+					<when test="searchType == 'commuTitle'">
+					commuTitle LIKE '%'||#{searchContent}||'%'
+					</when>
+					<when test="searchType == 'commuContent'">
+					commuContent LIKE '%'||#{searchContent}||'%'
+					</when>
+				</choose>
+		</select>
+		
+		<select id="getSearchCommu" parameterType="spring.com.pro_A.common.dto.Criteria" resultMap="commuLists">
+			<![CDATA[
+				select commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt from
+				 (
+				  select  /*+INDEX_DESC(t_commuBoard pk_community) */
+				    rownum rn, commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt
+				  from t_commuBoard where
+			]]>
+					<choose>
+						<when test="searchType == 'commuTitle'">
+						commuTitle LIKE '%'||#{searchContent}||'%'
+						</when>
+						<when test="searchType == 'commuContent'">
+						commuContent LIKE '%'||#{searchContent}||'%'
+						</when>
+					</choose>
+				<![CDATA[
+					and rownum <=#{pageNum} * #{amount}) where rn > (#{pageNum}-1) * #{amount}
+				]]> 
+		</select>
 		<insert id="addCommu" parameterType="spring.com.pro_A.board.community.dto.CommDTO">
 			<![CDATA[
 				insert into t_commuBoard(commuNo, commuWriter, commuTitle, commuContent) 
@@ -53,4 +87,8 @@
 		<update id="updateCommu" parameterType="spring.com.pro_A.board.community.dto.CommDTO">
 			update t_commuBoard set commuTitle = #{commuTitle}, commuContent = #{commuContent} where commuNo = #{commuNo}
 		</update>
+		
+		<delete id="delCommu" parameterType="int">
+			delete from t_commuBoard where commuNo = #{commuNo}
+		</delete>
 	</mapper>

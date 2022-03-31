@@ -76,7 +76,20 @@
 			]]> 
 		</select>
 		
-		
+		<select id="selectSearchCount" parameterType="spring.com.pro_A.common.dto.Criteria" resultType="int">
+			<![CDATA[
+				select count(*) from t_noticeBoard where
+			]]>
+				<choose>
+					<when test="searchType == 'noticeTitle'">
+					noticeTitle LIKE '%'||#{searchContent}||'%'
+					</when>
+					<when test="searchType == 'noticeContent'">
+					noticeContent LIKE '%'||#{searchContent}||'%'
+					</when>
+				</choose>
+		</select>
+
 		<update id="noticeAddHit" parameterType="int" >
 			<![CDATA[
 				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{noticeNo}

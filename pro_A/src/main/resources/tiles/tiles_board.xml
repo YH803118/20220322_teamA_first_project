@@ -47,4 +47,9 @@
 		<put-attribute name="title" value="커뮤니티 게시글 수정" />
 		<put-attribute name="body" value="/WEB-INF/views/board/commuModifyForm.jsp" />
 	</definition>
+	
+	<definition name="/board/commuSearch" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 검색 게시목록" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuSearch.jsp" />
+	</definition>
 </tiles-definitions>

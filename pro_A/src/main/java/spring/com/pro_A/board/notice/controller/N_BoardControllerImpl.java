@@ -221,22 +221,20 @@ public class N_BoardControllerImpl implements N_BoardController {
 	}
 
 	@Override
-	@RequestMapping(value = "/board/noticeSearch.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/board/noticeSearch.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView noticeSearch(@RequestParam Map<String, String> info, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Criteria cri = new Criteria();
 		List<NoticeDTO> noticeListTop = boardService.noticeListTop();
 		cri.setAmount(20-noticeListTop.size());
 		cri.setSearchType(info.get("searchType"));
 		cri.setSearchContent(info.get("searchContent"));
-		System.out.println("content 가 이상한가? " + cri.getSearchContent());
-		System.out.println("searchType이 이상한가?" + cri.getSearchType());
-		int total = boardService.getNoticeCountAll();
 		if(info.get("pageNum") == null) {
 			cri.setPageNum(1);
 		} else {
 			cri.setPageNum(Integer.parseInt(info.get("pageNum")));
 		}
 		
+		int total = boardService.getSearchCountAll(cri);
 		PageDTO pageDTO = new PageDTO(cri, total);
 		pageDTO.setCurPage(cri.getPageNum());
 		
@@ -247,6 +245,8 @@ public class N_BoardControllerImpl implements N_BoardController {
 		mav.addObject("searchList", searchList);
 		mav.addObject("noticeListTop", noticeListTop);
 		mav.addObject("pageDTO", pageDTO);
+		mav.addObject("searchType", info.get("searchType"));
+		mav.addObject("searchContent", info.get("searchContent"));
 		return mav;
 		
 	}

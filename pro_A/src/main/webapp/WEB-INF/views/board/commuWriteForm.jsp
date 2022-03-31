@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+	<h1> 커뮤니티 게시판 글쓰기 구현중.jsp</h1>
 	<form action="/pro_A/board/commuNew.do" method="post" enctype="multipart/form-data">
 		<table class="tblForm">
 			<tr>

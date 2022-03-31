@@ -54,7 +54,7 @@
 <body>
 	<h1> 검색 결과 구현.jsp</h1>
 	<div class="tblBox">
-		<a href="/pro_A/board/noticeWriteForm.do"><button style="margin-left: 945px; margin-bottom: 10px;">글쓰기</button></a>
+		<a href="/pro_A/board/commuWriteForm.do"><button style="margin-left: 945px; margin-bottom: 10px;">글쓰기</button></a>
 		<table class="tblList">
 			<tr class="tblListLabel">
 				<th width="70px">번호</th>
@@ -64,39 +64,20 @@
 				<th width="100px">조회수</th>
 			</tr>
 			<c:choose>
-				<c:when test="${not empty noticeListTop }">
-					<c:forEach var="noticeTop" items="${noticeListTop }" step="1">
-						<tr>
-							<td><img alt="notice" src="../resources/img/alram.png" width="20px"></td>
-							<td>
-								<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }">
-								${noticeTop.noticeTitle }</a>
-							</td>
-							<td>${noticeTop.noticeWriter }</td>
-							<td>
-								<fmt:parseDate value="${noticeTop.noticeRegDate}" var="parseDate" pattern="yyyy-MM-dd"/> 
-								<fmt:formatDate value="${parseDate }" pattern="yyyy-MM-dd"/>
-							</td>
-							<td>${noticeTop.noticeHit }</td>
-						</tr>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-			<c:choose>
 				<c:when test="${not empty searchList  }">
-					<c:forEach var="notice" items="${searchList }" step="1">
+					<c:forEach var="commu" items="${searchList }" step="1">
 						<tr>
-							<td>${notice.noticeNo }</td>
+							<td>${commu.commuNo }</td>
 							<td>
 								<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }">
-								${notice.noticeTitle }</a>
+								${commu.commuTitle }</a>
 							</td>
-							<td>${notice.noticeWriter }</td>
+							<td>${commu.commuWriter }</td>
 							<td>
-								<fmt:parseDate value="${notice.noticeRegDate}" var="parseDate" pattern="yyyy-MM-dd"/> 
+								<fmt:parseDate value="${commu.commuRegDate}" var="parseDate" pattern="yyyy-MM-dd"/> 
 								<fmt:formatDate value="${parseDate }" pattern="yyyy-MM-dd"/>
 							</td>
-							<td>${notice.noticeHit }</td>
+							<td>${commu.commuHit }</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -108,10 +89,10 @@
 			</c:choose>
 		</table>
 		<div class="searchBar">
-			<form action="/pro_A/board/noticeSearch.do" method="post">
+			<form action="/pro_A/board/commuSearch.do" method="post">
 				<select name="searchType">
-					<option value="noticeTitle">제목</option>
-					<option value="noticeContent">내용</option>
+					<option value="commuTitle">제목</option>
+					<option value="commuContent">내용</option>
 				</select>
 					<input type="text" name="searchContent" maxlength="50">
 					<input type="submit" value="검색">	
@@ -120,13 +101,13 @@
 		<div class="navBar">
 			<ul>
 				<c:if test="${pageDTO.prev }">
-					<li><a href="/pro_A/board/noticeSearch.do?pageNum=${pageDTO.startPage-1 }&searchType=${searchType}&searchContent=${searchContent}">이전</a></li>
+					<li><a href="/pro_A/board/commuSearch.do?pageNum=${pageDTO.startPage-1 }&searchType=${searchType}&searchContent=${searchContent}">이전</a></li>
 				</c:if>
 				<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
-					<li><a href="/pro_A/board/noticeSearch.do?pageNum=${pageNum}&searchType=${searchType}&searchContent=${searchContent}">${pageNum }</a></li>
+					<li><a href="/pro_A/board/commuSearch.do?pageNum=${pageNum}&searchType=${searchType}&searchContent=${searchContent}">${pageNum }</a></li>
 				</c:forEach>
 				<c:if test="${pageDTO.next }">
-					<li><a href="/pro_A/board/noticeSearch.do?pageNum=${pageDTO.endPage+1 }&searchType=${searchType}&searchContent=${searchContent}">다음</a></li>
+					<li><a href="/pro_A/board/commuSearch.do?pageNum=${pageDTO.endPage+1 }&searchType=${searchType}&searchContent=${searchContent}">다음</a></li>
 				</c:if>
 			</ul>
 		</div>	

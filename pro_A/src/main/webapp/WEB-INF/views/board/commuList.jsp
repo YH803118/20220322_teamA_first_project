@@ -91,6 +91,18 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
+		
+		<div class="searchBar">
+			<form action="/pro_A/board/commuSearch.do" method="post">
+				<select name="searchType">
+					<option value="commuTitle">제목</option>
+					<option value="commuContent">내용</option>
+				</select>
+					<input type="text" name="searchContent" maxlength="50">
+					<input type="submit" value="검색">	
+			</form>
+		</div>
+		
 		<div class="navBar">
 			<ul>
 				<c:if test="${pageDTO.prev }">

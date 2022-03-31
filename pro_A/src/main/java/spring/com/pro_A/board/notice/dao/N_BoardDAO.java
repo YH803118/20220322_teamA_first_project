@@ -36,5 +36,7 @@ public interface N_BoardDAO {
 	public List<NoticeDTO> selectNoticeListTop();
 
 	public List<NoticeDTO> searchNoticeList(Criteria cri);
+
+	public int getSearchCountAll(Criteria cri);
 	
 }

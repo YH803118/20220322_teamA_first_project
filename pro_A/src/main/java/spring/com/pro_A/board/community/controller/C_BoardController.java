@@ -1,5 +1,7 @@
 package spring.com.pro_A.board.community.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,4 +26,8 @@ public interface C_BoardController {
 
 	public void commuModify(@ModelAttribute("commDTO") CommDTO commDTO, @RequestParam("pageNum") int pageNum,
 			HttpServletResponse response) throws Exception;
+	
+	public ModelAndView commuSearch(@RequestParam Map<String, String> info,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public void commuDelete(@RequestParam(value = "commuNo", required = true) int commuNo, HttpServletResponse response) throws Exception;
 }

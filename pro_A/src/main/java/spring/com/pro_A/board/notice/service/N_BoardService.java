@@ -36,5 +36,7 @@ public interface N_BoardService {
 	public List<NoticeDTO> noticeListTop();
 
 	public List<NoticeDTO> searchNoticeList(Criteria cri);
+
+	public int getSearchCountAll(Criteria cri);
 	
 }

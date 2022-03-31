@@ -105,6 +105,12 @@ public class N_BoardServiceImpl implements N_BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.searchNoticeList(cri);
 	}
+
+	@Override
+	public int getSearchCountAll(Criteria cri) {
+		// TODO Auto-generated method stub
+		return boardDAO.getSearchCountAll(cri);
+	}
 	
 	
 	

@@ -19,5 +19,12 @@ public interface C_BoardService {
 
 	public int updateCommu(CommDTO commDTO);
 
+	public int getCommuSearchCnt(Criteria cri);
+
+	public List<CommDTO> searchCommuList(Criteria cri);
+
+	public int delCommu(int commuNo);
+
+
 
 }

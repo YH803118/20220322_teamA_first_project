@@ -91,5 +91,40 @@ public class C_BoardControllerImpl implements C_BoardController {
 		
 	}
 
+	@Override
+	@RequestMapping(value="/board/commuSearch", method=RequestMethod.POST)
+	public ModelAndView commuSearch(@RequestParam Map<String, String> info,HttpServletRequest request,  HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		Criteria cri = new Criteria();
+		cri.setAmount(20);
+		cri.setSearchType(info.get("searchType"));
+		cri.setSearchContent(info.get("searchContent"));
+		int total = cBoardService.getCommuSearchCnt(cri);
+		if(info.get("pageNum") == null) {
+			cri.setPageNum(1);
+		} else {
+			cri.setPageNum(Integer.parseInt(info.get("pageNum")));
+		}
+		
+		PageDTO pageDTO = new PageDTO(cri, total);
+		pageDTO.setCurPage(cri.getPageNum());
+		
+		List<CommDTO> searchList = cBoardService.searchCommuList(cri);
+		System.out.println("결과는? " + searchList.size());
+		
+		ModelAndView mav = new ModelAndView((String)request.getAttribute("viewName"));
+		mav.addObject("searchList", searchList);
+		mav.addObject("pageDTO", pageDTO);
+		mav.addObject("searchType", info.get("searchType"));
+		mav.addObject("searchContent", info.get("searchContent"));
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value="/board/commuDelete.do", method=RequestMethod.GET)
+	public void commuDelete(@RequestParam(value="commuNo", required=true) int commuNo, HttpServletResponse response) throws Exception {
+		int result = cBoardService.delCommu(commuNo);
+		response.sendRedirect("/pro_A/board/commuList.do");
+	}
 
 }
