@@ -1,0 +1,65 @@
+// 게시판 테이블 생성
+
+create table t_noticeBoard(
+    noticeNo number,
+    noticeWriter varchar2(20) not null,
+    noticeTitle varchar2(100) not null,
+    noticeContent varchar2(4000) not null,
+    noticeRegDate date default sysdate,
+    noticeLevel number default 0,
+    noticeHit number default 0,
+    constraint pk_notice primary key(noticeNo)
+    );
+
+// 공지 게시판 시퀀스 생성
+create SEQUENCE seq_notice;
+
+// 시퀀스 삭제시 사용
+DROP SEQUENCE SEQ_NOTICE;
+
+// 파일 DB  생성
+create table t_noticeFile(
+    noticeFileName varchar2(500),
+    noticeNo number,
+    uuid varchar2(100),
+    originalFileName varchar2(500),
+    RegDate date default sysdate,
+    constraint pk_noticeFile primary key(noticeFileName),
+    constraint fk_noticeFile foreign key(noticeNo) references t_noticeBoard(noticeNo)
+);
+
+// 커뮤니티 게시판
+create table t_commuBoard(
+    commuNo number,
+    commuWriter varchar2(20) not null,
+    commuTitle varchar2(100) not null,
+    commuContent varchar2(4000) not null,
+    commuRegDate date default sysdate,
+    commuHit number default 0,
+    replyCnt number default 0,
+    constraint pk_community primary key(com muNo)
+    );
+    
+
+// 커뮤니티 게시판 테스트 및 수정 하느라 사용한 쿼리문
+alter table t_commuBoard ADD replyCnt number default 0 not null;
+alter table t_commuBoard modify replyCnt null;
+alter table t_commuBoard modify commuWriter varchar2(50);
+
+
+// 커뮤니티 게시판 시퀀스 생성
+CREATE SEQUENCE seq_commu;
+
+// 댓글 게시판
+create table t_commuReply(
+    replyNo number,
+    commuNo number,
+    replyWriter varchar2(50),
+    replyContent varchar2(1000),
+    rePlyRegDate date default sysdate,
+    constraint pk_reply primary key(replyNo),
+    constraint fk_reply foreign key(commuNo) references t_commuBoard(commuNo)
+);
+
+// 댓글 게시판 시퀀스 생성
+CREATE SEQUENCE seq_reply;

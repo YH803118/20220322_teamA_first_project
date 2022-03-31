@@ -13,18 +13,19 @@
  	}
  	
 	#container{
-		width: 800px;
+		width: auto;
 		margin: 0px auto;
 		text-align: center;
 		background-color: #EEEEEE;
 	}
+
 	#header {
 		height: 160px;
 		background-color: lightgreen;
+		
 	}	
 	#content{
 		min-height : 700px;
-		padding-bottom: 150px;
 	}
 	#footer {
 		clear:both;
@@ -34,7 +35,6 @@
 </head>
 <body>
 <div id="container">
-
 	<div id="header">
 		<tiles:insertAttribute name="header" />
 	</div>

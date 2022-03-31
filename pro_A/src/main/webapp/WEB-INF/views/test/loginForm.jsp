@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%@ page import="java.util.Calendar"%>
 
@@ -144,23 +145,23 @@ String schedule = request.getParameter("schedule");
 						<td><c:set var="date" value="${i-start+1 }" /> <c:if
 								test="${(i-start+1)<10 }">
 								<c:set var="date" value="${'0' += (i-start+1) }" />
-							</c:if> <c:set var="day" value="${yearMonth }${date }" /> <c:set
-								var="doneLoop" value="false" /> <c:forEach var="sche"
-								items="${calendarList }">
-								<c:choose>
-									<c:when test="${sche.scheduleDate eq day }">
-										<a
-											href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
+							</c:if> <c:set var="day" value="${yearMonth }${date }" />
+							<c:set var="doneLoop" value="true" />
+							<c:set var="noSchedule" value="true" />
+							
+							<c:forEach var="sche" items="${calendarList }">
+								<c:if test="${doneLoop}">
+									<c:if test="${sche.scheduleDate eq day }">
+										<a	href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
 											id="scheduleOn">${i-start+1 }*</a>
-									</c:when>
-									<c:when test="${not doneLoop }">
-										<c:set var="doneLoop" value="true" />
-									</c:when>
-									<c:otherwise>
-										<a href="#">${i-start+1 }</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach></td>
+											<c:set var="noSchedule" value="false"/>
+											<c:set var="doneLoop" value="false" />
+									</c:if>
+								</c:if>
+							</c:forEach>
+								<c:if test="${noSchedule eq true }">
+									<a href="#">	${i-start+1 }</a>
+								</c:if></td>
 					</c:if>
 					<c:if test="${i%7 == 0 }">
 			</tr>
@@ -209,7 +210,20 @@ String schedule = request.getParameter("schedule");
 			</c:choose>
 		</form>
 	</div>
-	<div id="notice"></div>
+	<div id="notice">
+	<table>
+		<tr>
+			<td>공지사항</td>
+			<td><a href="${contextPath }/board/noticeList.do">전체보기</a></td>
+		</tr>
+		<c:forEach var="notice" items="${noticeList }">
+		<tr>
+			<td>${notice.noticeTitle }	</td>
+			<td>${fn:split(notice.noticeRegDate, ' ')[0] } </td>		
+		</tr>
+		</c:forEach>
+	</table>
+	</div>
 	<div id="community"></div>
 </body>
 </html>

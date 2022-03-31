@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
-import spring.com.pro_A.member.dao.MemberDAO;
+import spring.com.pro_A.board.notice.dto.NoticeDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
 
@@ -27,7 +27,6 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Autowired
 	MemberDTO memberDTO;
-	
 	@Override
 	@RequestMapping(value="/test/login.do")
 	public ModelAndView login(@ModelAttribute("member")MemberDTO dto,
@@ -60,7 +59,9 @@ public class MemberControllerImpl implements MemberController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		List<CalendarDTO> calendarList = memberService.showSchedule();
+		List<NoticeDTO> noticeList = memberService.noticeList();
 		mav.addObject("calendarList",calendarList);
+		mav.addObject("noticeList", noticeList);
 		return mav;
 	}
 	
@@ -105,5 +106,16 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	
+	@RequestMapping(value="/test/addSchedule.do" ,method = RequestMethod.POST)
+	   public ModelAndView addMember(@ModelAttribute("calendar") CalendarDTO calendar,
+	                           HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      request.setCharacterEncoding("utf-8");
+	      ModelAndView mav =new ModelAndView();
+	      int result = memberService.addSchedule(calendar);
+	      if(result>=1) {
+	      mav.setViewName("redirect:/test/managerForm.do");
+	      }
+	      
+	      return mav;
+	   }
 }

@@ -15,4 +15,11 @@
 			select * from t_calendar
 		]]>
 	</select>
+	
+	<insert id="addSchedule" parameterType="calendarDTO">
+		<![CDATA[
+			insert into t_calendar(scheduleDate, schedule) 
+				values(to_date(#{scheduleDate}, 'RR/MM/DD'),#{schedule})
+		]]>
+	</insert>
 	</mapper>

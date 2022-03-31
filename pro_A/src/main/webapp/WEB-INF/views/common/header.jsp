@@ -14,9 +14,9 @@
 #menu {
 		width:100%;
 		display:flex;
-		position : absolute;
 		margin-top:130px;
 		background-color: #2d2d2d;
+		position:absolute;
 }
 
 #menu ul {
@@ -54,7 +54,7 @@ a{top:30px;}
 		<li><a href="/pro_A/board/noticeList.do">공지사항</a></li>
 		<li><a href="#">질의응답</a></li>
 		<li><a href="#">자료실</a></li>
-		<li><a href="#">커뮤니티</a></li>
+		<li><a href="/pro_A/board/commuList.do">커뮤니티</a></li>
 	</ul>
 <c:choose>
 	<c:when test="${isLogon=='true' }">
