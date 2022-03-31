@@ -76,4 +76,10 @@
 			]]>
 		</delete>
 		
+		<select id="noticeList" resultType="noticeDTO">
+			<![CDATA[
+				select * from (select * from t_noticeBoard) where rownum <=4
+			]]>
+		</select>
+		
 	</mapper>

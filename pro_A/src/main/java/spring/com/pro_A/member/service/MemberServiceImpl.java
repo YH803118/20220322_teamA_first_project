@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
+import spring.com.pro_A.board.dto.NoticeDTO;
 import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -55,6 +56,12 @@ public class MemberServiceImpl implements MemberService{
 	public int addSchedule(CalendarDTO calendar) {
 		// TODO Auto-generated method stub
 		return memberDAO.addSchedule(calendar);
+	}
+
+	@Override
+	public List<NoticeDTO> noticeList() {
+		// TODO Auto-generated method stub
+		return memberDAO.noticeList();
 	}
 
 }

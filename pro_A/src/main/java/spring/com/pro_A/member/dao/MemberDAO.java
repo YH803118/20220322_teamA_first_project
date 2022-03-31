@@ -2,6 +2,7 @@ package spring.com.pro_A.member.dao;
 
 import java.util.List;
 
+import spring.com.pro_A.board.dto.NoticeDTO;
 import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -23,6 +24,9 @@ public interface MemberDAO {
 
 
 	int addSchedule(CalendarDTO calendar);
+
+
+	List<NoticeDTO> noticeList();
 
 
 }
