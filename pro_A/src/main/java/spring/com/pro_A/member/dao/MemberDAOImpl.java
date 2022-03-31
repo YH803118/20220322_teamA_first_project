@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import spring.com.pro_A.board.dto.NoticeDTO;
+import spring.com.pro_A.board.notice.dto.NoticeDTO;
 import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 

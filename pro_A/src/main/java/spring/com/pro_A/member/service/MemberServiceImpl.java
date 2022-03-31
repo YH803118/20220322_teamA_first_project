@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
-import spring.com.pro_A.board.dto.NoticeDTO;
+import spring.com.pro_A.board.notice.dto.NoticeDTO;
 import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
