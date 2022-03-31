@@ -13,7 +13,7 @@
  	}
  	
 	#container{
-		width: auto;
+		width: 800px;
 		margin: 0px auto;
 		text-align: center;
 		background-color: #EEEEEE;

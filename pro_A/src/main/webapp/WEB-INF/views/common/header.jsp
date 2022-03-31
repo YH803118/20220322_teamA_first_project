@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style>
 #menu {
-		width:100%;
+		width:800px;
 		display:flex;
 		margin-top:130px;
 		background-color: #2d2d2d;
