@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.boardc">
+		<resultMap id="commuLists" type="commDTO">
+			<result property="commuNo" column = "commuNo"/>
+			<result property="commuWriter" column = "commuWriter"/>
+			<result property="commuTitle" column = "commuTitle"/>
+			<result property="commuContent" column = "commuContent"/>
+			<result property="commuRegDate" column = "commuRegDate"/>
+			<result property="commuHit" column = "commuHit"/>
+			<result property="replyCnt" column = "replyCnt"/>
+		</resultMap>
+		
+		<select id="getCommuList" parameterType="spring.com.pro_A.common.dto.Criteria"  resultMap="commuLists">
+			<![CDATA[
+				select commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt
+				  from (
+				  select  /*+INDEX_DESC(t_commuBoard pk_community) */
+				    rownum rn, commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt
+				from t_commuBoard where rownum <=#{pageNum} * #{amount}
+				) where rn > (#{pageNum}-1) * #{amount}
+			]]>
+		</select>
+		
+		<select id="getCommuTotCnt" resultType="int">
+			<![CDATA[
+				select count(*) from t_commuBoard
+			]]>
+			
+		</select>
+		
+		<select id="getCommuDetail" parameterType="int" resultType="spring.com.pro_A.board.community.dto.CommDTO">
+			<![CDATA[
+				select * from t_commuBoard where commuNo = #{commuNo}
+			]]>
+		</select>
+		
+		<select id="getCommuSearchCnt" parameterType="spring.com.pro_A.common.dto.Criteria" resultType="int">
+			<![CDATA[
+				select count(*) from t_commuBoard where
+			]]>
+				<choose>
+					<when test="searchType == 'commuTitle'">
+					commuTitle LIKE '%'||#{searchContent}||'%'
+					</when>
+					<when test="searchType == 'commuContent'">
+					commuContent LIKE '%'||#{searchContent}||'%'
+					</when>
+				</choose>
+		</select>
+		
+		<select id="getSearchCommu" parameterType="spring.com.pro_A.common.dto.Criteria" resultMap="commuLists">
+			<![CDATA[
+				select commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt from
+				 (
+				  select  /*+INDEX_DESC(t_commuBoard pk_community) */
+				    rownum rn, commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt
+				  from t_commuBoard where
+			]]>
+					<choose>
+						<when test="searchType == 'commuTitle'">
+						commuTitle LIKE '%'||#{searchContent}||'%'
+						</when>
+						<when test="searchType == 'commuContent'">
+						commuContent LIKE '%'||#{searchContent}||'%'
+						</when>
+					</choose>
+				<![CDATA[
+					and rownum <=#{pageNum} * #{amount}) where rn > (#{pageNum}-1) * #{amount}
+				]]> 
+		</select>
+		<insert id="addCommu" parameterType="spring.com.pro_A.board.community.dto.CommDTO">
+			<![CDATA[
+				insert into t_commuBoard(commuNo, commuWriter, commuTitle, commuContent) 
+					values (seq_commu.nextval, #{commuWriter}, #{commuTitle}, #{commuContent})
+			]]>
+		</insert>
+		
+		<update id="addCommuHit" parameterType="int">
+			<![CDATA[
+				update t_commuBoard set commuHit = commuHit + 1 where commuNo = #{commuNo}
+			]]>
+		</update>
+		
+		<update id="updateCommu" parameterType="spring.com.pro_A.board.community.dto.CommDTO">
+			update t_commuBoard set commuTitle = #{commuTitle}, commuContent = #{commuContent} where commuNo = #{commuNo}
+		</update>
+		
+		<delete id="delCommu" parameterType="int">
+			delete from t_commuBoard where commuNo = #{commuNo}
+		</delete>
+	</mapper>

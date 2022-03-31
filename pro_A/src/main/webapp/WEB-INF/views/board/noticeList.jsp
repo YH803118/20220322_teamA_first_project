@@ -69,7 +69,7 @@
 						<tr>
 							<td><img alt="notice" src="../resources/img/alram.png" width="20px"></td>
 							<td>
-								<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }">
+								<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }&pageNum=${pageDTO.curPage}">
 								${noticeTop.noticeTitle }</a>
 							</td>
 							<td>${noticeTop.noticeWriter }</td>
@@ -88,7 +88,7 @@
 						<tr>
 							<td>${notice.noticeNo }</td>
 							<td>
-								<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }">
+								<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }&pageNum=${pageDTO.curPage}">
 								${notice.noticeTitle }</a>
 							</td>
 							<td>${notice.noticeWriter }</td>
@@ -108,7 +108,7 @@
 			</c:choose>
 		</table>
 		<div class="searchBar">
-			<form action="/pro_A/board/noticeSearch.do" method="get">
+			<form action="/pro_A/board/noticeSearch.do" method="post">
 				<select name="searchType">
 					<option value="noticeTitle">제목</option>
 					<option value="noticeContent">내용</option>

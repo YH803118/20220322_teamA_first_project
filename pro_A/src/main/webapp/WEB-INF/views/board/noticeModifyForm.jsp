@@ -39,7 +39,7 @@
 			<tr>
 				<td>내용</td>
 				<td colspan="3">
-				<textarea rows="30" cols="80" name="noticeContent">${detailDTO.noticeContent }</textarea>
+				<textarea rows="30" cols="80" name="noticeContent" maxlength="4000">${detailDTO.noticeContent }</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="수정">
-		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }"><button type="button">취소</button></a>
+		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&pageNum=${pageNum }"><button type="button">취소</button></a>
 	</form>
 </body>
 </html>

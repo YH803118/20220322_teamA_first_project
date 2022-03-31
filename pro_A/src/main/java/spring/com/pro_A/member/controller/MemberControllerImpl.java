@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
-import spring.com.pro_A.board.dto.NoticeDTO;
+import spring.com.pro_A.board.notice.dto.NoticeDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
 
