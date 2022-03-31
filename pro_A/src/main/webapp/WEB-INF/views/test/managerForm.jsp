@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%@ page import="java.util.Calendar"%>
 
@@ -202,7 +203,21 @@ String schedule = request.getParameter("schedule");
 		</table>
 	</div>
 
-	<div id="notice"></div>
+	<div id="notice">
+	<table>
+		<tr>
+			<td colspan="2">공지사항</td>
+			<td><a href="${contextPath }/board/noticeList.do">전체보기</a></td>
+		</tr>
+		<c:forEach var="notice" items="${noticeList }">
+		<tr>
+			<td>${notice.noticeTitle }	</td>
+			<td>${fn:split(notice.noticeRegDate, ' ')[0] } </td>	
+			<td><a href="${contextPath }/test/delNotice?noticeNo=${notice.noticeNo }">삭제</a></td>	
+		</tr>
+		</c:forEach>
+	</table>
+	</div>
 	<div id="community"></div>
 </form>
 </body>
