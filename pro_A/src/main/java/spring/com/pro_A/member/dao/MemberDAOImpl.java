@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import spring.com.pro_A.board.dto.NoticeDTO;
 import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -47,6 +48,18 @@ public class MemberDAOImpl implements MemberDAO{
 		// TODO Auto-generated method stub
 		List<CalendarDTO> schedule = sqlSession.selectList("mapper.calendar.showSchedule"); 
 		return schedule;
+	}
+
+	@Override
+	public int addSchedule(CalendarDTO calendar) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mapper.calendar.addSchedule", calendar);
+	}
+
+	@Override
+	public List<NoticeDTO> noticeList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mapper.board.noticeList");
 	}
 
 }

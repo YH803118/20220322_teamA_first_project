@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
 @Controller
@@ -23,4 +24,6 @@ public interface MemberController {
 	public ModelAndView modForm(MemberDTO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) throws Exception;
+	 public ModelAndView addMember(@ModelAttribute("calendar") CalendarDTO calendar,
+             HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

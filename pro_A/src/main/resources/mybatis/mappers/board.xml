@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.board">
+		<resultMap id="noticeAllResult" type="noticeDTO">
+			<result property="noticeNo" column = "noticeNo"/>
+			<result property="noticeWriter" column = "noticeWriter"/>
+			<result property="noticeTitle" column = "noticeTitle"/>
+			<result property="noticeContent" column = "noticeContent"/>
+			<result property="noticeRegDate" column = "noticeRegDate"/>
+			<result property="noticeLevel" column = "noticeLevel"/>
+			<result property="noticeHit" column = "noticeHit"/>
+		</resultMap>
+		
+		<select id="selectNoticeListAll" parameterType="spring.com.pro_A.board.dto.Criteria"  resultMap="noticeAllResult">
+			<![CDATA[
+				select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
+				  from (
+				  select  /*+INDEX_DESC(t_noticeBoard PK_NOTICE) */
+				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
+				from t_noticeBoard where rownum <=#{pageNum} * #{amount}
+				) where rn > (#{pageNum}-1) * #{amount}
+			]]>
+		</select>
+		
+		<select id="selectNoticeListTop" resultMap="noticeAllResult">
+		 <![CDATA[
+		 	select noticeNo, noticeTitle, noticeWriter, noticeRegDate
+		 	 from 
+		 		(
+		 		 select rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate 
+		 		 from t_noticeBoard where noticeLevel=1 and rownum <=5
+		 		) order by noticeRegDate desc
+		 ]]>
+		</select>
+		
+		<select id="getNoticeCountAll" resultType="int">
+			<![CDATA[
+				select count(*) from t_noticeBoard
+			]]>
+		</select>
+		
+		
+		<select id="selectNoticeDetail" parameterType="int"  resultType="noticeDTO">
+			<![CDATA[
+				select * from t_noticeBoard where noticeNo = #{noticeNo}				
+			]]>
+		</select>
+		
+		
+		<select id="getLastNoticeNo" resultType="int">
+			<![CDATA[
+				select max(noticeNo) from t_noticeBoard
+			]]>
+		</select>
+		
+		
+		
+		<update id="noticeAddHit" parameterType="int" >
+			<![CDATA[
+				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{noticeNo}
+			]]>
+		</update>
+		
+		<insert id="addNotice" parameterType="java.util.Map">
+			<![CDATA[
+				insert into t_noticeBoard(noticeNo, noticeWriter, noticeTitle, noticeContent, noticeLevel)
+				 values(seq_notice.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent}, #{noticeLevel})
+			]]>
+		</insert>
+		
+		<delete id="noticeDel" parameterType="int">
+			<![CDATA[
+				delete from t_noticeBoard where noticeNo=#{noticeNo}
+			]]>
+		</delete>
+		
+		<select id="noticeList" resultType="noticeDTO">
+			<![CDATA[
+				select * from (select * from t_noticeBoard) where rownum <=4
+			]]>
+		</select>
+		
+	</mapper>
