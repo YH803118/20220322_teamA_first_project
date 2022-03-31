@@ -1,5 +1,7 @@
 package spring.com.pro_A.lecture.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,12 @@ public class LectureDAOImpl implements LectureDAO{
 	public int open(LectureDTO dto) {
 		int result=sqlSession.insert("mapper.lecture.openLecture", dto);
 		return result;
+	}
+
+	@Override
+	public List<LectureDTO> selectList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mapper.lecture.selectList");
 	}
 
 }

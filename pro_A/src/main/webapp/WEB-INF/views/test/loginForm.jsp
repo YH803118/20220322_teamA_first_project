@@ -186,12 +186,15 @@ String schedule = request.getParameter("schedule");
 		<form action="/pro_A/test/login.do" id="loginForm">
 			<c:choose>
 				<c:when test="${isLogon=='true' }">
-${dto.id }님 환영합니다.<br>
+				${dto.id }님 환영합니다.<br>
 					<c:choose>
 						<c:when test="${dto.memberType==1 }">
 							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input
 								type="button" value="강좌개설"></a>
 						</c:when>
+						<otherwise>
+						<a href="/pro_A/test/applyForm.do?id=${dto.id }"><input type="button" value="수강신청"></a>
+						</otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
