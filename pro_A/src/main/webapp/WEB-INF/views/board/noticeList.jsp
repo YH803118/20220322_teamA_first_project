@@ -15,10 +15,10 @@
 	}
 	
 	.tblList {
-		border : 1px solid;
-		min-width: 500px;
-		width : 1000px;
+		border-top: 1px solid;
 		border-collapse: collapse;
+		margin: 30px;
+		width: 740px;
 		vertical-align: middle;
 	}
 	
@@ -36,7 +36,7 @@
 	.navBar {
 		align-content: center;
 		border: 1px solid;
-		width : 1000px;
+		width: 740px;
 	}
 	
 	ul {
@@ -53,15 +53,17 @@
 </head>
 <body>
 	<h1> 공지게시판 구현.jsp</h1>
+	<div style="float:right; margin:0 30px;">
+		<a href="/pro_A/board/noticeWriteForm.do"><button>글쓰기</button></a></div>
 	<div class="tblBox">
-		<a href="/pro_A/board/noticeWriteForm.do"><button style="margin-left: 945px; margin-bottom: 10px;">글쓰기</button></a>
+		
 		<table class="tblList">
 			<tr class="tblListLabel">
-				<th width="70px">번호</th>
-				<th width="400px">제목</th>
-				<th width="100px">작성자</th>
+				<th width="40px">번호</th>
+				<th>제목</th>
+				<th width="80px">작성자</th>
 				<th width="100px">작성일</th>
-				<th width="100px">조회수</th>
+				<th width="50px">조회수</th>
 			</tr>
 			<c:choose>
 				<c:when test="${not empty noticeListTop }">
