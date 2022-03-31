@@ -52,7 +52,7 @@
 </style>
 </head>
 <body>
-	<h1> 공지게시판 구현.jsp</h1>
+	<h1> 검색 결과 구현.jsp</h1>
 	<div class="tblBox">
 		<a href="/pro_A/board/noticeWriteForm.do"><button style="margin-left: 945px; margin-bottom: 10px;">글쓰기</button></a>
 		<table class="tblList">
@@ -69,7 +69,7 @@
 						<tr>
 							<td><img alt="notice" src="../resources/img/alram.png" width="20px"></td>
 							<td>
-								<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }&pageNum=${pageDTO.curPage}">
+								<a href="/pro_A/board/noticeDetail.do?noticeNo=${noticeTop.noticeNo }">
 								${noticeTop.noticeTitle }</a>
 							</td>
 							<td>${noticeTop.noticeWriter }</td>
@@ -83,12 +83,12 @@
 				</c:when>
 			</c:choose>
 			<c:choose>
-				<c:when test="${not empty noticeList  }">
-					<c:forEach var="notice" items="${noticeList }" step="1">
+				<c:when test="${not empty searchList  }">
+					<c:forEach var="notice" items="${searchList }" step="1">
 						<tr>
 							<td>${notice.noticeNo }</td>
 							<td>
-								<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }&pageNum=${pageDTO.curPage}">
+								<a href="/pro_A/board/noticeDetail.do?noticeNo=${notice.noticeNo }">
 								${notice.noticeTitle }</a>
 							</td>
 							<td>${notice.noticeWriter }</td>

@@ -22,4 +22,29 @@
 		<put-attribute name="title" value="게시물 수정" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeModifyForm.jsp" />
 	</definition>
+	
+	<definition name="/board/noticeSearch" extends="baseLayout">
+		<put-attribute name="title" value="검색 결과" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeSearch.jsp" />
+	</definition>
+	
+	<definition name="/board/commuList" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuList.jsp" />
+	</definition>
+	
+	<definition name="/board/commuWriteForm" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuWriteForm.jsp" />
+	</definition>
+	
+	<definition name="/board/commuDetailView" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuDetailView.jsp" />
+	</definition>
+	
+	<definition name="/board/commuModifyForm" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시글 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuModifyForm.jsp" />
+	</definition>
 </tiles-definitions>

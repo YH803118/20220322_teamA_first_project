@@ -49,8 +49,9 @@
 		</tr>
 	</table>
 	<div style="margin-top: 10px;">
-		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&mod=true"><button>수정</button></a>
+		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&mod=true&pageNum=${pageNum }"><button>수정</button></a>
 		<a href="/pro_A/board/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button>삭제</button></a>
+		<a href="/pro_A/board/noticeList.do?pageNum=${pageNum }"><button>리스트</button></a>
 	</div>
 </body>
 </html>
