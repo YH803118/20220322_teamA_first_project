@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="mapper.lecture">
-		<resultMap id="lectName" type="lectureDTO">
+		<resultMap id="lecture" type="lectureDTO">
 			<result property="lectName" column="lectName" />
 			<result property="name" column="name" />
 			<result property="lectDay" column="lectDay" />
@@ -16,4 +16,10 @@
 			insert into lecture values(#{lectName},#{name},#{lectDay},#{begin},#{end})
 		]]>
 	</insert>
+	
+	<select id="selectList" resultMap="lecture">
+	<![CDATA[
+	select * from lecture
+	]]>
+	</select>
 	</mapper>
