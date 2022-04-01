@@ -70,7 +70,7 @@ String schedule = request.getParameter("schedule");
 
 #notice {
 	top: 500px;
-	background-color: lightgreen;
+	background-color: #aaa;
 	margin: 30px;
 	width: 450px;
 	height: 120px;
@@ -78,7 +78,7 @@ String schedule = request.getParameter("schedule");
 }
 
 #community {
-	background-color: green;
+	background-color: #aaa;
 	width: 450px;
 	height: 120px;
 	margin: 30px;
@@ -117,6 +117,12 @@ String schedule = request.getParameter("schedule");
 
 #scheduleOn {
 	background-color: #aaaaaa;
+}
+#notice td, th {
+	border-bottom : 2px solid #eee;
+}
+#community td, th{
+	border-bottom : 2px solid #eee;
 }
 </style>
 </head>
@@ -216,17 +222,31 @@ String schedule = request.getParameter("schedule");
 	<div id="notice">
 	<table>
 		<tr>
-			<td>공지사항</td>
+			<td width="80%" align="left">공지사항</td>
 			<td><a href="${contextPath }/board/noticeList.do">전체보기</a></td>
 		</tr>
 		<c:forEach var="notice" items="${noticeList }">
 		<tr>
-			<td>${notice.noticeTitle }	</td>
+			<td  align="left">${notice.noticeTitle }	</td>
 			<td>${fn:split(notice.noticeRegDate, ' ')[0] } </td>		
 		</tr>
 		</c:forEach>
 	</table>
 	</div>
-	<div id="community"></div>
+	<div id="community">
+	<table>
+		<tr>
+			<td width="80%" align="left">커뮤니티</td>
+			<td><a href="${contextPath }/board/commuList.do">전체보기</a></td>
+		</tr>
+		<c:forEach var="commu" items="${commuList }">
+		<tr>
+			<td  align="left">${commu.commuTitle }	</td>
+			<td>${fn:split(commu.commuRegDate, ' ')[0] } </td>		
+		</tr>
+		</c:forEach>
+	</table>
+	
+	</div>
 </body>
 </html>

@@ -81,5 +81,9 @@
 				select * from (select * from t_noticeBoard) where rownum <=4
 			]]>
 		</select>
-		
+		<select id="commuList" resultType="commDTO">
+			<![CDATA[
+				select * from (select * from t_commuBoard) where rownum <=4
+			]]>
+		</select>
 	</mapper>

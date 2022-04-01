@@ -15,16 +15,15 @@
 	}
 	
 	.tblList {
-		border : 1px solid;
-		min-width: 500px;
-		width : 1000px;
+		border-top: 1px solid;
 		border-collapse: collapse;
+		margin: 30px;
+		width: 740px;
 		vertical-align: middle;
 	}
 	
 	.tblList > tr, td, th {
-		border : 1px solid;
-		border-color : black;
+		border-bottom : 1px solid black;
 		padding: 0px;
 	} 
 	
@@ -36,12 +35,13 @@
 	.navBar {
 		align-content: center;
 		border: 1px solid;
-		width : 1000px;
+		width: 740px;
 	}
 	
 	ul {
 		list-style: none;
-		display: inline;
+		display: table;
+		margin: 0 auto;
 	}
 	
 	ul > li {
@@ -53,15 +53,15 @@
 </head>
 <body>
 	<h1> 커뮤니티 게시판 구현.jsp</h1>
+	<div style="float:right; margin:0 30px;"><a href="/pro_A/board/commuWriteForm.do"><button>글쓰기</button></a></div>
 	<div class="tblBox">
-		<a href="/pro_A/board/commuWriteForm.do"><button style="margin-left: 945px; margin-bottom: 10px;">글쓰기</button></a>
 		<table class="tblList">
 			<tr class="tblListLabel">
-				<th width="70px">번호</th>
-				<th width="400px">제목</th>
-				<th width="100px">작성자</th>
+				<th width="40px">번호</th>
+				<th>제목</th>
+				<th width="80px">작성자</th>
 				<th width="100px">작성일</th>
-				<th width="100px">조회수</th>
+				<th width="50px">조회수</th>
 			</tr>
 			<c:choose>
 				<c:when test="${not empty commuList  }">
