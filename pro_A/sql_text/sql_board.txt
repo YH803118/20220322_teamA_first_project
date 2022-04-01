@@ -37,7 +37,7 @@ create table t_commuBoard(
     commuRegDate date default sysdate,
     commuHit number default 0,
     replyCnt number default 0,
-    constraint pk_community primary key(com muNo)
+    constraint pk_community primary key(commuNo)
     );
     
 

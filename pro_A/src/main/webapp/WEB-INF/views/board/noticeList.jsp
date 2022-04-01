@@ -23,8 +23,7 @@
 	}
 	
 	.tblList > tr, td, th {
-		border : 1px solid;
-		border-color : black;
+		border-bottom : 1px solid black;
 		padding: 0px;
 	} 
 	
@@ -41,12 +40,12 @@
 	
 	ul {
 		list-style: none;
-		display: inline;
+		display: table;
+		margin: 0 auto;
 	}
 	
 	ul > li {
 		float: left;
-		
 	}
 	
 </style>
