@@ -33,7 +33,7 @@ public class LectureControllerImpl implements LectureController{
 		ModelAndView mav=new ModelAndView();
 		int lectNo=lectureService.selNo();
 		if(lectNo<1) lectNo=1;
-		dto.setLectNo(lectNo);
+		dto.setLectNo(lectNo+1);
 		int result=lectureService.open(dto);
 		mav.setViewName("redirect:/test/loginForm.do");
 		return mav;

@@ -20,7 +20,7 @@
 		
 	<insert id="openLecture" parameterType="lectureDTO">
 		<![CDATA[
-			insert into lecture values(#{lectName},#{name},#{lectDay},#{begin},#{end})
+			insert into lecture values(#{lectNo},#{lectName},#{name},#{lectDay},#{begin},#{end})
 		]]>
 	</insert>
 	
