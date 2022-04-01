@@ -49,6 +49,7 @@ public class LectureControllerImpl implements LectureController{
 	}
 
 	@Override
+	@RequestMapping(value="/test/apply.do")
 	public ModelAndView apply(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		ModelAndView mav = new ModelAndView();
@@ -63,6 +64,8 @@ public class LectureControllerImpl implements LectureController{
 			li.add(dto);
 		}
 		
+		lectureService.apply(li);
+		mav.setViewName("redirect:/test/loginForm.do");
 		return mav;
 	}
 	
