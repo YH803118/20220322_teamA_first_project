@@ -97,6 +97,7 @@ select * from t_noticeFile;
 
 select * from t_commuBoard; 
 
+commit;
 
 
 SELECT * FROM USER_SEQUENCES;
