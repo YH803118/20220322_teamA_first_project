@@ -31,6 +31,9 @@ public class LectureControllerImpl implements LectureController{
 		// TODO Auto-generated method stub
 		
 		ModelAndView mav=new ModelAndView();
+		int lectNo=lectureService.selNo();
+		if(lectNo<1) lectNo=1;
+		dto.setLectNo(lectNo);
 		int result=lectureService.open(dto);
 		mav.setViewName("redirect:/test/loginForm.do");
 		return mav;

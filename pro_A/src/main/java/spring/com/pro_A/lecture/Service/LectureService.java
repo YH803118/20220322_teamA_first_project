@@ -13,4 +13,6 @@ public interface LectureService {
 
 	public void apply(List<ApplyDTO> li);
 
+	public int selNo();
+
 }
