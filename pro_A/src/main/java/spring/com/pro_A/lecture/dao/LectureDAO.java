@@ -13,4 +13,6 @@ public interface LectureDAO {
 
 	public void apply(List<ApplyDTO> li);
 
+	public int selNo();
+
 }

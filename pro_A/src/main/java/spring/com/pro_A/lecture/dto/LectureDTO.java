@@ -5,11 +5,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class LectureDTO {
 
+	private int lectNo;
 	private String lectName;
 	private String name;
 	private String lectDay;
 	private int begin;
 	private int end;
+	public int getLectNo() {
+		return lectNo;
+	}
+	public void setLectNo(int lectNo) {
+		this.lectNo = lectNo;
+	}
 	public String getLectName() {
 		return lectName;
 	}

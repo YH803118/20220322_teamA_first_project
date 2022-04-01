@@ -36,4 +36,10 @@ public class LectureDAOImpl implements LectureDAO{
 		}
 	}
 
+	@Override
+	public int selNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mapper.lecture.selectNo");
+	}
+
 }
