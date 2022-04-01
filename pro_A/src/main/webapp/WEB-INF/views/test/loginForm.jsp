@@ -236,7 +236,7 @@ String schedule = request.getParameter("schedule");
 	<div id="community">
 	<table>
 		<tr>
-			<td width="80%" align="left">공지사항</td>
+			<td width="80%" align="left">커뮤니티</td>
 			<td><a href="${contextPath }/board/commuList.do">전체보기</a></td>
 		</tr>
 		<c:forEach var="commu" items="${commuList }">
