@@ -60,15 +60,17 @@ String schedule = request.getParameter("schedule");
 	position: relative;
 	top: 0;
 	float: right;
-	margin: 30px;
+	margin: 0 30px;
+	padding: 30px 0;
 	width: 260px;
 	height: 200px;
 	background-color: #aaaaaa;
+	line-height: 200%;
 }
 
 #notice {
 	top: 500px;
-	background-color: lightgreen;
+	background-color: #aaa;
 	margin: 30px;
 	width: 450px;
 	height: 120px;
@@ -76,7 +78,7 @@ String schedule = request.getParameter("schedule");
 }
 
 #community {
-	background-color: green;
+	background-color: #aaa;
 	width: 450px;
 	height: 120px;
 	margin: 30px;
@@ -116,9 +118,42 @@ String schedule = request.getParameter("schedule");
 #scheduleOn {
 	background-color: #aaaaaa;
 }
+#notice td, th {
+	border-bottom : 2px solid #eee;
+}
+#community td, th{
+	border-bottom : 2px solid #eee;
+}
 </style>
 </head>
 <body>
+<div id="login">
+		<form action="/pro_A/test/login.do" id="loginForm">
+			<c:choose>
+				<c:when test="${isLogon=='true' }">
+				${dto.id }님 환영합니다.<br>
+					<c:choose>
+						<c:when test="${dto.memberType==1 }">
+							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input
+								type="button" value="강좌개설"></a>
+						</c:when>
+						<c:otherwise>
+						<a href="/pro_A/test/applyForm.do?id=${dto.id }"><input type="button" value="수강신청"></a>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput">
+					<br>
+	비밀번호 : <input type="password" name="pwd" class="loginInput">
+					<br>
+					<input type="submit" value="로그인">
+					<a href="/pro_A/test/memberForm.do"><input type="button"
+						value="회원가입"></a>
+				</c:otherwise>
+			</c:choose>
+		</form>
+	</div>
 	<c:set var="yearMonth" value="<%=yearMonth%>" />
 	<div id="calendarFrm">
 		<table>
@@ -183,44 +218,35 @@ String schedule = request.getParameter("schedule");
 			</tr>
 		</table>
 	</div>
-	<div id="login">
-		<form action="/pro_A/test/login.do" id="loginForm">
-			<c:choose>
-				<c:when test="${isLogon=='true' }">
-				${dto.id }님 환영합니다.<br>
-					<c:choose>
-						<c:when test="${dto.memberType==1 }">
-							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input
-								type="button" value="강좌개설"></a>
-						</c:when>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-	&nbsp;아이디 &nbsp;&nbsp;: <input type="text" name="id" class="loginInput">
-					<br>
-	비밀번호 : <input type="password" name="pwd" class="loginInput">
-					<br>
-					<input type="submit" value="로그인">
-					<a href="/pro_A/test/memberForm.do"><input type="button"
-						value="회원가입"></a>
-				</c:otherwise>
-			</c:choose>
-		</form>
-	</div>
+	
 	<div id="notice">
 	<table>
 		<tr>
-			<td>공지사항</td>
+			<td width="80%" align="left">공지사항</td>
 			<td><a href="${contextPath }/board/noticeList.do">전체보기</a></td>
 		</tr>
 		<c:forEach var="notice" items="${noticeList }">
 		<tr>
-			<td>${notice.noticeTitle }	</td>
+			<td  align="left">${notice.noticeTitle }	</td>
 			<td>${fn:split(notice.noticeRegDate, ' ')[0] } </td>		
 		</tr>
 		</c:forEach>
 	</table>
 	</div>
-	<div id="community"></div>
+	<div id="community">
+	<table>
+		<tr>
+			<td width="80%" align="left">커뮤니티</td>
+			<td><a href="${contextPath }/board/commuList.do">전체보기</a></td>
+		</tr>
+		<c:forEach var="commu" items="${commuList }">
+		<tr>
+			<td  align="left">${commu.commuTitle }	</td>
+			<td>${fn:split(commu.commuRegDate, ' ')[0] } </td>		
+		</tr>
+		</c:forEach>
+	</table>
+	
+	</div>
 </body>
 </html>

@@ -62,7 +62,7 @@ public class C_BoardControllerImpl implements C_BoardController {
 		System.out.println("commDTO 제목 " + commDTO.getCommuTitle());
 		System.out.println("commDTO 작성자 " + commDTO.getCommuWriter());
 		System.out.println("게시물 작성 결과는? + " + cBoardService.addCommu(commDTO));
-		response.sendRedirect("pro_A/board/commuList.do");
+		response.sendRedirect("commuList.do");
 	}
 
 	@RequestMapping(value = "/board/commuDetail.do", method = RequestMethod.GET)

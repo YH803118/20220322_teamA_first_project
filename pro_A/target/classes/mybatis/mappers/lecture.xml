@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="mapper.lecture">
-		<resultMap id="lectName" type="lectureDTO">
+		<resultMap id="lecture" type="lectureDTO">
 			<result property="lectName" column="lectName" />
 			<result property="name" column="name" />
 			<result property="lectDay" column="lectDay" />
@@ -11,9 +11,27 @@
 			<result property="end" column="end" />
 		</resultMap>
 		
+		<resultMap id="apply" type="applyDTO">
+			<result property="lectInfo" column="lectInfo" />
+			<result property="id" column="id" />
+		</resultMap>
+		
+		
 	<insert id="openLecture" parameterType="lectureDTO">
 		<![CDATA[
 			insert into lecture values(#{lectName},#{name},#{lectDay},#{begin},#{end})
 		]]>
+	</insert>
+	
+	<select id="selectList" resultMap="lecture">
+	<![CDATA[
+	select * from lecture
+	]]>
+	</select>
+	
+	<insert id="applyLect" parameterType="applyDTO">
+	<![CDATA[
+	insert into apply values(#{lectInfo},#{id})
+	]]>
 	</insert>
 	</mapper>
