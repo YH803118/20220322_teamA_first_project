@@ -4,6 +4,7 @@
 	
 	<mapper namespace="mapper.lecture">
 		<resultMap id="lecture" type="lectureDTO">
+			<result property="lectNo" column="lectNo" />
 			<result property="lectName" column="lectName" />
 			<result property="name" column="name" />
 			<result property="lectDay" column="lectDay" />
@@ -19,7 +20,7 @@
 		
 	<insert id="openLecture" parameterType="lectureDTO">
 		<![CDATA[
-			insert into lecture values(#{lectName},#{name},#{lectDay},#{begin},#{end})
+			insert into lecture values(#{lectNo},#{lectName},#{name},#{lectDay},#{begin},#{end})
 		]]>
 	</insert>
 	
@@ -34,4 +35,10 @@
 	insert into apply values(#{lectInfo},#{id})
 	]]>
 	</insert>
+	
+	<select id="selectNo" resultType="int">
+	<![CDATA[
+	select max(lectNo) from lecture
+	]]>
+	</select>
 	</mapper>
