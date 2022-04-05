@@ -41,4 +41,12 @@
 	select max(lectNo) from lecture
 	]]>
 	</select>
+	
+	
+	<select id="applyList" resultMap="apply">
+	<![CDATA[
+	select * from apply
+	]]>
+	</select>
+	
 	</mapper>

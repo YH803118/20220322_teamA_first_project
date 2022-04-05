@@ -34,5 +34,10 @@ public class LectureServiceImpl implements LectureService{
 		// TODO Auto-generated method stub
 		return dao.selNo();
 	}
+	@Override
+	public List<ApplyDTO> applyList() {
+		// TODO Auto-generated method stub
+		return dao.applyList();
+	}
 	
 }

@@ -32,7 +32,6 @@ public class LectureControllerImpl implements LectureController{
 		
 		ModelAndView mav=new ModelAndView();
 		int lectNo=lectureService.selNo();
-		if(lectNo<1) lectNo=1;
 		dto.setLectNo(lectNo+1);
 		int result=lectureService.open(dto);
 		mav.setViewName("redirect:/test/loginForm.do");
@@ -46,6 +45,44 @@ public class LectureControllerImpl implements LectureController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		List<LectureDTO> lectList=lectureService.selectList();
+		List<ApplyDTO> applyList = lectureService.applyList();
+		
+		String id= request.getParameter("id");
+		int num=0;
+		
+		for(ApplyDTO app : applyList)
+		{
+			if(app.getId().equals(id))
+				num++;
+		}
+		
+		int[] chkli=new int[num];
+		int a=0;
+		for(ApplyDTO app : applyList)
+		{
+			
+			if(app.getId().equals(id))
+			{
+				String[] info=app.getLectInfo().split(" ");
+				chkli[a]=Integer.parseInt(info[0]);
+				a++;
+			}
+		}
+		
+		
+		for(LectureDTO dto : lectList)
+		{
+		
+		for(int i : chkli) {
+			if(i==dto.getLectNo())
+				{
+				int index=lectList.indexOf(dto);
+				lectList.remove(index);
+				}
+		}
+		
+		}
+		
 		mav.addObject("lectList",lectList);
 		
 		return mav;
