@@ -22,36 +22,32 @@
 		float:right;
 		background-color: gray;
 	}
+	#subjectHomework{
+		width: 540px;
+		height: 600px;
+		margin: 10px;
+		background-color: #eee;
+	}
 </style>
 </head>
 <body>
 <div id="subjectContent">
-	<div id="subjectNotice">
-		<table>
-			<tr>
-				<td width="80%" align="left">공지사항</td>
-				<td><a href="/pro_A/test/subjectNotice.do?subjectNo=${lectNo }">전체보기</a></td>
-			</tr>
-			<c:forEach var="notice" items="${noticeList }">
-			<tr>
-				<td  align="left">${notice.noticeTitle }	</td>
-				<td>${fn:split(notice.noticeRegDate, ' ')[0] } </td>		
-			</tr>
-			</c:forEach>
-		</table>
-	</div>
 	<div id="subjectHomework">
 		<table>
 			<tr>
 				<td width="80%" align="left">과제</td>
-				<td><a href="/pro_A/test/subjectHomework.do?subjectNo=${lectNo }">전체보기</a></td>
+				<td>
+					<c:if test="${dto.memberType==1 }">
+						<input type="button" value="과제등록">
+					</c:if>
+				</td>
 			</tr>
-			<c:forEach var="homework" items="${homework }">
+			<%-- <c:forEach var="homework" items="${homework }">
 			<tr>
 				<td  align="left">${homework.Title }	</td>
 				<td>${fn:split(homework.endDate, ' ')[0] } </td>		
 			</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</div>	
 </div>

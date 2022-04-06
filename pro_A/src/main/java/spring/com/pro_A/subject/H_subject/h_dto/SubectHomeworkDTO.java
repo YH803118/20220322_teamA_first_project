@@ -4,12 +4,18 @@ import java.sql.Date;
 
 public class SubectHomeworkDTO {
 	private int lectNo;
+	private int homeworkNo;
 	private String title;
 	private String content;
 	private Date endDate;
-	private boolean submit; //false:미제출 true:제출
 	
 	
+	public int getHomeworkNo() {
+		return homeworkNo;
+	}
+	public void setHomeworkNo(int homeworkNo) {
+		this.homeworkNo = homeworkNo;
+	}
 	public int getLectNo() {
 		return lectNo;
 	}
@@ -33,14 +39,6 @@ public class SubectHomeworkDTO {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-	public boolean isSubmit() {
-		return submit;
-	}
-	public void setSubmit(boolean submit) {
-		this.submit = submit;
-	}
-	
-	
+	}	
 	
 }
