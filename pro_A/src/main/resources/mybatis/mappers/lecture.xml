@@ -41,4 +41,16 @@
 	select max(lectNo) from lecture
 	]]>
 	</select>
+	
+	<select id="subjectList" parameterType="String" resultType="applyDTO">
+	<![CDATA[
+		select * from apply where id = #{id}
+	]]>
+	</select>
+	<select id="professorSubject" parameterType="String" resultType="lectureDTO">
+	<![CDATA[
+		select * from lecture where name = #{name}
+	]]>
+	</select>
+	
 	</mapper>

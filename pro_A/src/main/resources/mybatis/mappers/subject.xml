@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.subject">
+		<resultMap id="lecture" type="lectureDTO">
+			<result property="lectNo" column="lectNo" />
+			<result property="lectName" column="lectName" />
+			<result property="name" column="name" />
+			<result property="lectDay" column="lectDay" />
+			<result property="begin" column="begin" />
+			<result property="end" column="end" />
+		</resultMap>
+		
+		<resultMap id="apply" type="applyDTO">
+			<result property="lectInfo" column="lectInfo" />
+			<result property="id" column="id" />
+		</resultMap>
+		
+		<select id="lectName" parameterType="int" resultType="String">
+			<![CDATA[
+				select lectName from lecture where lectNo=#{lectNo}
+			]]>
+		</select>
+	</mapper>

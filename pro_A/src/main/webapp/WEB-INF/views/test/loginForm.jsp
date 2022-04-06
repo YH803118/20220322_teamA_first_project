@@ -134,11 +134,24 @@ String schedule = request.getParameter("schedule");
 				${dto.id }님 환영합니다.<br>
 					<c:choose>
 						<c:when test="${dto.memberType==1 }">
-							<a href="/pro_A/test/openForm.do?name=${dto.name }"><input
-								type="button" value="강좌개설"></a>
+							<a href="/pro_A/test/openForm.do?name=${dto.name }">
+							<input	type="button" value="강좌개설"></a><br>
+							<table>
+							<c:forEach var="proSubject" items="${professorSubject }">
+								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${proSubject.lectNo }">${proSubject.lectName }</a></td></tr>
+							</c:forEach>
+							</table>
 						</c:when>
 						<c:otherwise>
-						<a href="/pro_A/test/applyForm.do?id=${dto.id }"><input type="button" value="수강신청"></a>
+							<a href="/pro_A/test/applyForm.do?id=${dto.id }">
+							<input type="button" value="수강신청"></a><br>
+							<table>
+							<c:set var="i" value="0" />
+							<c:forEach var="subject" items="${subjectList }">
+								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${subjectNo.get(i) }">${subject.lectInfo }</a></td></tr>
+								<c:set var="i" value="${i+1 }" />
+							</c:forEach>
+							</table>
 						</c:otherwise>
 					</c:choose>
 				</c:when>

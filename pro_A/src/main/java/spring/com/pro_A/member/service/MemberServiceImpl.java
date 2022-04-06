@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
+import spring.com.pro_A.apply.dto.ApplyDTO;
 import spring.com.pro_A.board.community.dto.CommDTO;
 import spring.com.pro_A.board.notice.dto.NoticeDTO;
+import spring.com.pro_A.lecture.dto.LectureDTO;
 import spring.com.pro_A.member.dao.MemberDAO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -69,6 +71,18 @@ public class MemberServiceImpl implements MemberService{
 	public List<CommDTO> commuList() {
 		// TODO Auto-generated method stub
 		return memberDAO.commuList();
+	}
+
+	@Override
+	public List<ApplyDTO> subjectList(String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.subjectList(id);
+	}
+
+	@Override
+	public List<LectureDTO> professorSubject(String name) {
+		// TODO Auto-generated method stub
+		return memberDAO.professorSubject(name);
 	}
 
 }
