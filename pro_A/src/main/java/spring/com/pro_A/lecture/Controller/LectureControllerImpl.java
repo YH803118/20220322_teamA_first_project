@@ -70,18 +70,24 @@ public class LectureControllerImpl implements LectureController{
 		}
 		
 		
-		for(LectureDTO dto : lectList)
-		{
-		
-		for(int i : chkli) {
-			if(i==dto.getLectNo())
-				{
-				int index=lectList.indexOf(dto);
-				lectList.remove(index);
-				}
-		}
-		
-		}
+		int[] delList = new int[50];
+	      int j=0;
+	      for(LectureDTO dto : lectList)
+	      {
+	      for(int i : chkli) {
+	         if(i==dto.getLectNo())
+	            {
+	               delList[j++]=dto.getLectNo();
+	            }
+	      }
+	   
+	      }
+	      j=1;
+	      for(int i:delList) {
+	         if(i == 0) break;
+	         System.out.println(i);
+	         lectList.remove(i-(j++));
+	      }
 		
 		mav.addObject("lectList",lectList);
 		
