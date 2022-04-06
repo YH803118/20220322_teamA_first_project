@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import spring.com.pro_A.apply.dto.ApplyDTO;
 import spring.com.pro_A.board.community.dto.CommDTO;
 import spring.com.pro_A.board.notice.dto.NoticeDTO;
+import spring.com.pro_A.lecture.dto.LectureDTO;
 import spring.com.pro_A.member.dto.CalendarDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 
@@ -67,6 +69,18 @@ public class MemberDAOImpl implements MemberDAO{
 	public List<CommDTO> commuList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mapper.board.commuList");
+	}
+
+	@Override
+	public List<ApplyDTO> subjectList(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mapper.lecture.subjectList", id);
+	}
+
+	@Override
+	public List<LectureDTO> professorSubject(String name) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mapper.lecture.professorSubject", name);
 	}
 
 }

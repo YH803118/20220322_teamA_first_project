@@ -1,5 +1,6 @@
 package spring.com.pro_A.member.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import spring.com.pro_A.member.dto.CalendarDTO;
+import spring.com.pro_A.apply.dto.ApplyDTO;
 import spring.com.pro_A.board.community.dto.CommDTO;
 import spring.com.pro_A.board.notice.dto.NoticeDTO;
+import spring.com.pro_A.lecture.dto.LectureDTO;
 import spring.com.pro_A.member.dto.MemberDTO;
 import spring.com.pro_A.member.service.MemberService;
 
@@ -45,6 +48,21 @@ public class MemberControllerImpl implements MemberController{
 				session.setAttribute("isLogon", true);
 				session.setAttribute("dto", memberDTO);
 				System.out.println("로그인성공");
+				if(memberDTO.getMemberType() == 0) {
+					List<ApplyDTO> subjectList = memberService.subjectList(dto.getId());
+					if(!subjectList.isEmpty()) {
+						List<String> subjectNo = new ArrayList<String>();
+						for(ApplyDTO app:subjectList) {
+							String[] lect = app.getLectInfo().split(" ");
+							subjectNo.add(lect[0]);
+						}
+						session.setAttribute("subjectNo", subjectNo);
+						session.setAttribute("subjectList", subjectList);
+					}
+				} else {
+					List<LectureDTO> professorSubject = memberService.professorSubject(memberDTO.getName());
+					session.setAttribute("professorSubject", professorSubject);
+				}
 				mav.setViewName("redirect:/test/loginForm.do");
 			}
 		} else{
