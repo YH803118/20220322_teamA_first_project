@@ -46,6 +46,8 @@ function add(){
 <td>교수명</td>
 <td>수업일</td>
 </tr>
+
+
  <c:forEach var="lect" items="${lectList}" >     
    <tr align="center">
       <td><input type="radio" value="${lect.lectNo} ${lect.lectName } ${lect.name } ${lect.lectDay} ${lect.begin }~${lect.end}"
@@ -54,6 +56,7 @@ function add(){
       <td>${lect.lectDay} ${lect.begin }~${lect.end }</td>
     </tr>
   </c:forEach>
+
 </table>
 <br>
 
