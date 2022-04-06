@@ -37,7 +37,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/test/openForm.jsp" />
 	</definition>
 	
-	<definition name="/test/openForm" extends="baseLayout">
+	<definition name="/test/applyForm" extends="baseLayout">
 		<put-attribute name="title" value="수강신청" />
 		<put-attribute name="body" value="/WEB-INF/views/test/applyForm.jsp" />
 	</definition>

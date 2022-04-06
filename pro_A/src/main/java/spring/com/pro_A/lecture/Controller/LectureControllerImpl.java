@@ -1,10 +1,12 @@
 package spring.com.pro_A.lecture.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.event.TableColumnModelListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,20 +71,24 @@ public class LectureControllerImpl implements LectureController{
 			}
 		}
 		
-		
+		int[] delList = new int[50];
+		int j=0;
 		for(LectureDTO dto : lectList)
 		{
-		
 		for(int i : chkli) {
 			if(i==dto.getLectNo())
 				{
-				int index=lectList.indexOf(dto);
-				lectList.remove(index);
+					delList[j++]=dto.getLectNo();
 				}
 		}
-		
+	
 		}
-		
+
+		for(int i:delList) {
+			if(i == 0) break;
+			System.out.println(i);
+			lectList.remove(i-1);
+		}
 		mav.addObject("lectList",lectList);
 		
 		return mav;

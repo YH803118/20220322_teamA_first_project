@@ -42,7 +42,6 @@
 	]]>
 	</select>
 	
-<<<<<<< HEAD
 	<select id="subjectList" parameterType="String" resultType="applyDTO">
 	<![CDATA[
 		select * from apply where id = #{id}
@@ -51,12 +50,12 @@
 	<select id="professorSubject" parameterType="String" resultType="lectureDTO">
 	<![CDATA[
 		select * from lecture where name = #{name}
-=======
+	]]>
+	</select>
 	
 	<select id="applyList" resultMap="apply">
 	<![CDATA[
 	select * from apply
->>>>>>> branch 'main' of https://github.com/YH803118/20220322_teamA_first_project.git
 	]]>
 	</select>
 	
