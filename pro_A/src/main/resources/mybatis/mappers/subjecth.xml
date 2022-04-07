@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.subjecth">
+		<resultMap id="homework" type="homeworkDTO">
+			<result property="lectNo" column="lectNo" />
+			<result property="homeworkNo" column="homeworkNo" />
+			<result property="title" column="title" />
+			<result property="content" column="content" />
+			<result property="endDate" column="endDate" />
+		</resultMap>
+		<resultMap id="h_fileList" type="h_fileDTO">
+			<result property="homeworkNo" column = "homeworkNo"/>
+			<result property="homeworkFileName" column = "homeworkFileName"/>
+			<result property="regDate" column = "regDate"/>
+		</resultMap>
+		<resultMap id="apply" type="applyDTO">
+			<result property="lectInfo" column="lectInfo" />
+			<result property="id" column="id" />
+		</resultMap>
+		
+		<select id="lectName" parameterType="int" resultType="String">
+			<![CDATA[
+				select lectName from lecture where lectNo=#{lectNo}
+			]]>
+		</select>
+		<select id="homeworkList" parameterType="String" resultType="homeworkDTO">
+			<![CDATA[
+				select * from subjectHomework where lectNo=#{lectNo}
+			]]>
+		</select>
+		
+		<select id="addHomework" parameterType="java.util.Map">
+			<![CDATA[
+				insert into subjectHomework
+				values(#{lectNo}, seq_homework.NEXTVAL, #{title}, #{content}, to_date(#{endDate},'RR/MM/DD'))
+			]]>
+		</select>
+		
+		<select id="getLastHomeworkNo" resultType="int">
+			<![CDATA[
+				select max(homeworkNo) from subjectHomework
+			]]>
+		</select>
+		
+		<select id="addHomeworkFile" parameterType="h_fileDTO">
+			<![CDATA[
+				insert into homeworkFile(homeworkFileName, homeworkNo, uuid, originalFileName) values (#{homeworkFileName},#{homeworkNo}, #{uuid},#{originalFileName})
+			]]>
+		</select>
+	</mapper>

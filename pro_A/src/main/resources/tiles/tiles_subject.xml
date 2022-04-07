@@ -13,5 +13,8 @@
 		<put-attribute name="title" value="과제" />
 		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomework.jsp" />
 	</definition>
-
+	<definition name="/test/subjectHomeworkAdd" extends="baseLayout">
+		<put-attribute name="title" value="과제등록" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomeworkAdd.jsp" />
+	</definition>
 </tiles-definitions>

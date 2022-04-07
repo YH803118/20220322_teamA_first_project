@@ -2,12 +2,23 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% request.setCharacterEncoding("utf-8"); %>
+<% request.setCharacterEncoding("utf-8"); 
+	String lectNo = request.getParameter("subjectNo");
+%>
+<c:set var="lectNo" value="<%=lectNo %>" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	var cnt=1;
+	function fn_addFile(){
+		$("#d_file").append("<br><input type='file' name='file"+cnt+"' />");
+		cnt++;
+	}
+	
+</script>
 <style>
 	#subjectMenu{
 		margin:30px;
@@ -28,27 +39,42 @@
 		margin: 10px;
 		background-color: #eee;
 	}
+	textarea{
+		width:520px;
+		height:400px;
+		margin:10px;
+	}
 </style>
 </head>
 <body>
+
 <div id="subjectContent">
 	<div id="subjectHomework">
+	<form action="/pro_A/test/homeworkAdd.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td width="80%" align="left">과제</td>
-				<td>
-					<c:if test="${dto.memberType eq 1}">
-						<a href="/pro_A/test/subjectHomeworkAdd.do?subjectNo=${lectNo }"><button>과제등록</button></a>
-					</c:if>
-				</td>
+				<td colspan="2">제목 : <input type="text" name="title"></td>
 			</tr>
-			<c:forEach var="homework" items="${homeworkList }">
 			<tr>
-				<td  align="left">${homework.title }	</td>
-				<td>${fn:split(homework.endDate, ' ')[0] } </td>		
+				<td colspan="2"><textarea name="content">내용</textarea></td>
 			</tr>
-			</c:forEach>
+			<tr>
+				<td colspan="2">기간 : <input type="date" name="endDate"></td>
+			</tr>
+			<tr>
+				<td>첨부파일</td>
+				<td id="d_file"></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="파일추가" onClick="fn_addFile()"/></td>
+				<td>
+				<input type="hidden" name="lectNo" value="${lectNo}">
+				<input type="hidden" name="subjectNo" value="${lectNo}">
+				<input type="hidden" name="type" value="${dto.memberType}">
+				<input type="submit" value="전송"></td>
+			</tr>
 		</table>
+		</form>
 	</div>	
 </div>
 <div id="subjectMenu">

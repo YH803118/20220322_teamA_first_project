@@ -2,7 +2,7 @@ package spring.com.pro_A.subject.H_subject.h_dto;
 
 import java.sql.Date;
 
-public class SubectHomeworkDTO {
+public class SubjectHomeworkDTO {
 	private int lectNo;
 	private int homeworkNo;
 	private String title;
