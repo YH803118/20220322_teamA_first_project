@@ -46,14 +46,17 @@ function add(){
 <td>교수명</td>
 <td>수업일</td>
 </tr>
+
+
  <c:forEach var="lect" items="${lectList}" >     
    <tr align="center">
-      <td><input type="radio" value="${lect.lectName } ${lect.name } ${lect.lectDay} ${lect.begin }~${lect.end}"
+      <td><input type="radio" value="${lect.lectNo} ${lect.lectName } ${lect.name } ${lect.lectDay} ${lect.begin }~${lect.end}"
        onclick="put(event)" name="sel">${lect.lectName}</td>
       <td>${lect.name}</td>
       <td>${lect.lectDay} ${lect.begin }~${lect.end }</td>
     </tr>
   </c:forEach>
+
 </table>
 <br>
 

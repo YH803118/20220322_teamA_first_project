@@ -1,10 +1,12 @@
 package spring.com.pro_A.lecture.Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.event.TableColumnModelListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,6 @@ public class LectureControllerImpl implements LectureController{
 		
 		ModelAndView mav=new ModelAndView();
 		int lectNo=lectureService.selNo();
-		if(lectNo<1) lectNo=1;
 		dto.setLectNo(lectNo+1);
 		int result=lectureService.open(dto);
 		mav.setViewName("redirect:/test/loginForm.do");
@@ -46,6 +47,47 @@ public class LectureControllerImpl implements LectureController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		List<LectureDTO> lectList=lectureService.selectList();
+		List<ApplyDTO> applyList = lectureService.applyList();
+		
+		String id= request.getParameter("id");
+		int num=0;
+		
+		for(ApplyDTO app : applyList)
+		{
+			if(app.getId().equals(id))
+				num++;
+		}
+		
+		int[] chkli=new int[num];
+		int a=0;
+		for(ApplyDTO app : applyList)
+		{
+			
+			if(app.getId().equals(id))
+			{
+				String[] info=app.getLectInfo().split(" ");
+				chkli[a]=Integer.parseInt(info[0]);
+				a++;
+			}
+		}
+		
+		int[] delList = new int[num];
+		int j=0;
+		for(LectureDTO dto : lectList)
+		{
+		for(int i : chkli) {
+			if(i==dto.getLectNo())
+				{
+					delList[j++]=dto.getLectNo();
+				}
+		}
+	
+		}
+		j=1;
+		for(int i:delList) {
+			System.out.println(i);
+			lectList.remove(i-(j++));
+		}
 		mav.addObject("lectList",lectList);
 		
 		return mav;
