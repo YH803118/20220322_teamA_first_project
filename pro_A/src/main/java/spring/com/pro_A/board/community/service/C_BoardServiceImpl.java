@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import spring.com.pro_A.board.community.dao.C_BoardDAO;
 import spring.com.pro_A.board.community.dto.CommDTO;
+import spring.com.pro_A.board.community.dto.ReplyDTO;
 import spring.com.pro_A.common.dto.Criteria;
 
 @Service
@@ -66,7 +67,16 @@ public class C_BoardServiceImpl implements C_BoardService {
 		return cBoardDAO.delCommu(commuNo);
 	}
 
+	@Override
+	public int addReply(ReplyDTO replyDTO) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.addReply(replyDTO);
+	}
 
-	
-	
+	@Override
+	public List<ReplyDTO> getReplys(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.getReplys(commuNo);
+	}
+
 }

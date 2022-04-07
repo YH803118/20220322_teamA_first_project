@@ -46,7 +46,6 @@
 	
 	ul > li {
 		float: left;
-		
 	}
 	
 </style>

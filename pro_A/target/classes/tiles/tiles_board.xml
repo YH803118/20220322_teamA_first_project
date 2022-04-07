@@ -41,6 +41,7 @@
 	<definition name="/board/commuDetailView" extends="baseLayout">
 		<put-attribute name="title" value="커뮤니티 게시판 글쓰기" />
 		<put-attribute name="body" value="/WEB-INF/views/board/commuDetailView.jsp" />
+		<put-attribute name="reply" value="/WEB-INF/views/board/commuReply.jsp"/>
 	</definition>
 	
 	<definition name="/board/commuModifyForm" extends="baseLayout">

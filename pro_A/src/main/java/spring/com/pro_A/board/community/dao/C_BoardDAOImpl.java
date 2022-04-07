@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import spring.com.pro_A.board.community.dto.CommDTO;
+import spring.com.pro_A.board.community.dto.ReplyDTO;
 import spring.com.pro_A.common.dto.Criteria;
 
 @Repository
@@ -70,6 +71,18 @@ public class C_BoardDAOImpl implements C_BoardDAO {
 	public int delCommu(int commuNo) {
 		// TODO Auto-generated method stub
 		return sqlsession.delete("mapper.boardc.delCommu", commuNo);
+	}
+
+	@Override
+	public int addReply(ReplyDTO replyDTO) {
+		// TODO Auto-generated method stub
+		return sqlsession.insert("mapper.boardc.addReply", replyDTO);
+	}
+
+	@Override
+	public List<ReplyDTO> getReplys(int commuNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mapper.boardc.getReplys", commuNo);
 	}
 	
 	
