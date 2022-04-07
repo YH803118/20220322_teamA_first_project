@@ -3,6 +3,7 @@ package spring.com.pro_A.board.community.dao;
 import java.util.List;
 
 import spring.com.pro_A.board.community.dto.CommDTO;
+import spring.com.pro_A.board.community.dto.ReplyDTO;
 import spring.com.pro_A.common.dto.Criteria;
 
 public interface C_BoardDAO {
@@ -24,5 +25,9 @@ public interface C_BoardDAO {
 	public List<CommDTO> searchCommuList(Criteria cri);
 
 	public int delCommu(int commuNo);
+
+	public int addReply(ReplyDTO replyDTO);
+
+	public List<ReplyDTO> getReplys(int commuNo);
 
 }

@@ -89,10 +89,19 @@
 					</when>
 				</choose>
 		</select>
-
+		
+		<select id="fileInfo2" parameterType="java.util.Map" resultType="fileDTO">
+		
+		</select>
 		<update id="noticeAddHit" parameterType="int" >
 			<![CDATA[
 				update t_noticeBoard set noticeHit = noticeHit+1 where noticeNo=#{noticeNo}
+			]]>
+		</update>
+		
+		<update id="modNotice" parameterType="java.util.Map">
+			<![CDATA[
+				update t_noticeBoard set noticeTitle = #{noticeTitle} , noticeContent = #{noticeContent} where noticeNo=#{noticeNo}
 			]]>
 		</update>
 		

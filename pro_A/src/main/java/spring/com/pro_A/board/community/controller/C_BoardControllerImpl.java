@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.com.pro_A.board.community.dto.CommDTO;
+import spring.com.pro_A.board.community.dto.ReplyDTO;
 import spring.com.pro_A.board.community.service.C_BoardService;
 import spring.com.pro_A.common.dto.Criteria;
 import spring.com.pro_A.common.dto.PageDTO;
@@ -75,44 +76,47 @@ public class C_BoardControllerImpl implements C_BoardController {
 		if (mod == null) {
 			int result = cBoardService.addCommuHit(commuNo);
 			mav.setViewName("/board/commuDetailView");
+			List<ReplyDTO> replys = cBoardService.getReplys(commuNo);
+			mav.addObject("replys", replys);
 		} else {
 			mav.setViewName("/board/commuModifyForm");
 		}
 		return mav;
 	}
 
-	@RequestMapping(value="/board/commuModify.do", method = RequestMethod.POST)
-	public void commuModify(@ModelAttribute("commDTO") CommDTO commDTO, @RequestParam("pageNum") int pageNum, HttpServletResponse response) throws Exception {
-		
+	@RequestMapping(value = "/board/commuModify.do", method = RequestMethod.POST)
+	public void commuModify(@ModelAttribute("commDTO") CommDTO commDTO, @RequestParam("pageNum") int pageNum,
+			HttpServletResponse response) throws Exception {
+
 		int result = cBoardService.updateCommu(commDTO);
 		System.out.println("수정 결과가 반영 안된거 같은데?" + result);
-		
-		response.sendRedirect("/pro_A/board/commuList.do?pageNum="+pageNum);
-		
+
+		response.sendRedirect("/pro_A/board/commuList.do?pageNum=" + pageNum);
+
 	}
 
 	@Override
-	@RequestMapping(value="/board/commuSearch", method=RequestMethod.POST)
-	public ModelAndView commuSearch(@RequestParam Map<String, String> info,HttpServletRequest request,  HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/board/commuSearch", method = RequestMethod.POST)
+	public ModelAndView commuSearch(@RequestParam Map<String, String> info, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria cri = new Criteria();
 		cri.setAmount(20);
 		cri.setSearchType(info.get("searchType"));
 		cri.setSearchContent(info.get("searchContent"));
 		int total = cBoardService.getCommuSearchCnt(cri);
-		if(info.get("pageNum") == null) {
+		if (info.get("pageNum") == null) {
 			cri.setPageNum(1);
 		} else {
 			cri.setPageNum(Integer.parseInt(info.get("pageNum")));
 		}
-		
+
 		PageDTO pageDTO = new PageDTO(cri, total);
 		pageDTO.setCurPage(cri.getPageNum());
-		
+
 		List<CommDTO> searchList = cBoardService.searchCommuList(cri);
-		System.out.println("결과는? " + searchList.size());
-		
-		ModelAndView mav = new ModelAndView((String)request.getAttribute("viewName"));
+
+		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
 		mav.addObject("searchList", searchList);
 		mav.addObject("pageDTO", pageDTO);
 		mav.addObject("searchType", info.get("searchType"));
@@ -121,10 +125,21 @@ public class C_BoardControllerImpl implements C_BoardController {
 	}
 
 	@Override
-	@RequestMapping(value="/board/commuDelete.do", method=RequestMethod.GET)
-	public void commuDelete(@RequestParam(value="commuNo", required=true) int commuNo, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/board/commuDelete.do", method = RequestMethod.GET)
+	public void commuDelete(@RequestParam(value = "commuNo", required = true) int commuNo, HttpServletResponse response)
+			throws Exception {
 		int result = cBoardService.delCommu(commuNo);
 		response.sendRedirect("/pro_A/board/commuList.do");
+	}
+
+	@RequestMapping(value = "/board/replyNew.do", method = RequestMethod.POST)
+	public void replyNew(@ModelAttribute("replyDTO") ReplyDTO replyDTO, @RequestParam(value="pageNum", required=false) int pageNum,
+			HttpServletResponse response) throws Exception {
+		int result = cBoardService.addReply(replyDTO);
+		String url= "/pro_A/board/commuDetail.do?commuNo=";
+		url += replyDTO.getCommuNo() + "&pageNum="+pageNum;
+		System.out.println("url : " + url);
+		response.sendRedirect(url);
 	}
 
 }

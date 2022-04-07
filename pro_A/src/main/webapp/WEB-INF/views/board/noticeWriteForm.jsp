@@ -4,55 +4,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="../resources/style/style.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-	var cnt=1;
-	function fn_addFile(){
-		$("#d_file").append("<br><input type='file' name='file"+cnt+"' />");
-		cnt++;
-	}
-	
-</script>
-<style type="text/css">
-
-	.tblForm, .tblForm > tr, td {
-			border : 1px solid;
-			border-collapse: collapse;
-			padding: 0px;
-		}
-
-	textarea {
-			border-style : none;
-			border:0px;
-			padding:0px;
-			resize: none;
-		}
-		
-</style>
+<script src="../resources/js/board.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
-	<form action="/pro_A/board/noticeNew.do" method="post" enctype="multipart/form-data">
-		<table class="tblForm">
+	<h1>공지사항 작성</h1>
+	<form action="/pro_A/board/noticeNew.do" name="noticeWForm" onsubmit="return formCheck(this.name, 'notice')"  method="post" enctype="multipart/form-data">
+		<table class="tblView">
 			<tr>
-				<td>작성자</td>
-				<td><input type="hidden" name="noticeWriter" value="임시로">임시로</td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td>
-				
-					<input type="text" name="noticeTitle" maxlength="100" style="width:567px;">
+				<th class="tblViewlbl">작성자</th>
+				<td class="tblViewlbl2"> 관리자
+					<input type="hidden" name="noticeWriter" value="임시로">
 				</td>
+				<th class="tblViewlbl">작성일</th>
+				<td width="120px">스크립트</td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td>
-					<textarea rows="30" cols="80" name="noticeContent" maxlength="4000"></textarea>
+				<th class="tblViewlbl">제목</th>
+				<td class="tblViewWrite">
+					<input type="text" name="noticeTitle" maxlength="50">
 				</td>
-			</tr>
-			<tr>
-				<td>고정</td>
+				<th class="tblViewlbl">상단고정</th>
 				<td>
 					<select name="noticeLevel">
 						<option value="0">미고정</option>
@@ -61,15 +35,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
-				<td id="d_file"></td>
+				<td colspan="4">
+					<textarea rows="20"  name="noticeContent" maxlength="4000"></textarea>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="button" value="파일추가" onClick="fn_addFile()"/>
-				<td><input type="submit" value="전송"></td>
+				<th style="padding-top:10px;" class="tblViewlbl">첨부파일<br>
+					<button style="margin:10px 0 10px 0;" type="button" onclick="w_addFile()">파일추가</button>
+				</th>
+				<td id="d_file" colspan="3"></td>
 			</tr>
-					
 		</table>
+			<br>
+			<input class="dbtn" type="submit" value="작성완료">
 	</form>
 </body>
 </html>

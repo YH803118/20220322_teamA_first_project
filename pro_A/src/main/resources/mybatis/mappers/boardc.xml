@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="mapper.boardc">
-		<resultMap id="commuLists" type="commDTO">
+		<resultMap  type="commDTO" id="commuLists">
 			<result property="commuNo" column = "commuNo"/>
 			<result property="commuWriter" column = "commuWriter"/>
 			<result property="commuTitle" column = "commuTitle"/>
@@ -12,6 +12,15 @@
 			<result property="commuHit" column = "commuHit"/>
 			<result property="replyCnt" column = "replyCnt"/>
 		</resultMap>
+		
+		<resultMap type="replyDTO" id="replys">
+			<result property="commuNo" column = "commuNo"/>
+			<result property="replyNo" column = "replyNo"/>
+			<result property="replyWriter" column = "replyWriter"/>
+			<result property="replyContent" column = "replyContent"/>
+			<result property="replyRegDate" column = "replyRegDate"/>
+		</resultMap>
+		
 		
 		<select id="getCommuList" parameterType="spring.com.pro_A.common.dto.Criteria"  resultMap="commuLists">
 			<![CDATA[
@@ -71,10 +80,22 @@
 					and rownum <=#{pageNum} * #{amount}) where rn > (#{pageNum}-1) * #{amount}
 				]]> 
 		</select>
+		
+		<select id="getReplys" parameterType="int" resultMap="replys">
+			select * from t_commuReply where commuNo = #{commuNo}
+		</select>
+		
 		<insert id="addCommu" parameterType="spring.com.pro_A.board.community.dto.CommDTO">
 			<![CDATA[
 				insert into t_commuBoard(commuNo, commuWriter, commuTitle, commuContent) 
 					values (seq_commu.nextval, #{commuWriter}, #{commuTitle}, #{commuContent})
+			]]>
+		</insert>
+		
+		<insert id="addReply" parameterType="spring.com.pro_A.board.community.dto.ReplyDTO">
+			<![CDATA[
+				insert into t_commuReply(replyNo, commuNo, replyWriter, replyContent)
+					values (seq_reply.nextval, #{commuNo}, #{replyWriter}, #{replyContent})
 			]]>
 		</insert>
 		

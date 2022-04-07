@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="../resources/style/style.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../resources/js/validate.js"></script>
+<title>Insert title here</title>
 <style type="text/css">
 
 	.tblForm, .tblForm > tr, td {
@@ -22,10 +24,27 @@
 		}
 		
 </style>
+<script type="text/javascript">
+	function formCheck(name,boardtype){
+		let form = document.forms[name];
+		let title = form[boardtype + "Title"].value;
+		let content = form[boardtype + "Content"].value;
+		if(title=="" || title.length == 0){
+			alert("제목이 비어있습니다.");
+			return false;
+		} else if (content == "" || content.length == 0 ) {
+			alert("내용이 비어있습니다.");
+			return false;
+		} else {
+			alert("게시글이 작성되었습니다.");
+			return true;
+		} 
+	}
+</script>
 </head>
 <body>
 	<h1> 커뮤니티 게시판 글쓰기 구현중.jsp</h1>
-	<form action="/pro_A/board/commuNew.do" method="post" enctype="multipart/form-data">
+	<form action="/pro_A/board/commuNew.do"  name="commuWriteForm" onsubmit="return formCheck(this.name,'commu')" method="post" enctype="multipart/form-data">
 		<table class="tblForm">
 			<tr>
 				<td>작성자</td>
@@ -46,7 +65,8 @@
 			<tr>
 				<td colspan="2"><input type="submit" value="작성완료">
 				<a href="/pro_A/board/commuList.do"><button type="button">목록</button></a>
-				</td>
+			</td>
+				
 			</tr>
 		</table>
 	</form>

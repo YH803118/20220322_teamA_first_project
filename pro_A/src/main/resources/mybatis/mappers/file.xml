@@ -27,6 +27,11 @@
 			]]>
 		</select>
 		
+		<select id="getFileInfo2" parameterType="java.util.Map" resultType="fileDTO">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo} and originalFileName = #{originalFileName}
+			]]>
+		</select>
 		
 		<insert id="addNoticeFile" parameterType="fileDTO">
 			<![CDATA[
@@ -34,9 +39,15 @@
 			]]>
 		</insert>
 		
-		<delete id="noticeFileDel" parameterType="int">
+		<delete id="noticeFileDelAll" parameterType="int">
 			<![CDATA[
 				delete from t_noticeFile where noticeNo=#{noticeNo}
+			]]>
+		</delete>
+		
+		<delete id="noticeFileDel" parameterType="String">
+			<![CDATA[
+				delete from t_noticeFile where noticeFileName = #{noticeFileName}
 			]]>
 		</delete>
 	</mapper>
