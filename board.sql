@@ -64,6 +64,7 @@ create table t_commuReply(
 // 댓글 게시판 시퀀스 생성
 CREATE SEQUENCE seq_reply;
 select * from t_commu;
+select * from t_commuReply;
 
 // 테스트 입력
 insert into t_noticeBoard values(seq_notice.nextval, '홍길동', '홍길동 테스트1', '홍길동 테스트내용', sysdate, 1, 0);

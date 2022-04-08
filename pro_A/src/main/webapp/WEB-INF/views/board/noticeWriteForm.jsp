@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../resources/style/style.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../resources/js/board.js"></script>
+<script src="../resources/js/date.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
 					<input type="hidden" name="noticeWriter" value="임시로">
 				</td>
 				<th class="tblViewlbl">작성일</th>
-				<td width="120px">스크립트</td>
+				<td id="regDate" width="120px"></td>
 			</tr>
 			<tr>
 				<th class="tblViewlbl">제목</th>
@@ -48,6 +49,9 @@
 		</table>
 			<br>
 			<input class="dbtn" type="submit" value="작성완료">
+			<input class="dbtn" type="reset" value="취소">
+			<a href="/pro_A/board/noticeList.do">
+			<button class="dbtn" type="button">목록</button></a>
 	</form>
 </body>
 </html>

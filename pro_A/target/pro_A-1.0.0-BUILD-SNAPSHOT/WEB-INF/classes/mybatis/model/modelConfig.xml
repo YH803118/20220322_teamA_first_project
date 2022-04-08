@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
-	
 <configuration>
 	<typeAliases>
 		<typeAlias type="spring.com.pro_A.member.dto.MemberDTO" alias="memberDTO" />
-		<typeAlias type="spring.com.pro_A.board.dto.NoticeDTO" alias="noticeDTO" />
+		<typeAlias type="spring.com.pro_A.board.notice.dto.NoticeDTO" alias="noticeDTO" />
+		<typeAlias type="spring.com.pro_A.board.notice.dto.FileDTO" alias="fileDTO" />
+		<typeAlias type="spring.com.pro_A.lecture.dto.LectureDTO" alias="lectureDTO" />
+		<typeAlias type="spring.com.pro_A.member.dto.CalendarDTO" alias="calendarDTO" />
+		<typeAlias type="spring.com.pro_A.board.community.dto.ReplyDTO" alias="replyDTO"/>
+		<typeAlias type="spring.com.pro_A.board.community.dto.CommDTO" alias="commDTO"/>
+		<typeAlias type="spring.com.pro_A.apply.dto.ApplyDTO" alias="applyDTO"/>
+		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.SubjectHomeworkDTO" alias="homeworkDTO"/>
+		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.H_FileDTO" alias="h_fileDTO"/>
 	</typeAliases>
 </configuration>
