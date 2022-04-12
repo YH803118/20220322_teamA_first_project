@@ -11,5 +11,6 @@
 		<typeAlias type="spring.com.pro_A.board.community.dto.ReplyDTO" alias="replyDTO"/>
 		<typeAlias type="spring.com.pro_A.board.community.dto.CommDTO" alias="commDTO"/>
 		<typeAlias type="spring.com.pro_A.apply.dto.ApplyDTO" alias="applyDTO"/>
+		<typeAlias type="spring.com.pro_A.board.notice.dto.SubjectNoticeDTO" alias="subjectNoticeDTO"/>
 	</typeAliases>
 </configuration>

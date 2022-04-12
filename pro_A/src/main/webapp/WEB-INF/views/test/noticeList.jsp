@@ -1,28 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% request.setCharacterEncoding("utf-8"); %>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#subjectMenu{
-		margin:30px;
-		width:150px;
-		height: 800px;
-		background-color: gray;
-	}
-	#subjectContent{
-		width:560px;
-		height: 800px;
-		margin: 0 30px 0 0;
-		float:right;
-		background-color: gray;
-	}
-	
+
 	.tblBox{
 		margin-top: 50px;
 		margin-bottom: 50px;
@@ -36,14 +22,13 @@
 		vertical-align: middle;
 	}
 	
-	
 	.tblList > tr, td, th {
 		border-bottom : 1px solid black;
 		padding: 0px;
 	} 
 	
 	.tblListLabel{
-		background-color: skyblue;
+		background-color: #F08080;
 		color : white;
 	}
 	
@@ -62,18 +47,14 @@
 	ul > li {
 		float: left;
 	}
+	
 </style>
 </head>
 <body>
-<h1>공지사항 </h1>
-	<c:choose>
-	<c:when test="${dto.memberType==1 }">
+	<h1> 공지게시판 구현.jsp</h1>
 	<div style="float:right; margin:0 30px;">
-		<a href="/pro_A/test/noticeWriteForm.do?lectNo=${lectNo }&name=${name}"><button>글쓰기</button></a></div>
-	</c:when>
-	</c:choose>
+		<a href="/pro_A/board/noticeWriteForm.do"><button>글쓰기</button></a></div>
 	<div class="tblBox">
-
 		
 		<table class="tblList">
 			<tr class="tblListLabel">
@@ -127,5 +108,29 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
+		<div class="searchBar">
+			<form action="/pro_A/test/noticeSearch.do" method="post">
+				<select name="searchType">
+					<option value="noticeTitle">제목</option>
+					<option value="noticeContent">내용</option>
+				</select>
+					<input type="text" name="searchContent" maxlength="50">
+					<input type="submit" value="검색">	
+			</form>
+		</div>
+		<div class="navBar">
+			<ul>
+				<c:if test="${pageDTO.prev }">
+					<li><a href="/pro_A/test/noticeList.do?pageNum=${pageDTO.startPage-1 }">이전</a></li>
+				</c:if>
+				<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+					<li><a href="/pro_A/test/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
+				</c:forEach>
+				<c:if test="${pageDTO.next }">
+					<li><a href="/pro_A/test/noticeList.do?pageNum=${pageDTO.endPage+1 }">다음</a></li>
+				</c:if>
+			</ul>
+		</div>	
+	</div>
 </body>
 </html>

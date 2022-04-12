@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SubjectDAOImpl implements SubjectDAO{
+public class H_SubjectDAOImpl implements H_SubjectDAO{
 
 	@Autowired
 	private SqlSession sqlSession;

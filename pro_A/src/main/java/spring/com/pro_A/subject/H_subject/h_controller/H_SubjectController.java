@@ -6,6 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-public interface SubjectController {
+public interface H_SubjectController {
 	public ModelAndView subjectForm(@RequestParam(value="lectNo", required=false) String lectNo, HttpServletRequest request, HttpServletResponse response)throws Exception;
 }
