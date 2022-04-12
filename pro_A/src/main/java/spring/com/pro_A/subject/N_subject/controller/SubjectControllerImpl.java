@@ -1,5 +1,6 @@
 package spring.com.pro_A.subject.N_subject.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -61,30 +62,16 @@ public class SubjectControllerImpl implements SubjectController{
 		PageDTO pageDTO = new PageDTO(cri, total);
 		pageDTO.setCurPage(cri.getPageNum());
 		
-		List<SubjectNoticeDTO> noticeList = subjectService.noticeList(cri);
-		int num=0;
-		for(SubjectNoticeDTO sub:noticeList)
+		List<SubjectNoticeDTO> subNotice = subjectService.noticeList(cri);
+		List<SubjectNoticeDTO> noticeList= new ArrayList<SubjectNoticeDTO>();
+
+		for(SubjectNoticeDTO sub:subNotice)
 		{
-			if(lectNo!=sub.getLectNo())
-				num++;
-		}
-		
-		int[] noticeNo=new int[num];
-		int j=0;
-		for(SubjectNoticeDTO sub:noticeList)
-		{
-			if(lectNo!=sub.getLectNo())
+			if(lectNo==sub.getLectNo())
 				{
-				noticeNo[j++]=noticeList.indexOf(sub);
+				noticeList.add(sub);
 				}
 		}
-		
-		j=0;
-		for(int i:noticeNo)
-		{
-			noticeList.remove(i-(j++));
-		}
-		
 		
 		
 		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
@@ -129,8 +116,7 @@ public class SubjectControllerImpl implements SubjectController{
 		
 		ModelAndView mav = new ModelAndView();
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		String lectNo = request.getParameter("lectNo");
+		String lectNo=request.getParameter("lectNo");
 		Map<String, String> noticeMap = new HashMap<String, String>();
 		Enumeration enu = request.getParameterNames();
 
@@ -144,9 +130,9 @@ public class SubjectControllerImpl implements SubjectController{
 		int result =  subjectService.addNotice(noticeMap);
 		int addNoticeNo =  subjectService.getLastNoticeNo();
 		
-		session.setAttribute("lectNo", lectNo);
+		
 
-		response.sendRedirect("/pro_A/test/subjectNotice.do");
+		response.sendRedirect("/pro_A/test/subjectNotice.do?lectNo="+lectNo);
 	}
 	
 	@RequestMapping(value="/test/noticeDelete.do", method=RequestMethod.GET)
