@@ -3,25 +3,31 @@ package spring.com.pro_A.board.community.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import net.sf.cglib.proxy.Dispatcher;
 import spring.com.pro_A.board.community.dto.CommDTO;
 import spring.com.pro_A.board.community.dto.ReplyDTO;
 import spring.com.pro_A.board.community.service.C_BoardService;
 import spring.com.pro_A.common.dto.Criteria;
 import spring.com.pro_A.common.dto.PageDTO;
 
-@Controller
+@RestController
 public class C_BoardControllerImpl implements C_BoardController {
 
 	@Autowired
@@ -29,9 +35,10 @@ public class C_BoardControllerImpl implements C_BoardController {
 
 	@RequestMapping(value = "/board/commuList.do", method = RequestMethod.GET)
 	public ModelAndView commuList(@RequestParam(value = "pageNum", required = false) String pageNum,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		System.out.println("ㅇㅇㅇ");
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		System.out.println(session.getId());
+		System.out.println(session.getAttribute("dto"));
+		System.out.println(session.getMaxInactiveInterval());
 		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
 		int total = cBoardService.getCommuTotCnt();
 		Criteria cri = new Criteria();
@@ -59,10 +66,7 @@ public class C_BoardControllerImpl implements C_BoardController {
 	@RequestMapping(value = "/board/commuNew.do", method = RequestMethod.POST)
 	public void commuNew(CommDTO commDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("commDTO 내용 " + commDTO.getCommuContent());
-		System.out.println("commDTO 제목 " + commDTO.getCommuTitle());
-		System.out.println("commDTO 작성자 " + commDTO.getCommuWriter());
-		System.out.println("게시물 작성 결과는? + " + cBoardService.addCommu(commDTO));
+		int result = cBoardService.addCommu(commDTO);
 		response.sendRedirect("commuList.do");
 	}
 
@@ -133,13 +137,36 @@ public class C_BoardControllerImpl implements C_BoardController {
 	}
 
 	@RequestMapping(value = "/board/replyNew.do", method = RequestMethod.POST)
-	public void replyNew(@ModelAttribute("replyDTO") ReplyDTO replyDTO, @RequestParam(value="pageNum", required=false) int pageNum,
-			HttpServletResponse response) throws Exception {
+	public void replyNew(@ModelAttribute("replyDTO") ReplyDTO replyDTO,
+			@RequestParam(value = "pageNum", required = false) int pageNum, HttpServletResponse response)
+			throws Exception {
 		int result = cBoardService.addReply(replyDTO);
-		String url= "/pro_A/board/commuDetail.do?commuNo=";
-		url += replyDTO.getCommuNo() + "&pageNum="+pageNum;
-		System.out.println("url : " + url);
+		if(result > 0 ) {
+			int resultcommu = cBoardService.addReplyCnt(replyDTO.getCommuNo());
+		}
+		String url = "/pro_A/board/commuDetail.do?commuNo=";
+		url += replyDTO.getCommuNo() + "&pageNum=" + pageNum;
 		response.sendRedirect(url);
 	}
 
+	@RequestMapping(value = "/board/replyMod.do", method = RequestMethod.POST)
+	public void replyMod(@RequestBody ReplyDTO replyDTO) throws Exception {
+		int result = cBoardService.modReply(replyDTO);
+	}
+
+	
+	@RequestMapping(value = "/board/replyDel.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void replyDel(@RequestParam Map<String, String> info, HttpServletResponse response)
+			throws Exception {
+		int replyNo = Integer.parseInt(info.get("replyNo"));
+		int commNo = Integer.parseInt(info.get("commuNo"));
+		int result = cBoardService.delReply(replyNo);
+		if(result > 0 ) {
+			int resultcommu= cBoardService.delReplyCnt(commNo);
+		}
+		String url = "/pro_A/board/commuDetail.do?commuNo=";
+		url += commNo + "&pageNum=" + info.get("pageNum");
+		response.sendRedirect(url);
+	
+	}
 }

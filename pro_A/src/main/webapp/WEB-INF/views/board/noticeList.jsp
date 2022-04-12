@@ -11,9 +11,11 @@
 </head>
 <body>
 	<h1> 공지사항 게시판 </h1>
+		<c:if test="${isLogOn == true && dto.memberType == 2 }">
 		<a href="/pro_A/board/noticeWriteForm.do">
 			<button class="wbtn">게시글 작성</button>
 		</a>
+		</c:if>
 	<div class="tblBox">
 		<table class="tblList">
 			<tr class="tblListLabel">
@@ -83,7 +85,7 @@
 					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.startPage-1 }">&lt;</a></li>
 				</c:if>
 				<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
-					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
+					<li><a class="${pageDTO.curPage == pageNum ? 'pageActive' : ''  }"  href="/pro_A/board/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
 				</c:forEach>
 				<c:if test="${pageDTO.next }">
 					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.endPage+1 }">&gt;</a></li>

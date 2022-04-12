@@ -79,4 +79,31 @@ public class C_BoardServiceImpl implements C_BoardService {
 		return cBoardDAO.getReplys(commuNo);
 	}
 
+	@Override
+	public int modReply(ReplyDTO replyDTO) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.modReply(replyDTO);
+	}
+
+	@Override
+	public int delReply(int replyNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.delReply(replyNo);
+	}
+
+	@Override
+	public int addReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.addReplyCnt(commuNo);
+	}
+
+	@Override
+	public int delReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.delReplyCnt(commuNo);
+	}
+
+	
+	
+	
 }

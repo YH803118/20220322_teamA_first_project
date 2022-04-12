@@ -3,16 +3,54 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 	
 <tiles-definitions>
-	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="" />
-		<put-attribute name="side" value="" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="" />
-	</definition>
-		
 	<definition name="/board/noticeList" extends="baseLayout">
-		<put-attribute name="title" value="로그인" />
+		<put-attribute name="title" value="notice" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeList.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeDetailView" extends="baseLayout">
+		<put-attribute name="title" value="detailView" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeDetailView.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeWriteForm" extends="baseLayout">
+		<put-attribute name="title" value="writeForm" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeWriteForm.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeModifyForm" extends="baseLayout">
+		<put-attribute name="title" value="게시물 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeModifyForm.jsp" />
+	</definition>
+	
+	<definition name="/board/noticeSearch" extends="baseLayout">
+		<put-attribute name="title" value="검색 결과" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeSearch.jsp" />
+	</definition>
+	
+	<definition name="/board/commuList" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuList.jsp" />
+	</definition>
+	
+	<definition name="/board/commuWriteForm" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuWriteForm.jsp" />
+	</definition>
+	
+	<definition name="/board/commuDetailView" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuDetailView.jsp" />
+		<put-attribute name="reply" value="/WEB-INF/views/board/commuReply.jsp"/>
+	</definition>
+	
+	<definition name="/board/commuModifyForm" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 게시글 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuModifyForm.jsp" />
+	</definition>
+	
+	<definition name="/board/commuSearch" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티 검색 게시목록" />
+		<put-attribute name="body" value="/WEB-INF/views/board/commuSearch.jsp" />
 	</definition>
 </tiles-definitions>

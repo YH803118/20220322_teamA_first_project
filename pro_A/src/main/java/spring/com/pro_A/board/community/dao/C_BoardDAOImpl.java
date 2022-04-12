@@ -84,6 +84,31 @@ public class C_BoardDAOImpl implements C_BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mapper.boardc.getReplys", commuNo);
 	}
+
+	@Override
+	public int modReply(ReplyDTO replyDTO) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("mapper.boardc.modReply", replyDTO);
+	}
+
+	@Override
+	public int delReply(int replyNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("mapper.boardc.delReply", replyNo);
+	}
+
+	@Override
+	public int addReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("mapper.boardc.addReplyCnt", commuNo);
+	}
+
+	@Override
+	public int delReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("mapper.boardc.delReplyCnt", commuNo);
+	}
+	
 	
 	
 	

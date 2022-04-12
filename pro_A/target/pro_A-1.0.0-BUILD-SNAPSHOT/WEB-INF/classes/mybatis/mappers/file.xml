@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.file">
+		<resultMap id="fileList" type="fileDTO">
+			<result property="noticeNo" column = "noticeNo"/>
+			<result property="noticeFileName" column = "noticeFileName"/>
+			<result property="regDate" column = "regDate"/>
+		</resultMap>
+		
+		<select id="selectFiles" parameterType="int" resultMap="fileList">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo }
+			]]>
+		</select>
+	
+		<select id="getFileInfo" parameterType="String" resultType="fileDTO">
+			<![CDATA[
+				select * from t_noticeFile where noticeFileName = #{noticeFileName}
+			]]>
+		</select>
+		
+		<select id="getFileList" parameterType="int" resultMap="fileList">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo}
+			]]>
+		</select>
+		
+		<select id="getFileInfo2" parameterType="java.util.Map" resultType="fileDTO">
+			<![CDATA[
+				select * from t_noticeFile where noticeNo = #{noticeNo} and originalFileName = #{originalFileName}
+			]]>
+		</select>
+		
+		<insert id="addNoticeFile" parameterType="fileDTO">
+			<![CDATA[
+				insert into t_noticeFile(noticeFileName, noticeNo, uuid, originalFileName) values (#{noticeFileName},#{noticeNo}, #{uuid},#{originalFileName})
+			]]>
+		</insert>
+		
+		<delete id="noticeFileDelAll" parameterType="int">
+			<![CDATA[
+				delete from t_noticeFile where noticeNo=#{noticeNo}
+			]]>
+		</delete>
+		
+		<delete id="noticeFileDel" parameterType="String">
+			<![CDATA[
+				delete from t_noticeFile where noticeFileName = #{noticeFileName}
+			]]>
+		</delete>
+	</mapper>

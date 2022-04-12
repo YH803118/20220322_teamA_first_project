@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.lecture">
+		<resultMap id="lecture" type="lectureDTO">
+			<result property="lectNo" column="lectNo" />
+			<result property="lectName" column="lectName" />
+			<result property="name" column="name" />
+			<result property="lectDay" column="lectDay" />
+			<result property="begin" column="begin" />
+			<result property="end" column="end" />
+		</resultMap>
+		
+		<resultMap id="apply" type="applyDTO">
+			<result property="lectInfo" column="lectInfo" />
+			<result property="id" column="id" />
+		</resultMap>
+		
+		
+	<insert id="openLecture" parameterType="lectureDTO">
+		<![CDATA[
+			insert into lecture values(#{lectNo},#{lectName},#{name},#{lectDay},#{begin},#{end})
+		]]>
+	</insert>
+	
+	<select id="selectList" resultMap="lecture">
+	<![CDATA[
+	select * from lecture
+	]]>
+	</select>
+	
+	<insert id="applyLect" parameterType="applyDTO">
+	<![CDATA[
+	insert into apply values(#{lectInfo},#{id})
+	]]>
+	</insert>
+	
+	<select id="selectNo" resultType="int">
+	<![CDATA[
+	select max(lectNo) from lecture
+	]]>
+	</select>
+	
+	<select id="subjectList" parameterType="String" resultType="applyDTO">
+	<![CDATA[
+		select * from apply where id = #{id}
+	]]>
+	</select>
+	<select id="professorSubject" parameterType="String" resultType="lectureDTO">
+	<![CDATA[
+		select * from lecture where name = #{name}
+	]]>
+	</select>
+	
+	<select id="applyList" resultMap="apply">
+	<![CDATA[
+	select * from apply
+	]]>
+	</select>
+	
+	</mapper>

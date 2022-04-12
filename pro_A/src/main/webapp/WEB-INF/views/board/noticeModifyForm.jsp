@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> ${detailDTO.noticeNo } 게시글 수정</h1>
+	<h1> ${detailDTO.noticeNo }번 게시글 수정</h1>
 	<form action="/pro_A/board/noticeModify.do"  name="modForm" onsubmit="return formCheck(this.name, 'notice')" method="post" enctype="multipart/form-data">
 		<table class="tblView_mod">
 			<tr>

@@ -44,10 +44,12 @@
 			</td>
 		</tr>
 	</table>
+	<c:if test="${isLogon == true && dto.memberType == 2  }">
 	<div class="btn_lst">
 		<a href="/pro_A/board/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&mod=true&pageNum=${pageNum }"><button class="dbtn">수정</button></a>
 		<a href="/pro_A/board/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button class="dbtn">삭제</button></a>
 		<a href="/pro_A/board/noticeList.do?pageNum=${pageNum }"><button class="dbtn">리스트</button></a>
 	</div>
+	</c:if>
 </body>
 </html>

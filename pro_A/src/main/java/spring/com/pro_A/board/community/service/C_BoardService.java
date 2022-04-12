@@ -30,6 +30,13 @@ public interface C_BoardService {
 
 	public List<ReplyDTO> getReplys(int commuNo);
 
+	public int modReply(ReplyDTO replyDTO);
+
+	public int delReply(int replyNo);
+
+	public int addReplyCnt(int commuNo);
+
+	public int delReplyCnt(int commNo);
 
 
 }
