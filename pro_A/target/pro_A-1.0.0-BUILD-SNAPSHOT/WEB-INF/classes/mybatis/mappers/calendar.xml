@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.calendar">
+		<resultMap id="calendarList" type="calendarDTO">
+			<result property="scheduleDate" column="scheduleDate" />
+			<result property="scheduleEnd" column="scheduleEnd" />
+			<result property="schedule" column="schedule" />
+			<result property="scheduleDetail" column="scheduleDetail" />
+		</resultMap>
+		
+	<select id="showSchedule" resultType="calendarDTO">
+		<![CDATA[
+			select * from t_calendar
+		]]>
+	</select>
+	
+	<insert id="addSchedule" parameterType="calendarDTO">
+		<![CDATA[
+			insert into t_calendar(scheduleDate, schedule) 
+				values(to_date(#{scheduleDate}, 'RR/MM/DD'),#{schedule})
+		]]>
+	</insert>
+	</mapper>

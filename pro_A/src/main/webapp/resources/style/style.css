@@ -1,0 +1,392 @@
+@charset "UTF-8";
+
+/* CSS */
+
+/* common */
+h1 {
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover, a:visited {
+	color: blue;
+}
+
+.data_info {
+	display: none;
+}
+
+/* noticeList */
+.tblList {
+	border-top: 1px solid;
+	border-collapse: collapse;
+	background-color: white;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	vertical-align: middle;
+	width: 740px;
+	font-size: 13px;
+	vertical-align: middle;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+}
+
+.tblList tr, .tblList td, .tblList th {
+	border-bottom: 1px solid black;
+	height: 25px;
+	padding: 0px;
+}
+
+.tblListLabel {
+	background-color: #282828;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	color: white;
+}
+
+/*noticedetailView, noticeModForm, noticeWriteForm*/
+.tblView, .tblView_mod {
+	width: 700px;
+	border-collapse: collapse;
+	background-color: white;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	border-collapse: collapse;
+}
+
+.tblView th, .tblView_mod th {
+	width: 100px;
+	padding: 0;
+}
+
+.tblView tr, .tblView_mod tr {
+	height: 30px;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+.tblViewlbl {
+	background-color: #282828;
+	color: white;
+	text-align: center;
+}
+
+.tblView textarea, .tblView_mod textarea {
+	border-style: none;
+	border: 0px;
+	padding: 10px;
+	resize: none;
+	width: 700px;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	height: auto;
+}
+
+.tblViewlbl2 {
+	text-align: left;
+	width: 300px;
+	padding-left: 15px;
+}
+
+.tblViewWrite {
+	align-content: center;
+	text-align: left;
+	width: 270px;
+	padding: 0;
+}
+
+.tblView_mod input[name=noticeTitle] {
+	height: 25px;
+	width: inherit;
+	border: none;
+	margin-left: 15px;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 16px;
+}
+
+.fileList {
+	clear: both;
+	list-style: none;
+	text-align: left;
+}
+
+.tblViewlblFile {
+	padding-top: 10px;
+}
+
+#d_file {
+	text-align: left;
+}
+/* searchBar */
+.searchBar {
+	margin-bottom: 5px;
+}
+
+.searchBar>form>input[type=text] {
+	height: 25px;
+	width: 300px;
+}
+
+/* navBar */
+.navBar, .navBar_c {
+	margin-top: 20px;
+	align-content: center;
+	width: auto;
+}
+
+.navBar ul, .navBar_c ul {
+	list-style: none;
+	display: table;
+	margin: 0 auto;
+}
+
+.navBar li, .navBar_c li {
+	float: left;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+}
+
+.navBar .pageActive{
+	background-color: white;
+	text-align: center;
+	border: 1px solid #282828;
+	display: block;
+	color: #282828;
+	width: 30px;
+	padding: 5px;
+	font-size: 13px
+}
+.navBar a {
+	background-color: #282828;
+	text-align: center;
+	border: 1px solid white;
+	display: block;
+	color: white;
+	width: 30px;
+	padding: 5px;
+	font-size: 13px
+}
+
+.navBar_c a {
+	background-color: #1e73be;
+	text-align: center;
+	border: 1px solid white;
+	display: block;
+	color: white;
+	width: 30px;
+	padding: 5px;
+	font-size: 13px
+}
+.navBar_c .pageActive{
+	background-color: white;
+	color:#1e73be;
+	border:1px solid #1e73be;
+}
+/* */
+.replyBox {
+	background-color: #282828;
+	margin: auto;
+	width: 702px;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	vertical-align: middle;
+}
+
+.replyWBox {
+	text-align: left;
+}
+
+.replyBox textarea {
+	resize: none;
+	border-radius: 5px;
+	vertical-align: middle;
+	width: 540px;
+	margin: 10px 0px 10px 10px;
+	padding: 10px;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	vertical-align: middle;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.replytbl {
+	background-color: #282828;
+	border-radius: 10px;
+	color: white;
+	text-align: left;
+	border: 1px solid;
+	width: 700px;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 14px;
+	padding: 5px 0 5px 15px;
+}
+
+.replytbl textarea {
+	resize: none;
+	border-radius: 5px;
+	vertical-align: middle;
+	width: 520px;
+	padding: 15px;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	vertical-align: middle;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+}
+/* button */
+/*noticeWriteForm , noticeDetail */
+.wbtn {
+	align-items: center;
+	background-color: #282828;
+	border-width: 0;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	color: #fff;
+	cursor: pointer;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	font-weight: bold;
+	justify-content: center;
+	margin: 0;
+	outline: none;
+	overflow: hidden;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 150ms;
+	vertical-align: middle;
+	width: 92.5%;
+}
+
+.btn_lst {
+	margin-top: 20px;
+}
+
+.cdtbtn_lst {
+	margin-bottom: 5px;
+}
+
+
+.dbtn {
+	align-items: center;
+	background-color: #282828;
+	border-width: 0;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	color: #fff;
+	cursor: pointer;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	font-weight: bold;
+	justify-content: center;
+	margin: 2px 4px 0 4px;
+	outline: none;
+	overflow: hidden;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 150ms;
+	vertical-align: middle;
+	padding: 3.5px 6px 3.5px 6px;
+}
+
+.wbtn:hover, .dbtn:hover, .rbtn_view:hover {
+	box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+	opacity: .85;
+}
+
+.rbtn:hover {
+	box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+	opacity: .55;
+}
+
+.wbtn:active, .dbtn:active, .rbtn:active, .rbtn_view:active {
+	outline: 0;
+}
+
+.wbtn:focus, .dbtn:active, .rbtn:active, .rbtn_view:active {
+	box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+}
+
+.rbtn, .cdtbtn_lst button {
+	align-items: center;
+	background-color: #282828;
+	border-width: 0;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	color: #fff;
+	cursor: pointer;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	font-weight: bold;
+	justify-content: center;
+	margin: 2px 4px 0 4px;
+	outline: none;
+	overflow: hidden;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 150ms;
+	vertical-align: middle;
+	padding: 3.5px 6px 3.5px 6px;
+}
+
+.rbtn_view {
+	align-items: center;
+	background-color: #282828;
+	border-width: 0;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
+	color: #fff;
+	cursor: pointer;
+	font-family: expo-brand-demi, system-ui, -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		"Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 15px;
+	font-weight: bold;
+	justify-content: center;
+	margin: 10px 0 10px 0;
+	outline: none;
+	overflow: hidden;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 150ms;
+	vertical-align: middle;
+	width: 702px;
+}
+
+.cdtbtn_lst button, .commu_bgcolor {
+	background-color: #1e73be;
+}
+
+@media ( max-width : 420px) {
+	.button-84 {
+		height: 48px;
+	}
+}

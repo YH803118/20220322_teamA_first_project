@@ -68,8 +68,6 @@ public class N_BoardServiceImpl implements N_BoardService {
 		return boardDAO.getFileInfo(noticeFileName);
 	}
 
-
-	
 	@Override
 	public List<FileDTO> getNoticeFileList(int noticeNo) {
 		// TODO Auto-generated method stub
@@ -78,7 +76,7 @@ public class N_BoardServiceImpl implements N_BoardService {
 
 	@Override
 	public int noticeFileDel(int noticeNo) {
-		// 
+		//
 		return boardDAO.noticeFileDel(noticeNo);
 	}
 
@@ -111,8 +109,23 @@ public class N_BoardServiceImpl implements N_BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.getSearchCountAll(cri);
 	}
-	
-	
-	
+
+	@Override
+	public FileDTO getFileInfo(Map info) {
+		// TODO Auto-generated method stub
+		return boardDAO.getFileInfo(info);
+	}
+
+	@Override
+	public void noticeFileDel(String noticeFileName) {
+		// TODO Auto-generated method stub
+		boardDAO.noticeFileDel(noticeFileName);
+	}
+
+	@Override
+	public int modNotice(Map<String, String> noticeMap) {
+		// TODO Auto-generated method stub
+		return boardDAO.modNotice(noticeMap);
+	}
 
 }

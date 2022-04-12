@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD TIles Configuration 2.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+<tiles-definitions>
+	
+	
+	<definition name="/test/subjectNotice.do" extends="baseLayout">
+		<put-attribute name="title" value="과목공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectNotice.jsp" />
+	</definition>
+	<definition name="/test/subjectHomework" extends="baseLayout">
+		<put-attribute name="title" value="과제" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomework.jsp" />
+	</definition>
+	<definition name="/test/subjectHomeworkAdd" extends="baseLayout">
+		<put-attribute name="title" value="과제등록" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomeworkAdd.jsp" />
+	</definition>
+</tiles-definitions>

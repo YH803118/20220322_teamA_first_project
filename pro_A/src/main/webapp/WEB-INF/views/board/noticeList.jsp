@@ -6,60 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/style/style.css">
 <title>Insert title here</title>
-<style>
-
-	.tblBox{
-		margin-top: 50px;
-		margin-bottom: 50px;
-	}
-	
-	.tblList {
-		border-top: 1px solid;
-		border-collapse: collapse;
-		margin: 30px;
-		width: 740px;
-		vertical-align: middle;
-	}
-	
-	.tblList > tr, td, th {
-		border-bottom : 1px solid black;
-		padding: 0px;
-	} 
-	
-	.tblListLabel{
-		background-color: #F08080;
-		color : white;
-	}
-	
-	.navBar {
-		align-content: center;
-		border: 1px solid;
-		width: 740px;
-	}
-	
-	ul {
-		list-style: none;
-		display: table;
-		margin: 0 auto;
-	}
-	
-	ul > li {
-		float: left;
-	}
-	
-</style>
 </head>
 <body>
-	<h1> 공지게시판 구현.jsp</h1>
-	<div style="float:right; margin:0 30px;">
-		<a href="/pro_A/board/noticeWriteForm.do"><button>글쓰기</button></a></div>
+	<h1> 공지사항 게시판 </h1>
+		<c:if test="${isLogOn == true && dto.memberType == 2 }">
+		<a href="/pro_A/board/noticeWriteForm.do">
+			<button class="wbtn">게시글 작성</button>
+		</a>
+		</c:if>
 	<div class="tblBox">
-		
 		<table class="tblList">
 			<tr class="tblListLabel">
 				<th width="40px">번호</th>
-				<th>제목</th>
+				<th>제 목</th>
 				<th width="80px">작성자</th>
 				<th width="100px">작성일</th>
 				<th width="50px">조회수</th>
@@ -121,13 +82,13 @@
 		<div class="navBar">
 			<ul>
 				<c:if test="${pageDTO.prev }">
-					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.startPage-1 }">이전</a></li>
+					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.startPage-1 }">&lt;</a></li>
 				</c:if>
 				<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
-					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
+					<li><a class="${pageDTO.curPage == pageNum ? 'pageActive' : ''  }"  href="/pro_A/board/noticeList.do?pageNum=${pageNum}">${pageNum }</a></li>
 				</c:forEach>
 				<c:if test="${pageDTO.next }">
-					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.endPage+1 }">다음</a></li>
+					<li><a href="/pro_A/board/noticeList.do?pageNum=${pageDTO.endPage+1 }">&gt;</a></li>
 				</c:if>
 			</ul>
 		</div>	

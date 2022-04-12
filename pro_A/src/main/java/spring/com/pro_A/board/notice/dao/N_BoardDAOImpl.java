@@ -81,7 +81,7 @@ public class N_BoardDAOImpl implements N_BoardDAO {
 	@Override
 	public int noticeFileDel(int noticeNo) {
 		// TODO Auto-generated method stub
-		return sqlsession.delete("mapper.file.noticeFileDel", noticeNo);
+		return sqlsession.delete("mapper.file.noticeFileDelAll", noticeNo);
 	}
 
 	@Override
@@ -113,6 +113,24 @@ public class N_BoardDAOImpl implements N_BoardDAO {
 	public int getSearchCountAll(Criteria cri) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne("mapper.boardn.selectSearchCount", cri);
+	}
+
+	@Override
+	public FileDTO getFileInfo(Map info) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.file.getFileInfo2", info);
+	}
+
+	@Override
+	public void noticeFileDel(String noticeFileName) {
+		// TODO Auto-generated method stub
+		sqlsession.delete("mapper.file.noticeFileDel", noticeFileName);
+	}
+
+	@Override
+	public int modNotice(Map<String, String> noticeMap) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("mapper.boardn.modNotice",noticeMap);
 	}
 	
 	

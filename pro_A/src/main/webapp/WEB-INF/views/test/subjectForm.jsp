@@ -60,7 +60,10 @@
 	<tr><th>
 		<a href="#">${lectName }</a>
 	</th></tr>
+
 	<tr><td><a href="/pro_A/test/subjectNotice.do?lectNo=${lectNo }&type=${dto.memberType}">공지사항</a></td></tr>
+
+	<tr><td><a href="/pro_A/test/subjectNotice.do?subjectNo=${lectNo }&type=${dto.memberType}">공지사항</a></td></tr>
 	<tr><td><a href="/pro_A/test/subjectHomework.do?subjectNo=${lectNo }&type=${dto.memberType}">과제</a></td></tr>
 	</table>
 </div>

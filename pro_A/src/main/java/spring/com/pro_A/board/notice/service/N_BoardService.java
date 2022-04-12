@@ -38,5 +38,11 @@ public interface N_BoardService {
 	public List<NoticeDTO> searchNoticeList(Criteria cri);
 
 	public int getSearchCountAll(Criteria cri);
+
+	public FileDTO getFileInfo(Map info);
+
+	public void noticeFileDel(String noticeFileName);
+
+	public int modNotice(Map<String, String> noticeMap);
 	
 }

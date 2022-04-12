@@ -260,7 +260,6 @@ String schedule = request.getParameter("schedule");
 		</tr>
 		</c:forEach>
 	</table>
-	
 	</div>
 </body>
 </html>

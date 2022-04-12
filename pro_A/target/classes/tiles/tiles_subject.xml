@@ -3,9 +3,7 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 	
 <tiles-definitions>
-	
-	
-	<definition name="/test/subjectNotice.do" extends="baseLayout">
+	<definition name="/test/subjectNotice" extends="baseLayout">
 		<put-attribute name="title" value="과목공지사항" />
 		<put-attribute name="body" value="/WEB-INF/views/test/subjectNotice.jsp" />
 	</definition>
@@ -13,6 +11,7 @@
 		<put-attribute name="title" value="과제" />
 		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomework.jsp" />
 	</definition>
+
 	<definition name="/test/subjectNotice" extends="baseLayout">
 		<put-attribute name="title" value="과제" />
 		<put-attribute name="body" value="/WEB-INF/views/test/subjectNotice.jsp" />
@@ -23,4 +22,13 @@
 		<put-attribute name="body" value="/WEB-INF/views/test/noticeWriteForm.jsp" />
 	</definition>
 
+
+	<definition name="/test/subjectHomeworkAdd" extends="baseLayout">
+		<put-attribute name="title" value="과제등록" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomeworkAdd.jsp" />
+	</definition>
+	<definition name="/test/subjectHomeworkView" extends="baseLayout">
+		<put-attribute name="title" value="과제" />
+		<put-attribute name="body" value="/WEB-INF/views/test/subjectHomeworkView.jsp" />
+	</definition>
 </tiles-definitions>
