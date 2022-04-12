@@ -44,9 +44,68 @@
 			]]>
 		</select>
 		
-		<select id="addHomeworkFile" parameterType="h_fileDTO">
+		<insert id="addHomeworkFile" parameterType="h_fileDTO">
 			<![CDATA[
 				insert into homeworkFile(homeworkFileName, homeworkNo, uuid, originalFileName) values (#{homeworkFileName},#{homeworkNo}, #{uuid},#{originalFileName})
+			]]>
+		</insert>
+		
+		<insert id="addSubmitFile" parameterType="h_fileDTO">
+			<![CDATA[
+				insert into submitFile(id, submitFileName, homeworkNo, uuid, originalFileName) values (#{id},#{submitFileName},#{homeworkNo}, #{uuid},#{originalFileName})
+			]]>
+		</insert>
+		
+		<select id="homeworkDetailView" parameterType="int" resultType="homeworkDTO">
+			<![CDATA[
+				select * from subjectHomework where homeworkNo=#{homeworkNo}
+			]]>
+		</select>
+		
+		<select id="homeworkFiles" parameterType="int" resultType="h_fileDTO">
+			<![CDATA[
+				select * from homeworkFile where homeworkNo=#{homeworkNo}
+			]]>
+		</select>
+		<select id="submitFiles" parameterType="int" resultType="submitFileDTO">
+			<![CDATA[
+				select * from submitFile where homeworkNo=#{homeworkNo}
+			]]>
+		</select>
+		<select id="lectInfo" parameterType="int" resultType="lectureDTO">
+			<![CDATA[
+				select * from lecture where 
+				lectNo=(select lectNo from subjectHomework where homeworkNo=#{homeworkNo})
+			]]>
+		</select>
+		
+		<select id="studentList" parameterType="String" resultType="applyDTO">
+			<![CDATA[
+				select * from apply where lectInfo=#{lectSpl}
+			 ]]>
+		</select>
+		
+		<select id="nameList" parameterType="String" resultType="memberDTO">
+			<![CDATA[
+				select * from t_member where id=#{id}
+			]]>
+		</select>
+		
+		<insert id="homeworkSubmit" parameterType="submitInfo">
+			<![CDATA[
+				insert into submitInfo(id,content,homeworkNo) values(#{id}, #{content}, #{homeworkNo})
+			]]>
+		</insert>
+		
+	<!-- 	<insert id="listUp" parameterType="submitList">
+			<![CDATA[
+				insert into subitList values(#{homeworkNo}, #{submit}, #{id});
+			]]>
+		</insert> -->
+		
+		<select id="submitList" parameterType="int" resultType="submitInfo">
+			<![CDATA[
+				select * from submitInfo where homeworkNo=#{homeworkNo}
 			]]>
 		</select>
 	</mapper>

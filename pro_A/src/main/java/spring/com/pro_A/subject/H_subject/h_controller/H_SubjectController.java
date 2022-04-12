@@ -12,4 +12,14 @@ public interface H_SubjectController {
 	public ModelAndView homeworkAddForm(@RequestParam(value="lectNo", required=false) String lectNo, HttpServletRequest request, HttpServletResponse response)throws Exception;
 	public void homeworkAdd(MultipartHttpServletRequest multipartReq,@RequestParam(value="lectNo", required=false) String lectNo, HttpServletResponse response)
 			throws Exception;
+	public void homeworkDownload(@RequestParam("homeworkFileName") String homeworkFileName, HttpServletResponse response)
+			throws Exception;
+	public ModelAndView noticeDetailView(@RequestParam(value = "homeworkNo", required = false) int homeworkNo,
+			@RequestParam(value="lectNo", required=false) String lectNo,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public void homeworkSubmit(MultipartHttpServletRequest multipartReq, 
+			@RequestParam(value="lectNo", required=false) String lectNo, 
+			@RequestParam(value="homeworkNo", required=false) int homeworkNo,
+			@RequestParam(value="id", required=false) String id,
+			HttpServletResponse response) throws Exception;
 }

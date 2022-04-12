@@ -13,5 +13,8 @@
 		<typeAlias type="spring.com.pro_A.apply.dto.ApplyDTO" alias="applyDTO"/>
 		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.SubjectHomeworkDTO" alias="homeworkDTO"/>
 		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.H_FileDTO" alias="h_fileDTO"/>
+		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.SubmitFileDTO" alias="submitFileDTO"/>
+		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.SubmitInfo" alias="submitInfo"/>
+		<typeAlias type="spring.com.pro_A.subject.H_subject.h_dto.SubmitList" alias="submitList"/>
 	</typeAliases>
 </configuration>

@@ -35,16 +35,19 @@
 	<div id="subjectHomework">
 		<table>
 			<tr>
-				<td width="80%" align="left">과제</td>
 				<td>
 					<c:if test="${dto.memberType eq 1}">
-						<a href="/pro_A/test/subjectHomeworkAdd.do?subjectNo=${lectNo }"><button>과제등록</button></a>
+						<a href="/pro_A/test/subjectHomeworkAdd.do?lectNo=${lectNo }"><button>과제등록</button></a>
 					</c:if>
 				</td>
 			</tr>
+			<tr>
+				<td width="80%" align="left">과제</td>
+				<td>제출기한</td>
+			</tr>
 			<c:forEach var="homework" items="${homeworkList }">
 			<tr>
-				<td  align="left">${homework.title }	</td>
+				<td  align="left"><a href="/pro_A/test/subjectHomeworkView.do?lectNo=${lectNo }&homeworkNo=${homework.homeworkNo}">${homework.title }</a>	</td>
 				<td>${fn:split(homework.endDate, ' ')[0] } </td>		
 			</tr>
 			</c:forEach>

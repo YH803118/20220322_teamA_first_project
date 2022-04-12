@@ -11,14 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	var cnt=1;
-	function fn_addFile(){
-		$("#d_file").append("<br><input type='file' name='file"+cnt+"' />");
-		cnt++;
-	}
-	
-</script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../resources/js/board.js"></script>
 <style>
 	#subjectMenu{
 		margin:30px;
@@ -62,18 +56,16 @@
 				<td colspan="2">기간 : <input type="date" name="endDate"></td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<th style="padding-top:10px; width:30%;" class="tblViewlbl">첨부파일<br>
+					<button style="margin:10px 0 10px 0;" type="button" onclick="w_addFile()">파일추가</button>
+				</th>
 				<td id="d_file"></td>
 			</tr>
-			<tr>
-				<td><input type="button" value="파일추가" onClick="fn_addFile()"/></td>
-				<td>
-				<input type="hidden" name="lectNo" value="${lectNo}">
+		</table>
+		<input type="hidden" name="lectNo" value="${lectNo}">
 				<input type="hidden" name="subjectNo" value="${lectNo}">
 				<input type="hidden" name="type" value="${dto.memberType}">
-				<input type="submit" value="전송"></td>
-			</tr>
-		</table>
+				<input type="submit" value="전송">
 		</form>
 	</div>	
 </div>
