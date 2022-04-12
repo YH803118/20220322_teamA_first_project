@@ -6,6 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%@ page import="java.util.Calendar"%>
 
+
 <%
 Calendar cal = Calendar.getInstance();
 String strYear = request.getParameter("year");
@@ -138,7 +139,7 @@ String schedule = request.getParameter("schedule");
 							<input	type="button" value="강좌개설"></a><br>
 							<table>
 							<c:forEach var="proSubject" items="${professorSubject }">
-								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${proSubject.lectNo }">${proSubject.lectName }</a></td></tr>
+								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${proSubject.lectNo }&name=${proSubject.name}">${proSubject.lectName }</a></td></tr>
 							</c:forEach>
 							</table>
 						</c:when>
@@ -148,7 +149,7 @@ String schedule = request.getParameter("schedule");
 							<table>
 							<c:set var="i" value="0" />
 							<c:forEach var="subject" items="${subjectList }">
-								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${subjectNo.get(i) }">${subject.lectInfo }</a></td></tr>
+								<tr><td><a href="/pro_A/test/subjectForm.do?subjectNo=${subjectNo.get(i) }&name=${dto.name}">${subject.lectInfo }</a></td></tr>
 								<c:set var="i" value="${i+1 }" />
 							</c:forEach>
 							</table>

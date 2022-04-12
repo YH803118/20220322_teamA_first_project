@@ -12,6 +12,19 @@
 			<result property="end" column="end" />
 		</resultMap>
 		
+		<resultMap id="noticeAllResult" type="subjectNoticeDTO">
+			<result property="noticeNo" column = "noticeNo"/>
+			<result property="noticeWriter" column = "noticeWriter"/>
+			<result property="noticeTitle" column = "noticeTitle"/>
+			<result property="noticeContent" column = "noticeContent"/>
+			<result property="noticeRegDate" column = "noticeRegDate"/>
+			<result property="noticeLevel" column = "noticeLevel"/>
+			<result property="noticeHit" column = "noticeHit"/>
+			<result property="lectNo" column = "lectNo"/>
+		</resultMap>
+		
+		
+		
 		<resultMap id="apply" type="applyDTO">
 			<result property="lectInfo" column="lectInfo" />
 			<result property="id" column="id" />
@@ -22,4 +35,67 @@
 				select lectName from lecture where lectNo=#{lectNo}
 			]]>
 		</select>
+		
+		<select id="selectNoticeListTop" resultMap="noticeAllResult">
+		 <![CDATA[
+		 	select noticeNo, noticeTitle, noticeWriter, noticeRegDate
+		 	 from 
+		 		(
+		 		 select rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate 
+		 		 from t_subjectNotice where noticeLevel=1 and rownum <=5
+		 		) order by noticeRegDate desc
+		 ]]>
+		</select>
+		
+		<select id="getNoticeCountAll" resultType="int">
+			<![CDATA[
+				select count(*) from t_noticeBoard
+			]]>
+		</select>
+		
+		<select id="selectNoticeListAll" parameterType="spring.com.pro_A.common.dto.Criteria"  resultMap="noticeAllResult">
+			<![CDATA[
+				select noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
+				  from (
+				  select  /*+INDEX_DESC(t_subjectNotice PK_NOTICE) */
+				    rownum rn, noticeNo, noticeTitle, noticeWriter, noticeRegDate, noticeHit
+				from t_subjectNotice where rownum <=#{pageNum} * #{amount}
+				) where rn > (#{pageNum}-1) * #{amount}
+			]]>
+		</select>
+		
+		<select id="selectNoticeDetail" parameterType="int"  resultType="subjectNoticeDTO">
+			<![CDATA[
+				select * from t_subjectNotice where noticeNo = #{noticeNo}				
+			]]>
+		</select>
+		
+		<select id="getLastNoticeNo" resultType="int">
+			<![CDATA[
+				select max(noticeNo) from t_subjectNotice
+			]]>
+		</select>
+		
+		<update id="noticeAddHit" parameterType="int" >
+			<![CDATA[
+				update t_subjectNotice set noticeHit = noticeHit+1 where noticeNo=#{noticeNo}
+			]]>
+		</update>
+		
+		<insert id="addNotice" parameterType="java.util.Map">
+			<![CDATA[
+				insert into t_subjectNotice(noticeNo, noticeWriter, noticeTitle, noticeContent, noticeLevel,lectNo)
+				 values(seq_notice.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent}, #{noticeLevel},#{lectNo})
+			]]>
+		</insert>
+		
+		<delete id="noticeDel" parameterType="int">
+			<![CDATA[
+				delete from t_subjectNotice where noticeNo=#{noticeNo}
+			]]>
+		</delete>
+		
+		
+		
+		
 	</mapper>

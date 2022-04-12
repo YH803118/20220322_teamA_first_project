@@ -71,7 +71,12 @@ public class LectureControllerImpl implements LectureController{
 			}
 		}
 		
+		
+
+
+
 		int[] delList = new int[num];
+
 		int j=0;
 		for(LectureDTO dto : lectList)
 		{
@@ -88,6 +93,7 @@ public class LectureControllerImpl implements LectureController{
 			System.out.println(i);
 			lectList.remove(i-(j++));
 		}
+
 		mav.addObject("lectList",lectList);
 		
 		return mav;
