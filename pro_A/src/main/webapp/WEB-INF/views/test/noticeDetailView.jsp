@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-	<h1> 상세페이지 내용 </h1>
+	<h3> 상세페이지 내용 </h3>
 	<table class="tblView">
 		<tr>
 			<th>제목</th>
@@ -38,14 +38,14 @@
 			</td>
 		</tr>
 	</table>
+	
+	<div style="margin-top: 10px;">
 	<c:choose>
 	<c:when test="${dto.memberType==1 }">
-	<div style="margin-top: 10px;">
-		<a href="/pro_A/test/noticeDetail.do?noticeNo=${detailDTO.noticeNo }&mod=true&pageNum=${pageNum }"><button>수정</button></a>
 		<a href="/pro_A/test/noticeDelete.do?noticeNo=${detailDTO.noticeNo }"><button>삭제</button></a>
-		<a href="/pro_A/test/noticeList.do?pageNum=${pageNum }"><button>리스트</button></a>
-	</div>
 	</c:when>
 	</c:choose>
+		<a href="/pro_A/test/subjectNotice.do?pageNum=${pageNum }&lectNo=${lectNo}"><button>리스트</button></a>
+	</div>
 </body>
 </html>

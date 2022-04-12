@@ -65,7 +65,7 @@
 </style>
 </head>
 <body>
-<h1>공지사항 </h1>
+<h3>공지사항 </h3>
 	<c:choose>
 	<c:when test="${dto.memberType==1 }">
 	<div style="float:right; margin:0 30px;">
@@ -108,7 +108,7 @@
 						<tr>
 							<td>${notice.noticeNo }</td>
 							<td>
-								<a href="/pro_A/test/noticeDetail.do?noticeNo=${notice.noticeNo }&pageNum=${pageDTO.curPage}">
+								<a href="/pro_A/test/noticeDetail.do?noticeNo=${notice.noticeNo }&pageNum=${pageDTO.curPage}&lectNo=${lectNo}">
 								${notice.noticeTitle }</a>
 							</td>
 							<td>${notice.noticeWriter }</td>

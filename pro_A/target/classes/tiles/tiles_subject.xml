@@ -21,6 +21,11 @@
 		<put-attribute name="title" value="글쓰기" />
 		<put-attribute name="body" value="/WEB-INF/views/test/noticeWriteForm.jsp" />
 	</definition>
+	
+	<definition name="/test/noticeDetailView" extends="baseLayout">
+		<put-attribute name="title" value="글확인" />
+		<put-attribute name="body" value="/WEB-INF/views/test/noticeDetailView.jsp" />
+	</definition>
 
 
 	<definition name="/test/subjectHomeworkAdd" extends="baseLayout">
