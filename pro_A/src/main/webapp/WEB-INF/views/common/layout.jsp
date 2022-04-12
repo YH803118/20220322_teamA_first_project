@@ -21,14 +21,15 @@
 
 	#header {
 		height: 160px;
-		background-color: lightgreen;
+		background-color: white;
 		
 	}	
 	#content{
-		min-height : 700px;
+		min-height : 900px;
 	}
 	#footer {
 		clear:both;
+		height: 140px;
 		background-color: #bcbcbc
 	}
 </style>
