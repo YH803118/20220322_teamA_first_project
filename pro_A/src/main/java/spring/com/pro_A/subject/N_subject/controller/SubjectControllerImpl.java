@@ -146,7 +146,7 @@ public class SubjectControllerImpl implements SubjectController{
 		
 		session.setAttribute("lectNo", lectNo);
 
-		response.sendRedirect("/pro_A/test/subjectNotice.do");
+		response.sendRedirect("/pro_A/test/subjectNotice.do?lectNo="+lectNo);
 	}
 	
 	@RequestMapping(value="/test/noticeDelete.do", method=RequestMethod.GET)

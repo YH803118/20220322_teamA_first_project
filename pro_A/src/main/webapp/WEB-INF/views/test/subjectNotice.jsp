@@ -122,7 +122,7 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td colspan="5">데이터가 없음</td>
+						<td colspan="5">데이터가 없음22</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
