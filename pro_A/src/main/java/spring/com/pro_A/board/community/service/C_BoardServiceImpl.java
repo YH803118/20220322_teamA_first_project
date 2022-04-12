@@ -91,5 +91,19 @@ public class C_BoardServiceImpl implements C_BoardService {
 		return cBoardDAO.delReply(replyNo);
 	}
 
+	@Override
+	public int addReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.addReplyCnt(commuNo);
+	}
+
+	@Override
+	public int delReplyCnt(int commuNo) {
+		// TODO Auto-generated method stub
+		return cBoardDAO.delReplyCnt(commuNo);
+	}
+
+	
+	
 	
 }

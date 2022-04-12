@@ -1,0 +1,38 @@
+// 회원 가입 테이블   
+//memberType , 0 학생 , 1 교수, 2 관리자
+create table t_member(
+    id varchar2(20) primary key,
+    pwd varchar2(40),
+    name varchar2(10),
+    email varchar2(100),
+    joinDate date default sysdate,
+    memberType number 
+);
+
+// 캘린더 테이블
+create table t_calendar(
+    scheduleDate date,
+    scheduleEnd date,
+    schedule varchar2(30),
+    scheduleDetail varchar2(100)
+);
+
+// 강의 테이블
+create table lecture(
+lectNo number primary key,
+lectName varchar2(50),
+name varchar2(20),
+lectDay varchar2(20),
+begin number,
+end number
+);
+
+// ??
+create table apply(
+lectInfo varchar2(100),
+id varchar2(20),
+CONSTRAINT appl primary key(lectInfo,id)
+);
+
+
+

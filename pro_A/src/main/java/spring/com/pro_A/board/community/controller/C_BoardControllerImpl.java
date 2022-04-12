@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +35,10 @@ public class C_BoardControllerImpl implements C_BoardController {
 
 	@RequestMapping(value = "/board/commuList.do", method = RequestMethod.GET)
 	public ModelAndView commuList(@RequestParam(value = "pageNum", required = false) String pageNum,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		System.out.println(session.getId());
+		System.out.println(session.getAttribute("dto"));
+		System.out.println(session.getMaxInactiveInterval());
 		ModelAndView mav = new ModelAndView((String) request.getAttribute("viewName"));
 		int total = cBoardService.getCommuTotCnt();
 		Criteria cri = new Criteria();
@@ -62,6 +66,7 @@ public class C_BoardControllerImpl implements C_BoardController {
 	@RequestMapping(value = "/board/commuNew.do", method = RequestMethod.POST)
 	public void commuNew(CommDTO commDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		int result = cBoardService.addCommu(commDTO);
 		response.sendRedirect("commuList.do");
 	}
 
@@ -136,6 +141,9 @@ public class C_BoardControllerImpl implements C_BoardController {
 			@RequestParam(value = "pageNum", required = false) int pageNum, HttpServletResponse response)
 			throws Exception {
 		int result = cBoardService.addReply(replyDTO);
+		if(result > 0 ) {
+			int resultcommu = cBoardService.addReplyCnt(replyDTO.getCommuNo());
+		}
 		String url = "/pro_A/board/commuDetail.do?commuNo=";
 		url += replyDTO.getCommuNo() + "&pageNum=" + pageNum;
 		response.sendRedirect(url);
@@ -151,10 +159,14 @@ public class C_BoardControllerImpl implements C_BoardController {
 	public void replyDel(@RequestParam Map<String, String> info, HttpServletResponse response)
 			throws Exception {
 		int replyNo = Integer.parseInt(info.get("replyNo"));
+		int commNo = Integer.parseInt(info.get("commuNo"));
 		int result = cBoardService.delReply(replyNo);
+		if(result > 0 ) {
+			int resultcommu= cBoardService.delReplyCnt(commNo);
+		}
 		String url = "/pro_A/board/commuDetail.do?commuNo=";
-		url += info.get("commuNo") + "&pageNum=" + info.get("pageNum");
+		url += commNo + "&pageNum=" + info.get("pageNum");
 		response.sendRedirect(url);
-	}	
-
+	
+	}
 }

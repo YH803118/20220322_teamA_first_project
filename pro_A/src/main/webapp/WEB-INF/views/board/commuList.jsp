@@ -11,7 +11,9 @@
 </head>
 <body>
 	<h1> 커뮤니티 게시판</h1>
+	<c:if test="${isLogon == true }">
 	<a href="/pro_A/board/commuWriteForm.do"><button class="wbtn commu_bgcolor">글쓰기</button></a>
+	</c:if>
 	<div class="tblBox">
 		<table class="tblList">
 			<tr class="tblListLabel commu_bgcolor">
@@ -67,7 +69,7 @@
 					<li><a href="/pro_A/board/commuList.do?pageNum=${pageDTO.startPage-1 }">이전</a></li>
 				</c:if>
 				<c:forEach var="pageNum" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
-					<li><a href="/pro_A/board/commuList.do?pageNum=${pageNum}">${pageNum }</a></li>
+					<li><a class="${pageDTO.curPage == pageNum ? 'pageActive' : '' }" href="/pro_A/board/commuList.do?pageNum=${pageNum}">${pageNum }</a></li>
 				</c:forEach>
 				<c:if test="${pageDTO.next }">
 					<li><a href="/pro_A/board/commuList.do?pageNum=${pageDTO.endPage+1 }">다음</a></li>

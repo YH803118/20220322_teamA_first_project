@@ -48,7 +48,7 @@ a{top:30px;}
 </style>
 </head>
 <body>
-
+	<a href="/pro_A/test/loginForm.do"> 홈으로</a>
 	<div id="menu">
 	<ul>
 		<li><a href="/pro_A/board/noticeList.do">공지사항</a></li>

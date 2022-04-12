@@ -160,6 +160,16 @@ a:hover, a:visited {
 	box-shadow: 0 10px 20px rgb(0 0 0/ 10%), 0 3px 6px rgb(0 0 0/ 5%);
 }
 
+.navBar .pageActive{
+	background-color: white;
+	text-align: center;
+	border: 1px solid #282828;
+	display: block;
+	color: #282828;
+	width: 30px;
+	padding: 5px;
+	font-size: 13px
+}
 .navBar a {
 	background-color: #282828;
 	text-align: center;
@@ -180,6 +190,11 @@ a:hover, a:visited {
 	width: 30px;
 	padding: 5px;
 	font-size: 13px
+}
+.navBar_c .pageActive{
+	background-color: white;
+	color:#1e73be;
+	border:1px solid #1e73be;
 }
 /* */
 .replyBox {

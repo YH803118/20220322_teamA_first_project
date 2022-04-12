@@ -17,7 +17,7 @@
 			<tr>
 				<th class="tblViewlbl">작성자</th>
 				<td class="tblViewlbl2"> 관리자
-					<input type="hidden" name="noticeWriter" value="임시로">
+					<input type="hidden" name="noticeWriter" value="${dto.name }">
 				</td>
 				<th class="tblViewlbl">작성일</th>
 				<td id="regDate" width="120px"></td>

@@ -39,12 +39,14 @@ public class MemberControllerImpl implements MemberController{
 		ModelAndView mav = new ModelAndView();
 		
 		memberDTO = memberService.login(dto);
+		HttpSession session = request.getSession();
 		if(memberDTO != null) {
 			if(memberDTO.getMemberType() == 2) {
 				System.out.println("관리자로그인");
+				session.setAttribute("isLogon", true);
+				session.setAttribute("dto", memberDTO);
 				mav.setViewName("redirect:/test/managerForm.do");
 			} else {
-				HttpSession session = request.getSession();
 				session.setAttribute("isLogon", true);
 				session.setAttribute("dto", memberDTO);
 				System.out.println("로그인성공");
@@ -73,7 +75,7 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 	@Override
-	@RequestMapping(value="/test/*Form.do")
+	@RequestMapping(value={"/", "/test/*Form.do"})
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);

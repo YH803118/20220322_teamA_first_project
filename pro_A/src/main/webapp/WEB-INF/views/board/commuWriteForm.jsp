@@ -15,9 +15,10 @@
 	<form action="/pro_A/board/commuNew.do"  name="commuWriteForm" onsubmit="return formCheck(this.name,'commu')" method="post" enctype="multipart/form-data">
 		<table class="tblView">
 			<tr>
-				<td class="tblViewlbl commu_bgcolor">작성자</td>
+				<th class="tblViewlbl commu_bgcolor">작성자</th>
 				<td class="tblViewlbl2">
-					<input type="hidden" name="commuWriter" value="세션로그인아이디">세션로그인아이디로
+					<input type="hidden" name="commuWriter" value="${dto.name }">${dto.name }
+					<input type="hidden" name="commuId" value="${dto.id }">
 				</td>
 				<th class="tblViewlbl commu_bgcolor" >작성일</th>
 				<td id="regDate" width="120px"></td>

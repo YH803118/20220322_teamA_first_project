@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class CommDTO {
 
 	private int commuNo;
+	private String commuId;
 	private String commuWriter;
 	private String commuTitle;
 	private String commuContent;
@@ -69,6 +70,14 @@ public class CommDTO {
 
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
+	}
+
+	public String getCommuId() {
+		return commuId;
+	}
+
+	public void setCommuId(String commuId) {
+		this.commuId = commuId;
 	}
 
 }

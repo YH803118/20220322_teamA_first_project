@@ -34,5 +34,9 @@ public interface C_BoardService {
 
 	public int delReply(int replyNo);
 
+	public int addReplyCnt(int commuNo);
+
+	public int delReplyCnt(int commNo);
+
 
 }

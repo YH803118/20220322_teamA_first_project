@@ -11,7 +11,7 @@
 	</definition>
 	<definition name="main" extends="baseLayout">
 		<put-attribute name="title" value="로그인" />
-		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/test/loginForm.jsp" />
 	</definition>
 			
 	<definition name="/test/*" extends="baseLayout">

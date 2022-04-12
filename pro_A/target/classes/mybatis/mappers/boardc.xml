@@ -5,6 +5,7 @@
 <mapper namespace="mapper.boardc">
 	<resultMap type="commDTO" id="commuLists">
 		<result property="commuNo" column="commuNo" />
+		<result property="commuId" column="commuId" />
 		<result property="commuWriter" column="commuWriter" />
 		<result property="commuTitle" column="commuTitle" />
 		<result property="commuContent" column="commuContent" />
@@ -16,6 +17,7 @@
 	<resultMap type="replyDTO" id="replys">
 		<result property="commuNo" column="commuNo" />
 		<result property="replyNo" column="replyNo" />
+		<result property="replyId" column="replyId" />
 		<result property="replyWriter" column="replyWriter" />
 		<result property="replyContent" column="replyContent" />
 		<result property="replyRegDate" column="replyRegDate" />
@@ -95,16 +97,16 @@
 	<insert id="addCommu"
 		parameterType="spring.com.pro_A.board.community.dto.CommDTO">
 			<![CDATA[
-				insert into t_commuBoard(commuNo, commuWriter, commuTitle, commuContent) 
-					values (seq_commu.nextval, #{commuWriter}, #{commuTitle}, #{commuContent})
+				insert into t_commuBoard(commuNo, commuId, commuWriter, commuTitle, commuContent) 
+					values (seq_commu.nextval, #{commuId}, #{commuWriter}, #{commuTitle}, #{commuContent})
 			]]>
 	</insert>
 
 	<insert id="addReply"
 		parameterType="spring.com.pro_A.board.community.dto.ReplyDTO">
 			<![CDATA[
-				insert into t_commuReply(replyNo, commuNo, replyWriter, replyContent)
-					values (seq_reply.nextval, #{commuNo}, #{replyWriter}, #{replyContent})
+				insert into t_commuReply(replyNo, replyId, commuNo, replyWriter, replyContent)
+					values (seq_reply.nextval, #{replyId}, #{commuNo}, #{replyWriter}, #{replyContent})
 			]]>
 	</insert>
 
@@ -128,16 +130,29 @@
 		]]>
 	</update>
 
+	<update id="addReplyCnt" parameterType="int">
+		<![CDATA[
+			update t_commuBoard set replyCnt = replyCnt+1 where commuNo=#{commuNo}
+		]]>
+	</update>
+
+	<update id="delReplyCnt" parameterType="int">
+		<![CDATA[
+			update t_commuBoard set replyCnt = replyCnt-1 where commuNo=#{commuNo}
+		]]>
+	</update>
+
 	<delete id="delCommu" parameterType="int">
 		<![CDATA[
 		delete from t_commuBoard where commuNo = #{commuNo} 
 		]]>
 	</delete>
 
-	<delete id="delReply"
-		parameterType="int">
+	<delete id="delReply" parameterType="int">
 		<![CDATA[
 		delete from t_commuReply where replyNo = #{replyNo}
 		]]>
 	</delete>
+
+
 </mapper>

@@ -9,6 +9,7 @@ public class ReplyDTO {
 
 	private int replyNo;
 	private int commuNo;
+	private String replyId;
 	private String replyWriter;
 	private String replyContent;
 	private Date replyRegDate;
@@ -51,6 +52,14 @@ public class ReplyDTO {
 
 	public void setReplyRegDate(Date replyRegDate) {
 		this.replyRegDate = replyRegDate;
+	}
+
+	public String getReplyId() {
+		return replyId;
+	}
+
+	public void setReplyId(String replyId) {
+		this.replyId = replyId;
 	}
 
 }

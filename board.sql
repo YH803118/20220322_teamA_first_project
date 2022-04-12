@@ -30,16 +30,22 @@ create table t_noticeFile(
 
 // 커뮤니티 게시판
 create table t_commuBoard(
-    commuNo number,
+    commuNo number,  
+    commuId varchar2(30),
     commuWriter varchar2(20) not null,
     commuTitle varchar2(100) not null,
     commuContent varchar2(4000) not null,
     commuRegDate date default sysdate,
     commuHit number default 0,
     replyCnt number default 0,
-    constraint pk_community primary key(com muNo)
+    constraint pk_community primary key(commuNo),
+    constraint fk_community foreign key(commuId) reference t_member(id)
     );
     
+alter table t_commuBoard ADD commuId varchar2(100);
+
+select * from t_commuBoard;
+
 
 // 커뮤니티 게시판 테스트 및 수정 하느라 사용한 쿼리문
 alter table t_commuBoard ADD replyCnt number default 0 not null;
@@ -54,17 +60,25 @@ CREATE SEQUENCE seq_commu;
 create table t_commuReply(
     replyNo number,
     commuNo number,
+    replyId varchar2(50),
     replyWriter varchar2(50),
     replyContent varchar2(1000),
     rePlyRegDate date default sysdate,
     constraint pk_reply primary key(replyNo),
-    constraint fk_reply foreign key(commuNo) references t_commuBoard(commuNo)
+    constraint fk_reply foreign key(commuNo) references t_commuBoard(commuNo),
+    constraint fk_reply_id foreign key(replyId) references t_commuBoard(commuId)
 );
 
+commit;
 // 댓글 게시판 시퀀스 생성
 CREATE SEQUENCE seq_reply;
+
+alter table t_commuReply add replyId varchar2(50) not null;
+
 select * from t_commu;
 select * from t_commuReply;
+commit;
+delete from t_commuReply where commuNo = '25';
 
 // 테스트 입력
 insert into t_noticeBoard values(seq_notice.nextval, '홍길동', '홍길동 테스트1', '홍길동 테스트내용', sysdate, 1, 0);
@@ -143,3 +157,46 @@ select * from t_commuBoard;
 				    rownum rn, commuNo, commuWriter, commuTitle, commuRegDate, commuHit, replyCnt
 				from t_commuBoard where rownum <=20
 				) where rn > 10;
+                
+                
+                
+create table t_member(
+    id varchar2(20) primary key,
+    pwd varchar2(40),
+    name varchar2(10),
+    email varchar2(100),
+    joinDate date default sysdate,
+    memberType number 
+);
+commit;
+
+drop table t_member;
+
+create table t_calendar(
+    scheduleDate date,
+    scheduleEnd date,
+    schedule varchar2(30),
+    scheduleDetail varchar(100)
+);
+
+
+create table lecture(
+lectNo number primary key,
+lectName varchar2(50),
+name varchar2(20),
+lectDay varchar2(20),
+begin number,
+end number
+);
+
+create table apply(
+lectInfo varchar2(100),
+id varchar2(20),
+CONSTRAINT appl primary key(lectInfo,id)
+);
+
+commit;
+
+alter table t_commuboard add constraint fk_commuity foreign key(commuId) references t_member(id);
+alter table t_commuReply add constraint fk_reply_id foreign key(replyId) references t_member(id);
+ constraint fk_reply_id foreign key(replyId) references t_commuBoard(commuId)

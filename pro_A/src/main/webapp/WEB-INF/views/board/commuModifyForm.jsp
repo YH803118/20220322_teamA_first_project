@@ -1,65 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/style/style.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../resources/js/board.js"></script>
 <title>Insert title here</title>
-<style type="text/css">
-	.tblView, .tblView > tr, td {
-		border : 1px solid;
-		border-collapse: collapse;
-		padding: 0px;
-	}
-	
-	textarea {
-		border-style : none;
-		border:0px;
-		padding:0px;
-		resize: none;
-	}
-	
-</style>
-<script type="text/javascript">
-	function formCheck(name){
-		let form = document.forms[name];
-		let title = form["commuTitle"].value;
-		let content = form["commuContent"].value;
-		if(title=="" || title.length == 0){
-			alert("제목이 비어있습니다.");
-			return false;
-		} else if (content == "" || content.length == 0 ) {
-			alert("내용이 비어있습니다.");
-			return false;
-		} else {
-			alert("게시글이 작성되었습니다.");
-			return true;
-		} 
-	}
-</script>
 </head>
 <body>
-	<h1> 글수정 페이지 </h1>
-	<form action="/pro_A/board/commuModify.do" name="commuModForm"  onsubmit="return formCheck(this.name)"  method="post">
+	<h1> ${detailDTO.commuNo }번 게시글 수정 </h1>
+	<form action="/pro_A/board/commuModify.do" name="commuModForm" onsubmit="return formCheck(this.name, 'commu')"  method="post">
 		<table class="tblView">
 			<tr>
-				<th>제목</th>
-				<td>
-				<input type="text" name="commuTitle" value="${detailDTO.commuTitle }">
+				<th class="tblViewlbl commu_bgcolor">작성자</th>
+				<td class="tblViewlbl2">
+					<input type="hidden" name="commuWriter" value="${dto.name }">${dto.name }
+					<input type="hidden" name="commuId" value="${dto.id }">
+				<td width="120px">
+					<fmt:parseDate value="${detailDTO.commuRegDate}" 
+					var="parseDate" pattern="yyyy-MM-dd"/> 
+					<fmt:formatDate value="${parseDate }" pattern="yyyy-MM-dd"/>
 				</td>
-				<th>글쓴이</th>
-				<td>${detailDTO.commuWriter }</td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td colspan="3">
-				<textarea rows="30" cols="80" name="commuContent" maxlength="4000">${detailDTO.commuContent }</textarea>
+				<th class="tblViewlbl commu_bgcolor">제목</th>
+				<td class="tblViewlbl2">
+					<input type="text" name="commuTitle" value="${detailDTO.commuTitle }" maxlength="50">
+				</td>
+				<th class="tblViewlbl commu_bgcolor">조회수</th>
+				<td>${detailDTO.commuHit }</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<textarea rows="20" name="commuContent" maxlength="4000">${detailDTO.commuContent }</textarea>
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="수정완료">
-		<a href="/pro_A/board/commuDetail.do?commuNo=${detailDTO.commuNo }&pageNum=${pageNum }"><button type="button">취소</button></a>
+		<input class="dbtn commu_bgcolor" type="submit" value="수정완료">
+		<a href="/pro_A/board/commuDetail.do?commuNo=${detailDTO.commuNo }&pageNum=${pageNum }">
+			<button class="dbtn commu_bgcolor" type="button">취소</button>
+		</a>
 		<input type="hidden" name="pageNum" value="${pageNum }">
 		<input type="hidden" name="commuNo" value="${detailDTO.commuNo }">
 	</form>

@@ -30,22 +30,18 @@ create table t_noticeFile(
 
 // 커뮤니티 게시판
 create table t_commuBoard(
-    commuNo number,
+    commuNo number,  
+    commuId varchar2(30),
     commuWriter varchar2(20) not null,
     commuTitle varchar2(100) not null,
     commuContent varchar2(4000) not null,
     commuRegDate date default sysdate,
     commuHit number default 0,
     replyCnt number default 0,
-    constraint pk_community primary key(commuNo)
+    constraint pk_community primary key(commuNo),
+    constraint fk_community foreign key(commuId) reference t_member(id)
     );
     
-
-// 커뮤니티 게시판 테스트 및 수정 하느라 사용한 쿼리문
-alter table t_commuBoard ADD replyCnt number default 0 not null;
-alter table t_commuBoard modify replyCnt null;
-alter table t_commuBoard modify commuWriter varchar2(50);
-
 
 // 커뮤니티 게시판 시퀀스 생성
 CREATE SEQUENCE seq_commu;
@@ -54,11 +50,13 @@ CREATE SEQUENCE seq_commu;
 create table t_commuReply(
     replyNo number,
     commuNo number,
+    replyId varchar2(50),
     replyWriter varchar2(50),
     replyContent varchar2(1000),
     rePlyRegDate date default sysdate,
     constraint pk_reply primary key(replyNo),
-    constraint fk_reply foreign key(commuNo) references t_commuBoard(commuNo)
+    constraint fk_reply foreign key(commuNo) references t_commuBoard(commuNo),
+    constraint fk_reply_id foreign key(replyId) references t_commuBoard(commuId)
 );
 
 // 댓글 게시판 시퀀스 생성

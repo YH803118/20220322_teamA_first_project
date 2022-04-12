@@ -15,8 +15,10 @@
 	<h1> ${detailDTO.commuNo } 게시물 </h1>
 	<div class="detialview">
 		<div class="cdtbtn_lst">
+		<c:if test="${detailDTO.commuId == dto.id }">
 			<a href="/pro_A/board/commuDetail.do?commuNo=${detailDTO.commuNo }&mod=true&pageNum=${pageNum }"><button type="button">수정</button></a>
 			<a href="/pro_A/board/commuDelete.do?commuNo=${detailDTO.commuNo }"><button type="button">삭제</button></a>
+		</c:if>
 			<a href="/pro_A/board/commuList.do?pageNum=${pageNum }"><button type="button">리스트</button></a>
 		</div>
 			<table class="tblView">
@@ -43,6 +45,7 @@
 			</tr>
 		</table>
 	</div>
+	<c:if test="${isLogon == true }">
 	<div class="replyBox commu_bgcolor">
 		<form  action="/pro_A/board/replyNew.do" name="replyForm" onsubmit="return replyCheck(this.name)" method="post">
 			<div class="replyWBox">
@@ -50,11 +53,13 @@
 				<input class="rbtn commu_bgcolor" type="submit" value="댓글작성">
 				<input class="rbtn commu_bgcolor" type="reset" value="취소">
 				<input type="hidden" name="commuNo" value="${detailDTO.commuNo }">
-				<input type="hidden" name="replyWriter" value="작성자">
+				<input type="hidden" name="replyWriter" value="${dto.name }">
+				<input type="hidden" name="replyId" value="${dto.id }">
 				<input type="hidden" name="pageNum" value="${pageNum }">
 			</div>
 		</form>
 	</div>
+	</c:if>
 	<button class="rbtn_view commu_bgcolor" name="replyVbtn" onclick="rp_view(this)">댓글 보기</button>
 	<div class="replyList" style="display: none">
 		<c:choose>
@@ -70,6 +75,7 @@
 				 <textarea name="replyContent" rows="1" readonly="readonly" >${reply.replyContent }</textarea>
 				 <input type="hidden" name="replyNo" value="${reply.replyNo }">
 				</td>
+				<c:if test="${reply.replyId == dto.id }">
 				<td style="text-align: center;">
 					<button class="rbtn commu_bgcolor" name="replyMod" type="button">수정</button>
 					<button class="rbtn commu_bgcolor" name="replyUpdate" type="button" style="display: none;">수정완료</button>
@@ -78,11 +84,12 @@
 					<button class="rbtn commu_bgcolor" name="replyDel" type="button">삭제</button>
 					</a>
 				</td>
+				</c:if>
 			</tr>
 			</table>
 				</c:forEach>
 			</c:when>
-			<c:otherwise>	
+			<c:otherwise>
 				작성된 댓글이 없습니다.
 			</c:otherwise>
 		</c:choose>

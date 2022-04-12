@@ -34,4 +34,8 @@ public interface C_BoardDAO {
 
 	public int delReply(int replyNo);
 
+	public int addReplyCnt(int commuNo);
+
+	public int delReplyCnt(int commuNo);
+
 }
