@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
+<br>
+<br>
 <form action="/pro_A/test/modForm.do">
 아이디:<input type="text" name="id" readonly="readonly" value="${dto.id }"><br>
 비밀번호:<input type="password" name="pwd" value="${dto.pwd }"><br>

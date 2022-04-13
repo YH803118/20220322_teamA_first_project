@@ -65,6 +65,8 @@
 </style>
 </head>
 <body>
+<br>
+<br>
 <h3>공지사항 </h3>
 	<c:choose>
 	<c:when test="${dto.memberType==1 }">
