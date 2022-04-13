@@ -167,7 +167,7 @@ String schedule = request.getParameter("schedule");
 				</c:otherwise>
 			</c:choose>
 		</form>
-	</div>
+</div>
 	<c:set var="yearMonth" value="<%=yearMonth%>" />
 	<div id="calendarFrm">
 		<table>
@@ -201,7 +201,7 @@ String schedule = request.getParameter("schedule");
 							<c:forEach var="sche" items="${calendarList }">
 								<c:if test="${doneLoop}">
 									<c:if test="${sche.scheduleDate eq day }">
-										<a	href="${contextPath }/test/loginForm.do?schedule=${sche.schedule }"
+										<a	href="${contextPath }/test/loginForm.do?month=<%=month %>&schedule=${sche.schedule }"
 											id="scheduleOn">${i-start+1 }*</a>
 											<c:set var="noSchedule" value="false"/>
 											<c:set var="doneLoop" value="false" />

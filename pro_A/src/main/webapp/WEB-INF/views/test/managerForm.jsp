@@ -69,7 +69,7 @@ String schedule = request.getParameter("schedule");
 <style>
 #notice {
 	top: 600px;
-	background-color: lightgreen;
+	background-color: gray;
 	margin: 30px;
 	width: 740px;
 	height: 120px;
@@ -77,7 +77,7 @@ String schedule = request.getParameter("schedule");
 }
 
 #community {
-	background-color: green;
+	background-color: gray;
 	width: 740px;
 	height: 120px;
 	margin: 30px;
