@@ -10,6 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
+<br>
+<br>
 <form action="/pro_A/test/open.do">
 강의명:<input type="text" name="lectName"><br>
 교수명:<input type="text" name="name" value="<%=name %>" readonly="readonly"><br>
